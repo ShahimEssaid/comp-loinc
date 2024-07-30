@@ -7,7 +7,7 @@ import sys
 path_root = Path(__file__).parents[2]
 sys.path.append(str(path_root))
 from comp_loinc.ingest.source_data_utils import loincify, counter
-from comp_loinc.datamodel import LoincCodeClass
+from comp_loinc.datamodel import LoincTerm
 
 
 class CodeIngest(object):
@@ -104,7 +104,7 @@ class CodeIngest(object):
                 for part, part_type in lpl['parts']:
                     if part_type in part_pred_map.keys():
                         params[part_pred_map[part_type]] = loincify(part)
-                self.code_classes.append(LoincCodeClass(**params))
+                self.code_classes.append(LoincTerm(**params))
 
     def write_output_to_file(self, output_path):
         #"../../data/output/code_classes.owl"

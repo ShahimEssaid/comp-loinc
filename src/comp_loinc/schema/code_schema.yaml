@@ -14,7 +14,7 @@ default_curi_maps:
 #       'SCALE_TYP', 'METHOD_TYP', 'DefinitionDescription', 'STATUS', 'SHORTNAME', 'LONG_COMMON_NAME']]
 classes:
 
-  LoincCodeClass:
+  LoincTerm:
     is_a: Thing
     slots:
       - loinc_number
@@ -47,147 +47,6 @@ classes:
       - syntax_analyte_divisor  # Supplementary
       - syntax_analyte_divisor_suffix  # Supplementary
       - syntax_analyte_numerator  # Supplementary
-
-  LoincCodeClassIntersection:
-    is_a: LoincCodeClass
-
-    slot_usage:
-      has_component:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_property:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_time:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_system:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_scale:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_method:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_component_analyte:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-
-      has_component_challenge:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_component_count:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_component_adjustment:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_time_core:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_time_modifier:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_system_core:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      has_system_super_system:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-
-      semantic_analyte_gene:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      syntax_analyte_core:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      syntax_analyte_suffix:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      syntax_analyte_divisor:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      syntax_analyte_divisor_suffix:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-      syntax_analyte_numerator:
-        annotations:
-          owl: EquivalentClasses, IntersectionOf
-
-    annotations:
-      owl: Class
-
-  LoincCodeClassNonIntersection:
-    is_a: LoincCodeClass
-
-    slot_usage:
-
-      has_component:
-        annotations:
-          owl: EquivalentClasses
-      has_property:
-        annotations:
-          owl: EquivalentClasses
-      has_time:
-        annotations:
-          owl: EquivalentClasses
-      has_system:
-        annotations:
-          owl: EquivalentClasses
-      has_scale:
-        annotations:
-          owl: EquivalentClasses
-      has_method:
-        annotations:
-          owl: EquivalentClasses
-      has_component_analyte:
-        annotations:
-          owl: EquivalentClasses
-
-      has_component_challenge:
-        annotations:
-          owl: EquivalentClasses
-      has_component_count:
-        annotations:
-          owl: EquivalentClasses
-      has_component_adjustment:
-        annotations:
-          owl: EquivalentClasses
-      has_time_core:
-        annotations:
-          owl: EquivalentClasses
-      has_time_modifier:
-        annotations:
-          owl: EquivalentClasses
-      has_system_core:
-        annotations:
-          owl: EquivalentClasses
-      has_system_super_system:
-        annotations:
-          owl: EquivalentClasses
-
-      semantic_analyte_gene:
-        annotations:
-          owl: EquivalentClasses
-      syntax_analyte_core:
-        annotations:
-          owl: EquivalentClasses
-      syntax_analyte_suffix:
-        annotations:
-          owl: EquivalentClasses
-      syntax_analyte_divisor:
-        annotations:
-          owl: EquivalentClasses
-      syntax_analyte_divisor_suffix:
-        annotations:
-          owl: EquivalentClasses
-      syntax_analyte_numerator:
-        annotations:
-          owl: EquivalentClasses
-
-    annotations:
-      owl: Class
 
 slots:
   formal_name:
@@ -380,3 +239,146 @@ slots:
     range: PartClass
     annotations:
       owl: ObjectSomeValuesFrom
+
+
+
+#  LoincCodeClassIntersection:
+#    is_a: LoincCodeClass
+#
+#    slot_usage:
+#      has_component:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_property:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_time:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_system:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_scale:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_method:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_component_analyte:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#
+#      has_component_challenge:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_component_count:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_component_adjustment:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_time_core:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_time_modifier:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_system_core:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      has_system_super_system:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#
+#      semantic_analyte_gene:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      syntax_analyte_core:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      syntax_analyte_suffix:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      syntax_analyte_divisor:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      syntax_analyte_divisor_suffix:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#      syntax_analyte_numerator:
+#        annotations:
+#          owl: EquivalentClasses, IntersectionOf
+#
+#    annotations:
+#      owl: Class
+
+#  LoincCodeClassNonIntersection:
+#    is_a: LoincCodeClass
+#
+#    slot_usage:
+#
+#      has_component:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_property:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_time:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_system:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_scale:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_method:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_component_analyte:
+#        annotations:
+#          owl: EquivalentClasses
+#
+#      has_component_challenge:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_component_count:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_component_adjustment:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_time_core:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_time_modifier:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_system_core:
+#        annotations:
+#          owl: EquivalentClasses
+#      has_system_super_system:
+#        annotations:
+#          owl: EquivalentClasses
+#
+#      semantic_analyte_gene:
+#        annotations:
+#          owl: EquivalentClasses
+#      syntax_analyte_core:
+#        annotations:
+#          owl: EquivalentClasses
+#      syntax_analyte_suffix:
+#        annotations:
+#          owl: EquivalentClasses
+#      syntax_analyte_divisor:
+#        annotations:
+#          owl: EquivalentClasses
+#      syntax_analyte_divisor_suffix:
+#        annotations:
+#          owl: EquivalentClasses
+#      syntax_analyte_numerator:
+#        annotations:
+#          owl: EquivalentClasses
+#
+#    annotations:
+#      owl: Class

@@ -8,27 +8,24 @@ default_prefix: loinc
 default_range: string
 imports:
   - linkml:types
-  - code_schema
-  - part_schema
+#  - code_schema
+#  - part_schema
 #  - set_schema
 #  - grouping_classes_schema
 
 
 classes:
-  Thing:
-    slots:
-      - id
-      - label
-      - description
-      - subClassOf
-      - equivalentClasses
-    class_uri: owl:Class
 
   Loinc:
     slots:
       - codes
       - parts
     class_uri: owl:Class
+
+
+
+
+
 
 slots:
   id:
@@ -55,12 +52,7 @@ slots:
     slot_uri: owl:equivalentClass
     multivalued: true
     range: Thing
-  codes:
-    multivalued: true
-    range: LoincCodeClass
-  parts:
-    multivalued: true
-    range: PartClass
+
 
 
 #    required: true
