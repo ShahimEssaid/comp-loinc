@@ -7,7 +7,7 @@ import networkx as nx
 import pandas as pd
 
 import loinclib as ll
-from loinclib import EdgeType as ET, NodeType as NT, NameSpace as NS, PropertyType as PT
+from loinclib import EdgeType as ET, NodeType as NT, NameSpaceEnum as NS, PropertyType as PT
 
 
 class Graph:

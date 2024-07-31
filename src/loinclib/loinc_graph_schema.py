@@ -5,6 +5,8 @@ import re
 import typing as t
 from enum import Enum
 
+from requests.structures import CaseInsensitiveDict
+
 
 def _split_colon_1(self, loinc_string: str):
     parts = loinc_string.split(':')
@@ -17,41 +19,82 @@ def _split_colon_1(self, loinc_string: str):
         logging.warning(f'Identifier {loinc_string} for system: {self.base_url} had more than two parts')
         raise ValueError(f'Identifier {loinc_string} for system: {self.base_url} had more than two parts')
 
+class Namespace(CaseInsensitiveDict):
+    def __int__(self, *,
+                name: str,
+                base_url: str,
+                code_prefix:str,
+                curie_prefix: str,
+                code_regex: str,
+                url_regex: str,
+                regex_ignore_case: bool = False,
+                ):
+        self.name = name
+        self.base_url = base_url
+        self.code_prefix = code_prefix
+        self.curie_prefix = curie_prefix
+        self.code_regex = code_regex
+        self.url_regex = url_regex
+
+        flags = 0
+        if regex_ignore_case:
+            flags = flags | re.IGNORECASE
+        self.code_regex_pattern: re.Pattern = re.compile(code_regex, flags)
+        self.url_regex_pattern: re.Pattern = re.compile(url_regex, flags)
+
+    def is_code_prefixed(self, code: str):
+        match: t.Optional[re.Match] = self.code_regex_pattern.match(code)
+
+        return code.startswith(self.code_prefix)
+
+class Namespaces(CaseInsensitiveDict):
+    def __int__(self):
+        pass
+
+
+
+
+
 
 # Enum with attributes:
 # https://stackoverflow.com/questions/12680080/python-enums-with-attributes#19300424
-class NameSpace(Enum):
+class NameSpaceEnum(Enum):
     # enum id = name, base_url, code_prefix, curie_prefix, url_regex_string
-    loinc_code = 'LoincCode', 'https://loinc.org', None, 'loinc', r'https://loinc.org/\d+-\d'
-    loinc_part = 'LoincPart', 'https://loinc.org', None, 'loinc', r'https://loinc.org/LP\d+-\d'
+    loinc_code = 'LoincCode', 'https://loinc.org', None, 'loinc', r'https://loinc.org/\d+-\d', True
+    loinc_part = 'LoincPart', 'https://loinc.org', None, 'loinc', r'https://loinc.org/LP\d+-\d', True
 
-    loinclib_part = 'LoincLibPart', 'http://example.com/loinclib/part', None, 'LoincLibPart', r'http://example.com/loinclib/part/.+'
-    loinclib_code = 'c', 'http://example.com/loinclib/code', None, 'LoincLibCode', r'http://example.com/loinclib/code/.+'
-    loinclib_special = 'LoincLibSpecial', 'http://example.com/loinclib/special', None, 'LoincLibSpecial', r'http://example.com/loinclib/special/.+'
+    loinclib_part = 'LoincLibPart', 'http://example.com/loinclib/part', None, 'LoincLibPart', r'http://example.com/loinclib/part/.+', True
+    loinclib_code = 'c', 'http://example.com/loinclib/code', None, 'LoincLibCode', r'http://example.com/loinclib/code/.+', True
+    loinclib_special = 'LoincLibSpecial', 'http://example.com/loinclib/special', None, 'LoincLibSpecial', r'http://example.com/loinclib/special/.+', True
 
-    fdasis = 'fdasis', 'http://fdasis.nlm.nih.gov', None, 'fdasis', r'http://fdasis.nlm.nih.gov/.+'
-    pubchem = 'pubchem', 'http://pubchem.ncbi.nlm.nih.gov', None, 'pubchem', r'http://pubchem.ncbi.nlm.nih.gov/.+'
-    snomed = 'snomed', 'http://snomed.info/sct', None, 'snomed', r'http://snomed.info/sct/.+'
-    chebi_class_base = 'chebi', 'http://purl.obolibrary.org/obo', 'CHEBI_', 'chebi', r'http://purl.obolibrary.org/obo/CHEBI_.+'
-    ncbi_clinvar = 'ncbi_clinvar', 'https://www.ncbi.nlm.nih.gov/clinvar', None, 'ncbi_clinvar', r'https://www.ncbi.nlm.nih.gov/clinvar/.+'
-    ncbi_gene = 'ncbi_gene', 'https://www.ncbi.nlm.nih.gov/gene', None, 'ncbi_gene', r'https://www.ncbi.nlm.nih.gov/gene/.+'
-    ncbi_taxonomy = 'ncbi_taxonomy', 'https://www.ncbi.nlm.nih.gov/taxonomy', None, 'ncbi_taxonomy', r'https://www.ncbi.nlm.nih.gov/taxonomy/.+'
-    genenames = 'genenames', 'http://www.genenames.org/', None, 'genenames', r'http://www.genenames.org/.+'
-    rxnorm = 'rxnorm', 'http://www.nlm.nih.gov/research/umls/rxnorm', None, 'rxnorm', r'http://www.nlm.nih.gov/research/umls/rxnorm/.+'
-    radlex = 'radlex', 'http://www.radlex.org/', None, 'radlex', r'http://www.radlex.org/.+'
+    fdasis = 'fdasis', 'http://fdasis.nlm.nih.gov', None, 'fdasis', r'http://fdasis.nlm.nih.gov/.+', True
+    pubchem = 'pubchem', 'http://pubchem.ncbi.nlm.nih.gov', None, 'pubchem', r'http://pubchem.ncbi.nlm.nih.gov/.+', True
+    snomed = 'snomed', 'http://snomed.info/sct', None, 'snomed', r'http://snomed.info/sct/.+', True
+    chebi_class_base = 'chebi', 'http://purl.obolibrary.org/obo', 'CHEBI_', 'chebi', r'http://purl.obolibrary.org/obo/CHEBI_.+', True
+    ncbi_clinvar = 'ncbi_clinvar', 'https://www.ncbi.nlm.nih.gov/clinvar', None, 'ncbi_clinvar', r'https://www.ncbi.nlm.nih.gov/clinvar/.+', True
+    ncbi_gene = 'ncbi_gene', 'https://www.ncbi.nlm.nih.gov/gene', None, 'ncbi_gene', r'https://www.ncbi.nlm.nih.gov/gene/.+', True
+    ncbi_taxonomy = 'ncbi_taxonomy', 'https://www.ncbi.nlm.nih.gov/taxonomy', None, 'ncbi_taxonomy', r'https://www.ncbi.nlm.nih.gov/taxonomy/.+', True
+    genenames = 'genenames', 'http://www.genenames.org/', None, 'genenames', r'http://www.genenames.org/.+', True
+    rxnorm = 'rxnorm', 'http://www.nlm.nih.gov/research/umls/rxnorm', None, 'rxnorm', r'http://www.nlm.nih.gov/research/umls/rxnorm/.+', True
+    radlex = 'radlex', 'http://www.radlex.org/', None, 'radlex', r'http://www.radlex.org/.+', True
 
     def __init__(self, name: str,
                  base_url: str,
                  code_prefix: t.Optional[str],
                  curie_prefix: str,
                  url_regex_string: str,
+                 url_regex_ignore_case: bool
                  ):
         self.namespace_name = name
         self.base_url = base_url
         self.curie_prefix = curie_prefix
         self.code_prefix: t.Optional[str] = code_prefix
         self.url_regex_string = url_regex_string
-        self.url_regex_pattern: re.Pattern = re.compile(url_regex_string, re.IGNORECASE)
+
+        flags = 0
+        if url_regex_ignore_case:
+            flags = flags | re.IGNORECASE
+        self.url_regex_pattern: re.Pattern = re.compile(url_regex_string, flags)
 
     def __new__(cls, *args, **kwds):
         value = len(cls.__members__) + 1
@@ -75,19 +118,19 @@ class NameSpace(Enum):
         return self.is_valid_url(self.get_code_from_url(code)) is not None
 
     @classmethod
-    def namespace_for_url(cls, url: str) -> NameSpace:
-        for ns in NameSpace:
+    def namespace_for_url(cls, url: str) -> NameSpaceEnum:
+        for ns in NameSpaceEnum:
             if ns.url_regex_pattern.fullmatch(url):
                 return ns
         raise ValueError(f'No NameSpace for url {url}')
 
     @classmethod
-    def namespace_for_curie(cls, curie: str) -> t.Optional[NameSpace]:
+    def namespace_for_curie(cls, curie: str) -> t.Optional[NameSpaceEnum]:
         parts = curie.split(':')
         if len(parts) != 2:
             logging.warning(f'CURIE: {curie} is not formatted properly.')
             return None
-        for ns in NameSpace:
+        for ns in NameSpaceEnum:
             if ns.curie_prefix == parts[0]:
                 url = f'{ns.base_url}/{ns.code_prefix if ns.code_prefix else ""}{parts[1]}'
 
@@ -121,26 +164,27 @@ class NameSpace(Enum):
 
 
 class NodeType(Enum):
-    loinc_code = NameSpace.loinc_code
-    loinc_part = NameSpace.loinc_part
-    loinclib_part = NameSpace.loinclib_part
-    loinclib_code = NameSpace.loinclib_code
-    loinclib_special = NameSpace.loinclib_special
+    loinc_code = NameSpaceEnum.loinc_code
+    loinc_part = NameSpaceEnum.loinc_part
 
-    fdasis = NameSpace.fdasis
-    pubchem = NameSpace.pubchem
-    snomed = NameSpace.snomed
-    chebi = NameSpace.chebi_class_base
-    ncbi_clinvar = NameSpace.ncbi_clinvar
-    ncbi_gene = NameSpace.ncbi_gene
-    ncbi_taxonomy = NameSpace.ncbi_taxonomy
-    genenames = NameSpace.genenames
-    rxnorm = NameSpace.rxnorm
-    radlex = NameSpace.radlex
+    loinclib_part = NameSpaceEnum.loinclib_part
+    loinclib_code = NameSpaceEnum.loinclib_code
+    loinclib_special = NameSpaceEnum.loinclib_special
+
+    fdasis = NameSpaceEnum.fdasis
+    pubchem = NameSpaceEnum.pubchem
+    snomed = NameSpaceEnum.snomed
+    chebi = NameSpaceEnum.chebi_class_base
+    ncbi_clinvar = NameSpaceEnum.ncbi_clinvar
+    ncbi_gene = NameSpaceEnum.ncbi_gene
+    ncbi_taxonomy = NameSpaceEnum.ncbi_taxonomy
+    genenames = NameSpaceEnum.genenames
+    rxnorm = NameSpaceEnum.rxnorm
+    radlex = NameSpaceEnum.radlex
 
 
     def __init__(self, namespace):
-        self.namespace: NameSpace = namespace
+        self.namespace: NameSpaceEnum = namespace
 
     def __new__(cls, *args, **kwds):
         value = len(cls.__members__) + 1
@@ -149,7 +193,7 @@ class NodeType(Enum):
         return obj
 
     @classmethod
-    def nodetype_for_namespace(cls, namespace: NameSpace) -> NodeType:
+    def nodetype_for_namespace(cls, namespace: NameSpaceEnum) -> NodeType:
         for nodetype in NodeType:
             if nodetype.namespace == namespace:
                 return nodetype
@@ -171,7 +215,7 @@ class NodeType(Enum):
         return False
 
     @classmethod
-    def type_for_identifier(cls, identifier: str, namespace: NameSpace) -> NodeType:
+    def type_for_identifier(cls, identifier: str, namespace: NameSpaceEnum) -> NodeType:
         for t in NodeType:
             if t.namespace == namespace:
                 return t
@@ -182,7 +226,7 @@ class NodeType(Enum):
         match = re.match(f'(.+){{(.+)}}', node_id)
         if match:
             prefix = match.group(1)
-            namespace = NameSpace.namespace_for_prefix(prefix)
+            namespace = NameSpaceEnum.namespace_for_prefix(prefix)
             return NodeType.nodetype_for_namespace(namespace)
         raise ValueError(f'Unable to find NodeType for node id: {node_id}.')
 
@@ -514,11 +558,11 @@ class EdgeType(Enum):
 
 
 if __name__ == '__main__':
-    print(NameSpace.loinc_part.url_regex_pattern.match(f'{NameSpace.loinc_part.base_url}/LP123-1'))
-    print(NameSpace.namespace_for_url(f'{NameSpace.loinc_part.base_url}/LP123-1'))
-    print(NameSpace.namespace_for_curie(f'loinc:LP123-1'))
+    print(NameSpaceEnum.loinc_part.url_regex_pattern.match(f'{NameSpaceEnum.loinc_part.base_url}/LP123-1'))
+    print(NameSpaceEnum.namespace_for_url(f'{NameSpaceEnum.loinc_part.base_url}/LP123-1'))
+    print(NameSpaceEnum.namespace_for_curie(f'loinc:LP123-1'))
 
-    print(NameSpace.loinc_part.get_url_from_code('LP123-1'))
-    print(NameSpace.loinc_part.get_code_from_url('https://loinc.org/LP123-1'))
+    print(NameSpaceEnum.loinc_part.get_url_from_code('LP123-1'))
+    print(NameSpaceEnum.loinc_part.get_code_from_url('https://loinc.org/LP123-1'))
 
-    print(NameSpace.loinc_part.is_valid_code('LP123-1'))
+    print(NameSpaceEnum.loinc_part.is_valid_code('LP123-1'))

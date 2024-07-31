@@ -15,7 +15,7 @@ import loinclib as ll
 from comp_loinc.datamodel import Loinc, LoincTerm, LoincPart, LoincEntity, PartClassId, LoincTermId, \
     LoincTermIntersection, LoincTermNonIntersection
 from comp_loinc.datamodel import LoincTermNonIntersectionId
-from loinclib import NodeType as NT, NameSpace as NS, PropertyType as PT, EdgeType as ET
+from loinclib import NodeType as NT, NameSpaceEnum as NS, PropertyType as PT, EdgeType as ET
 
 
 class Generator:
@@ -542,9 +542,9 @@ class Generator:
         return part_based_def
 
     def generate_chebi_mappings(self):
-        self._generate_mapping(ll.NameSpace.chebi)
+        self._generate_mapping(ll.NameSpaceEnum.chebi)
 
-    def _generate_mapping(self, namespace: ll.NameSpace):
+    def _generate_mapping(self, namespace: ll.NameSpaceEnum):
         target_node_type = ll.NodeType.nodetype_for_namespace(namespace)
         part_node_ids = self.loinc_release.get_all_node_ids_for_node_type(NT.loinclib_part)
 
