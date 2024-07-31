@@ -25,6 +25,10 @@ class NameSpace(Enum):
     loinc_code = 'LoincCode', 'https://loinc.org', None, 'loinc', r'https://loinc.org/\d+-\d'
     loinc_part = 'LoincPart', 'https://loinc.org', None, 'loinc', r'https://loinc.org/LP\d+-\d'
 
+    loinclib_part = 'LoincLibPart', 'http://example.com/loinclib/part', None, 'LoincLibPart', r'http://example.com/loinclib/part/.+'
+    loinclib_code = 'c', 'http://example.com/loinclib/code', None, 'LoincLibCode', r'http://example.com/loinclib/code/.+'
+    loinclib_special = 'LoincLibSpecial', 'http://example.com/loinclib/special', None, 'LoincLibSpecial', r'http://example.com/loinclib/special/.+'
+
     fdasis = 'fdasis', 'http://fdasis.nlm.nih.gov', None, 'fdasis', r'http://fdasis.nlm.nih.gov/.+'
     pubchem = 'pubchem', 'http://pubchem.ncbi.nlm.nih.gov', None, 'pubchem', r'http://pubchem.ncbi.nlm.nih.gov/.+'
     snomed = 'snomed', 'http://snomed.info/sct', None, 'snomed', r'http://snomed.info/sct/.+'
@@ -36,24 +40,24 @@ class NameSpace(Enum):
     rxnorm = 'rxnorm', 'http://www.nlm.nih.gov/research/umls/rxnorm', None, 'rxnorm', r'http://www.nlm.nih.gov/research/umls/rxnorm/.+'
     radlex = 'radlex', 'http://www.radlex.org/', None, 'radlex', r'http://www.radlex.org/.+'
 
-    loinclib_part = 'LoincLibPart', 'http://example.com/loinclib/part', None, 'LoincLibPart', r'http://example.com/loinclib/part/.+'
-    loinclib_code = 'c', 'http://example.com/loinclib/code', None, 'LoincLibCode', r'http://example.com/loinclib/code/.+'
-    loinclib_special = 'LoincLibSpecial', 'http://example.com/loinclib/special', None, 'LoincLibSpecial', r'http://example.com/loinclib/special/.+'
-
-    def __new__(cls, *args, **kwds):
-        value = len(cls.__members__) + 1
-        obj = object.__new__(cls)
-        obj._value_ = value
-        return obj
-
-    def __init__(self, name: str, base_url: str, code_prefix: t.Optional[str], curie_prefix: str,
-                 url_regex_string: str):
+    def __init__(self, name: str,
+                 base_url: str,
+                 code_prefix: t.Optional[str],
+                 curie_prefix: str,
+                 url_regex_string: str,
+                 ):
         self.namespace_name = name
         self.base_url = base_url
         self.curie_prefix = curie_prefix
         self.code_prefix: t.Optional[str] = code_prefix
         self.url_regex_string = url_regex_string
         self.url_regex_pattern: re.Pattern = re.compile(url_regex_string, re.IGNORECASE)
+
+    def __new__(cls, *args, **kwds):
+        value = len(cls.__members__) + 1
+        obj = object.__new__(cls)
+        obj._value_ = value
+        return obj
 
     def get_url_from_code(self, code: str) -> str:
         return f'{self.base_url}/{self.code_prefix if self.code_prefix else ""}{code}'
@@ -121,7 +125,7 @@ class NodeType(Enum):
     loinc_part = NameSpace.loinc_part
     loinclib_part = NameSpace.loinclib_part
     loinclib_code = NameSpace.loinclib_code
-    special = NameSpace.loinclib_special
+    loinclib_special = NameSpace.loinclib_special
 
     fdasis = NameSpace.fdasis
     pubchem = NameSpace.pubchem
@@ -134,14 +138,15 @@ class NodeType(Enum):
     rxnorm = NameSpace.rxnorm
     radlex = NameSpace.radlex
 
+
+    def __init__(self, namespace):
+        self.namespace: NameSpace = namespace
+
     def __new__(cls, *args, **kwds):
         value = len(cls.__members__) + 1
         obj = object.__new__(cls)
         obj._value_ = value
         return obj
-
-    def __init__(self, namespace):
-        self.namespace: NameSpace = namespace
 
     @classmethod
     def nodetype_for_namespace(cls, namespace: NameSpace) -> NodeType:
@@ -173,13 +178,13 @@ class NodeType(Enum):
         raise ValueError(f'Unable to find node type for identifier {identifier} and namespace  {namespace}')
 
     @classmethod
-    def type_for_node_id(cls, nodeid: str) -> NodeType:
-        match = re.match(f'(.+){{(.+)}}', nodeid)
+    def type_for_node_id(cls, node_id: str) -> NodeType:
+        match = re.match(f'(.+){{(.+)}}', node_id)
         if match:
             prefix = match.group(1)
             namespace = NameSpace.namespace_for_prefix(prefix)
             return NodeType.nodetype_for_namespace(namespace)
-        raise ValueError(f'Unable to find NodeType for node id: {nodeid}.')
+        raise ValueError(f'Unable to find NodeType for node id: {node_id}.')
 
 
 class PropertyType(Enum):

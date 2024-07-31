@@ -12,11 +12,16 @@ from loinclib import EdgeType as ET, NodeType as NT, NameSpace as NS, PropertyTy
 
 class Graph:
 
-    def __init__(self, release_path: Path, loinc_version: str, trees_path: Path):
+    def __init__(self, *,
+                 release_path: Path,
+                 loinc_version: str,
+                 trees_path: Path,
+                 graph: nx.MultiDiGraph = nx.MultiDiGraph(),
+                 ):
         self.release_path: Path = release_path
         self.trees_path: Path = trees_path
         self.loinc_version: str = loinc_version
-        self.graph: nx.MultiDiGraph = nx.MultiDiGraph()
+        self.graph: nx.MultiDiGraph = graph
 
         self.__parsed_parts = False
 

@@ -12,6 +12,7 @@ packages = [
 
 [tool.poetry.scripts]
 comp-loinc = 'comp_loinc:cli.cli'
+comp-loinc2 = 'comp_loinc:cli2.cli'
 
 [tool.poetry.dependencies]
 python = "^3.10"

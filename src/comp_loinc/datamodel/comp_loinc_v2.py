@@ -1,5 +1,5 @@
 # Auto generated from comp_loinc_v2.yaml by pythongen.py version: 0.9.0
-# Generation date: 2024-07-29T17:35:05
+# Generation date: 2024-07-30T13:31:52
 # Schema: loinc-owl-core-schema
 #
 # id: https://loinc.org/core
@@ -72,12 +72,21 @@ class Loinc(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class LoincEntity(YAMLRoot):
+class Entity(YAMLRoot):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = OWL.Class
     class_class_curie: ClassVar[str] = "owl:Class"
+    class_name: ClassVar[str] = "Entity"
+    class_model_uri: ClassVar[URIRef] = LOINC.Entity
+
+
+@dataclass
+class LoincEntity(Entity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LOINC.LoincEntity
+    class_class_curie: ClassVar[str] = "loinc:LoincEntity"
     class_name: ClassVar[str] = "LoincEntity"
     class_model_uri: ClassVar[URIRef] = LOINC.LoincEntity
 
@@ -166,6 +175,11 @@ class LoincTerm(LoincEntity):
     rad_timing: Optional[Union[dict, "LoincPart"]] = None
     rad_view_aggregation: Optional[Union[dict, "LoincPart"]] = None
     rad_view_view_type: Optional[Union[dict, "LoincPart"]] = None
+    document_kind: Optional[Union[dict, "LoincPart"]] = None
+    document_role: Optional[Union[dict, "LoincPart"]] = None
+    document_setting: Optional[Union[dict, "LoincPart"]] = None
+    document_subject_matter_domain: Optional[Union[dict, "LoincPart"]] = None
+    document_type_of_service: Optional[Union[dict, "LoincPart"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.long_common_name is not None and not isinstance(self.long_common_name, str):
@@ -329,6 +343,21 @@ class LoincTerm(LoincEntity):
 
         if self.rad_view_view_type is not None and not isinstance(self.rad_view_view_type, LoincPart):
             self.rad_view_view_type = LoincPart(**as_dict(self.rad_view_view_type))
+
+        if self.document_kind is not None and not isinstance(self.document_kind, LoincPart):
+            self.document_kind = LoincPart(**as_dict(self.document_kind))
+
+        if self.document_role is not None and not isinstance(self.document_role, LoincPart):
+            self.document_role = LoincPart(**as_dict(self.document_role))
+
+        if self.document_setting is not None and not isinstance(self.document_setting, LoincPart):
+            self.document_setting = LoincPart(**as_dict(self.document_setting))
+
+        if self.document_subject_matter_domain is not None and not isinstance(self.document_subject_matter_domain, LoincPart):
+            self.document_subject_matter_domain = LoincPart(**as_dict(self.document_subject_matter_domain))
+
+        if self.document_type_of_service is not None and not isinstance(self.document_type_of_service, LoincPart):
+            self.document_type_of_service = LoincPart(**as_dict(self.document_type_of_service))
 
         super().__post_init__(**kwargs)
 
@@ -552,6 +581,21 @@ slots.rad_view_aggregation = Slot(uri=LOINC_PROPERTY.rad_view_aggregation, name=
 
 slots.rad_view_view_type = Slot(uri=LOINC_PROPERTY.rad_view_view_type, name="rad_view_view_type", curie=LOINC_PROPERTY.curie('rad_view_view_type'),
                    model_uri=LOINC.rad_view_view_type, domain=None, range=Optional[Union[dict, LoincPart]])
+
+slots.document_kind = Slot(uri=LOINC_PROPERTY['document-kind'], name="document_kind", curie=LOINC_PROPERTY.curie('document-kind'),
+                   model_uri=LOINC.document_kind, domain=None, range=Optional[Union[dict, LoincPart]])
+
+slots.document_role = Slot(uri=LOINC_PROPERTY['document-role'], name="document_role", curie=LOINC_PROPERTY.curie('document-role'),
+                   model_uri=LOINC.document_role, domain=None, range=Optional[Union[dict, LoincPart]])
+
+slots.document_setting = Slot(uri=LOINC_PROPERTY['document-setting'], name="document_setting", curie=LOINC_PROPERTY.curie('document-setting'),
+                   model_uri=LOINC.document_setting, domain=None, range=Optional[Union[dict, LoincPart]])
+
+slots.document_subject_matter_domain = Slot(uri=LOINC_PROPERTY['document-subject-matter-domain'], name="document_subject_matter_domain", curie=LOINC_PROPERTY.curie('document-subject-matter-domain'),
+                   model_uri=LOINC.document_subject_matter_domain, domain=None, range=Optional[Union[dict, LoincPart]])
+
+slots.document_type_of_service = Slot(uri=LOINC_PROPERTY['document-type-of-service'], name="document_type_of_service", curie=LOINC_PROPERTY.curie('document-type-of-service'),
+                   model_uri=LOINC.document_type_of_service, domain=None, range=Optional[Union[dict, LoincPart]])
 
 slots.part_type_name = Slot(uri=LOINC['part-type-name'], name="part_type_name", curie=LOINC.curie('part-type-name'),
                    model_uri=LOINC.part_type_name, domain=None, range=Optional[str])

@@ -20,13 +20,21 @@ classes:
       - parts
     class_uri: owl:Class
 
+  Entity:
+    slots:
+      - id
+    class_uri: owl:Class
+    annotations:
+      owl: Class
+
+
   LoincEntity:
+    is_a: Entity
     slots:
       - loinc_number
       - label
       - description
       - subClassOf
-    class_uri: owl:Class
     annotations:
       owl: Class
 
@@ -108,6 +116,14 @@ classes:
       - rad_timing
       - rad_view_aggregation
       - rad_view_view_type
+
+      # document ontology  https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#documentontology
+
+      - document_kind
+      - document_role
+      - document_setting
+      - document_subject_matter_domain
+      - document_type_of_service
 
 
   LoincPart:
@@ -596,7 +612,46 @@ slots:
     annotations:
       owl: ObjectSomeValuesFrom
 
-  
+  # document ontology  https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#documentontology
+  document_kind:
+    slot_uri: loinc_property:document-kind
+    multivalued: false
+    range: LoincPart
+    required: false
+    annotations:
+      owl: ObjectSomeValuesFrom
+
+  document_role:
+    slot_uri: loinc_property:document-role
+    multivalued: false
+    range: LoincPart
+    required: false
+    annotations:
+      owl: ObjectSomeValuesFrom
+
+  document_setting:
+    slot_uri: loinc_property:document-setting
+    multivalued: false
+    range: LoincPart
+    required: false
+    annotations:
+      owl: ObjectSomeValuesFrom
+
+  document_subject_matter_domain:
+    slot_uri: loinc_property:document-subject-matter-domain
+    multivalued: false
+    range: LoincPart
+    required: false
+    annotations:
+      owl: ObjectSomeValuesFrom
+
+  document_type_of_service:
+    slot_uri: loinc_property:document-type-of-service
+    multivalued: false
+    range: LoincPart
+    required: false
+    annotations:
+      owl: ObjectSomeValuesFrom
 
   # LoincPart slots
 
