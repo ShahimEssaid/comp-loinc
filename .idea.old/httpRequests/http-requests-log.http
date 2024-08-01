@@ -1,0 +1,121 @@
+GET https://fhir.loinc.org/ConceptMap/httpswwwncbinlmnihgovgene-2.72/$translate?code=LP101031-5
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T131009.200.json
+
+###
+
+GET https://fhir.loinc.org/ConceptMap/httpwwwgenenamesorg-2.72/$translate?code=LP101031-5
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T130741.200.json
+
+###
+
+GET https://fhir.loinc.org/ConceptMap/httpwwwgenenamesorg-2.72
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+GET https://fhir.loinc.org/ConceptMap/httpswwwncbinlmnihgovgene-2.72/$translate?code=LP101031-5
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T130611.200.json
+
+###
+
+GET https://fhir.loinc.org/ConceptMap/httpswwwncbinlmnihgovgene-2.72
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+GET https://fhir.loinc.org/ConceptMap?_summary=true
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+GET https://fhir.loinc.org/metadata
+Authorization: Basic sessaid caspass_01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T125255.200.json
+
+###
+
+GET https://fhir.loinc.org/ConceptMap?_summary=true
+Authorization: Basic sessaid caspass_01
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> /home/essaids/git/gh/se/comp-loinc/http-client/response/ConceptMap-summary-1.json
+
+###
+
+GET https://fhir.loinc.org/ConceptMap?_summary=true
+Accept: application/fhir+json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> /home/essaids/git/gh/se/comp-loinc/http-client/response/ConceptMap-summary.json
+
+###
+
+GET https://fhir.loinc.org/metadata
+Authorization: Basic sessaid caspass_01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> /home/essaids/git/gh/se/comp-loinc/http-client/response/metadata.json
+
+###
+
+GET https://fhir.loinc.org/metadata
+Authorization: Basic sessaid caspass_01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> /home/essaids/git/gh/se/comp-loinc/http-client/metadata.json
+
+###
+
+GET https://fhir.loinc.org/metadata
+Authorization: Basic sessaid caspass_01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T123714.200.json
+
+###
+

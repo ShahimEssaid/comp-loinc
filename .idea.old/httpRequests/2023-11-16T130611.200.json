@@ -1,0 +1,34 @@
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "result",
+      "valueBoolean": true
+    },
+    {
+      "name": "message",
+      "valueString": "Matches found"
+    },
+    {
+      "name": "match",
+      "part": [
+        {
+          "name": "equivalence",
+          "valueCode": "equal"
+        },
+        {
+          "name": "concept",
+          "valueCoding": {
+            "system": "https://www.ncbi.nlm.nih.gov/gene",
+            "code": "5290",
+            "display": "PIK3CA"
+          }
+        },
+        {
+          "name": "source",
+          "valueUri": "https://www.ncbi.nlm.nih.gov/gene"
+        }
+      ]
+    }
+  ]
+}

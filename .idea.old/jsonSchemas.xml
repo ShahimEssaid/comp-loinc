@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="LinkML Metamodel">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="LinkML Metamodel" />
+              <option name="relativePathToSchema" value="https://w3id.org/linkml/meta.schema.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="src/comp_loinc/schema/code_schema.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="src/comp_loinc/schema/comp_loinc.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="src/comp_loinc/schema/part_schema.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="src/loinclib/tmp/tmp-linkml-eq-1/schema.yaml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>
