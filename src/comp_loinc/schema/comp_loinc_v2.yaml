@@ -5,6 +5,7 @@ prefixes:
   loinc: https://loinc.org/
   loinc_property: http://loinc.org/property/
   owl: http://www.w3.org/2002/07/owl#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
 default_prefix: loinc
 default_range: string
 imports:
@@ -23,6 +24,9 @@ classes:
   Entity:
     slots:
       - id
+      - label
+      - description
+      - sub_class_of
     class_uri: owl:Class
     annotations:
       owl: Class
@@ -31,21 +35,17 @@ classes:
   LoincEntity:
     is_a: Entity
     slots:
-      - loinc_number
-      - label
-      - description
-      - subClassOf
     annotations:
       owl: Class
 
   LoincTerm:
     is_a: LoincEntity
     slots:
+      - loinc_number
       # annotations
       # The naming here is intended to match the column naming in the CSV files
       # TODO: review these names against the relevant CSVs.
       - long_common_name
-      - formal_name
       - short_name
       - status
       - loinc_class
@@ -129,6 +129,7 @@ classes:
   LoincPart:
     is_a: LoincEntity
     slots:
+      - part_number
       - part_type_name
       - part_name
       - part_display_name
@@ -141,6 +142,13 @@ slots:
  # The tooling reads this schema when needed,
  # dynamically overrides some of the definitions based on the use case (OWL annotations, slot URLs, etc.), and then
  # passes the updated schema to the LinkML runtime in order to have the intended effects of this runtime overriding.
+  sub_class_of:
+    annotations:
+      owl: SubClassOf
+    slot_uri: rdfs:subClassOf
+    multivalued: true
+    range: Entity
+
 
  #  for Loinc class
   codes:
@@ -165,12 +173,7 @@ slots:
     slot_uri: rdfs:description
     annotations:
       owl: AnnotationAssertion
-  subClassOf:
-    annotations:
-      owl: SubClassOf
-    slot_uri: rdfs:subClassOf
-    multivalued: true
-    range: LoincEntity
+
 
   # for LoincTerm
 
@@ -181,11 +184,6 @@ slots:
 
   long_common_name:
     slot_uri: loinc:long_common_name
-    annotations:
-      owl: AnnotationAssertion
-
-  formal_name:
-    slot_uri: loinc:formal_name
     annotations:
       owl: AnnotationAssertion
 
@@ -654,6 +652,11 @@ slots:
       owl: ObjectSomeValuesFrom
 
   # LoincPart slots
+
+  part_number:
+    slot_uri: loinc:part_number
+    annotations:
+      owl: AnnotationAssertion
 
   part_type_name:
     slot_uri: loinc:part-type-name

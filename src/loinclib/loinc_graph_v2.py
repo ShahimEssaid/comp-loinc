@@ -3,7 +3,9 @@ from pathlib import Path
 import networkx as nx
 import pandas as pd
 
-
+import loinclib.loinc_schema_v2 as LS
+from loinclib.schema_v2 import Schema
+from loinclib.view_v2 import Node
 
 
 class LoincGraph:
@@ -12,13 +14,14 @@ class LoincGraph:
                  loinc_version: str,
                  trees_path: Path,
                  graph: nx.MultiDiGraph = nx.MultiDiGraph(),
+                 schema: Schema,
                  ):
         self.release_path: Path = release_path
         self.trees_path: Path = trees_path
         self.loinc_version: str = loinc_version
         self.graph: nx.MultiDiGraph = graph
         self.loaded_sources = self.graph.graph.setdefault('loaded_sources', {})
-
+        self.schema: Schema = schema
 
     def load_LoincTable_Loinc_csv(self) -> None:
         if 'LoincTable/Loinc.csv' in self.loaded_sources:
@@ -27,12 +30,12 @@ class LoincGraph:
             (row_number,
              loinc_number,  # done
              component,  # done
-             _property,  # done
+             property_,  # done
              time_aspect,
              system,
              scale_type,
              method_type,
-             _class,  # done
+             class_,  # done
              version_last_changed,  # Done
              change_type,
              definition_description,  # done
@@ -68,7 +71,16 @@ class LoincGraph:
              display_name
              ) = tpl
 
-        pass
+            loinc_term_type = self.schema.get_node_type(LS.LoincNodes.LoincTerm)
+            nv: Node = loinc_term_type.get_node_view_by_code(code=loinc_number, graph=self.graph, create=True)
+
+            # properties
+            nv.set_property(property_=LS.LoincTermProps.loinc_number, value=loinc_number)
+            nv.set_property(property_=LS.LoincTermProps.long_common_name, value=long_common_name)
+            nv.set_property(property_=LS.LoincTermProps.class_, value=class_)
+            nv.set_property(property_=LS.LoincTermProps.class_type, value=class_type)
+
+            # edges
 
 
     def read_LoincTable_Loinc_csv(self) -> pd.DataFrame:
