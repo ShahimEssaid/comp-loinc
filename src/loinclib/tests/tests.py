@@ -3,8 +3,8 @@ from unittest import TestCase
 
 from networkx import MultiDiGraph
 
-from loinclib.loinc_graph_v2 import LoincGraph
-from loinclib.loinc_schema_v2 import loinc_schema, LoincNodes, LoincTermProps
+
+from loinclib.loinc_schema_v2 import loinc_schema, LoincNodeType, LoincTermProps
 
 LOINC_PATH = Path('../../../loinc_release/2.67')
 TREE_PATH = Path('../../../loinc_trees/2023-09-26')
@@ -16,7 +16,7 @@ class TestHello(TestCase):
     def test_hello(self):
 
         loinc_graph = LoincGraph(release_path=LOINC_PATH, trees_path=TREE_PATH, loinc_version='2.67', schema=loinc_schema)
-        loinc_graph.load_LoincTable_Loinc_csv()
+        loinc_graph.load_loinc_table__loinc_csv()
 
         print(loinc_graph)
         #

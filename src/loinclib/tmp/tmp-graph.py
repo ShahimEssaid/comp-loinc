@@ -31,7 +31,7 @@ node_back = g.nodes['hello']
 print(node_back)
 someting = g.nodes.get('somging', None)
 
-print(loinclib.loinc_schema_v2.LoincNodes.LoincTerm)
+print(loinclib.loinc_schema_v2.LoincNodeType.LoincTerm)
 
 get = g.nodes.get('notthere')
 

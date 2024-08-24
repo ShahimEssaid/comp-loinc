@@ -1,8 +1,17 @@
-from loinclib import NodeAttributeKey
+from enum import StrEnum
 
 
-key = NodeAttributeKey.SOME_KEY
+class SomeEnum(StrEnum):
+  One = 'one'
 
-print(f'{key} is of type {type(key)}')
-print(f'{key.name} is of type {type(key.name)}')
-print(f'{key.value} is of type {type(key.value)}')
+
+
+print(f'Enum name: {SomeEnum.One.name}')
+print(f'Enum value: {SomeEnum.One.value}')
+print(f'Enum print value: {SomeEnum.One}')
+
+
+a = SomeEnum.One
+
+print(repr(a))
+

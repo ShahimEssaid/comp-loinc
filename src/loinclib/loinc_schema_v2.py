@@ -1,9 +1,9 @@
 from enum import StrEnum
 
-from loinclib.schema_v2 import Schema, NodeType, Property, EdgeType
+from loinclib.schema_v2 import Schema, NodeType, PropertyType, EdgeType
 
 
-class LoincNodes(StrEnum):
+class LoincNodeType(StrEnum):
     LoincTerm = 'LoincTerm'
     LoincPart = 'LoincPart'
 
@@ -37,48 +37,49 @@ class LoincPartProps(StrEnum):
     part_display_name = 'part_display_name'
 
 
-loinc_schema: Schema = Schema()
-
-loinc_term = NodeType(type_key=LoincNodes.LoincTerm,
-                      schema=loinc_schema,
-                      base_url='https://loinc.org/',
-                      url_regex=r'^https?://loinc.org/(P<code>\d+-\d)$',
-                      curie_prefix='loinc')
-
-loinc_schema.add_node_type(node_type=loinc_term)
-
-# properties
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincTermProps.loinc_number))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincTermProps.long_common_name))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincTermProps.formal_name))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincTermProps.short_name))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincTermProps.class_))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincTermProps.class_type))
-
-# edges
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincTermEdges.primary_component))
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincTermEdges.primary_property))
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincTermEdges.primary_time_aspect))
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincTermEdges.primary_system))
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincTermEdges.primary_scale_type))
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincTermEdges.primary_method_type))
-
-
-loinc_part = NodeType(type_key=LoincNodes.LoincPart,
-                      schema=loinc_schema,
-                      base_url='https://loinc.org/',
-                      url_regex=r'^https?://loinc.org/(P<code>LP\d+-\d)$',
-                      curie_prefix='loinc')
-loinc_schema.add_node_type(node_type=loinc_part)
-
-# properties
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincPartProps.part_number))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincPartProps.part_type_name))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincPartProps.part_name))
-loinc_term.add_property(Property(node_type=loinc_term, type_key=LoincPartProps.part_display_name))
-
-# edge
-loinc_term.add_edge_type(EdgeType(node_type=loinc_term, edge_type_key=LoincPartEdges.sub_class_of))
+# loinc_schema: Schema = Schema()
+#
+# loinc_term = NodeType(type_=LoincNodeType.LoincTerm,
+#                       schema=loinc_schema,
+#                       base_url='https://loinc.org/',
+#                       url_regex=r'^https?://loinc.org/(P<code>\d+-\d)$',
+#                       curie_prefix='loinc',
+#                       dynamic=False)
+#
+# loinc_schema.add_node_type(node_type=loinc_term)
+#
+# # properties
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincTermProps.loinc_number))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincTermProps.long_common_name))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincTermProps.formal_name))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincTermProps.short_name))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincTermProps.class_))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincTermProps.class_type))
+#
+# # edges
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincTermEdges.primary_component))
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincTermEdges.primary_property))
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincTermEdges.primary_time_aspect))
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincTermEdges.primary_system))
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincTermEdges.primary_scale_type))
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincTermEdges.primary_method_type))
+#
+#
+# loinc_part = NodeType(type_=LoincNodeType.LoincPart,
+#                       schema=loinc_schema,
+#                       base_url='https://loinc.org/',
+#                       url_regex=r'^https?://loinc.org/(P<code>LP\d+-\d)$',
+#                       curie_prefix='loinc')
+# loinc_schema.add_node_type(node_type=loinc_part)
+#
+# # properties
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincPartProps.part_number))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincPartProps.part_type_name))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincPartProps.part_name))
+# loinc_term.add_property(PropertyType(node_type=loinc_term, type_key=LoincPartProps.part_display_name))
+#
+# # edge
+# loinc_term.add_edge_type(EdgeType(node_type=loinc_term, type_=LoincPartEdges.sub_class_of))
 
 
 
