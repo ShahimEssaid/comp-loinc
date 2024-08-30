@@ -1,0 +1,1 @@
+SNOMED file format: https://confluence.ihtsdotools.org/display/DOCRELFMT/4.2+File+Format+Specifications

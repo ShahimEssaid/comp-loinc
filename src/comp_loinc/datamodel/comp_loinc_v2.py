@@ -1,5 +1,5 @@
 # Auto generated from comp_loinc_v2.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-08-01T16:03:20
+# Generation date: 2024-08-27T10:29:10
 # Schema: loinc-owl-core-schema
 #
 # id: https://loinc.org/core
@@ -96,8 +96,8 @@ class Entity(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = LOINC.Entity
 
     id: Union[str, EntityId] = None
-    label: Optional[str] = None
-    description: Optional[str] = None
+    entity_label: Optional[str] = None
+    entity_description: Optional[str] = None
     sub_class_of: Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -106,11 +106,11 @@ class Entity(YAMLRoot):
         if not isinstance(self.id, EntityId):
             self.id = EntityId(self.id)
 
-        if self.label is not None and not isinstance(self.label, str):
-            self.label = str(self.label)
+        if self.entity_label is not None and not isinstance(self.entity_label, str):
+            self.entity_label = str(self.entity_label)
 
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
+        if self.entity_description is not None and not isinstance(self.entity_description, str):
+            self.entity_description = str(self.entity_description)
 
         if not isinstance(self.sub_class_of, list):
             self.sub_class_of = [self.sub_class_of] if self.sub_class_of is not None else []
@@ -151,7 +151,6 @@ class LoincTerm(LoincEntity):
     id: Union[str, LoincTermId] = None
     loinc_number: Optional[str] = None
     long_common_name: Optional[str] = None
-    formal_name: Optional[str] = None
     short_name: Optional[str] = None
     status: Optional[str] = None
     loinc_class: Optional[str] = None
@@ -221,9 +220,6 @@ class LoincTerm(LoincEntity):
 
         if self.long_common_name is not None and not isinstance(self.long_common_name, str):
             self.long_common_name = str(self.long_common_name)
-
-        if self.formal_name is not None and not isinstance(self.formal_name, str):
-            self.formal_name = str(self.formal_name)
 
         if self.short_name is not None and not isinstance(self.short_name, str):
             self.short_name = str(self.short_name)
@@ -446,215 +442,212 @@ class LoincPart(LoincEntity):
 class slots:
     pass
 
-slots.sub_class_of = Slot(uri=RDFS.subClassOf, name="sub_class_of", curie=RDFS.curie('subClassOf'),
-                   model_uri=LOINC.sub_class_of, domain=None, range=Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]])
+slots.loinc__codes = Slot(uri=LOINC.codes, name="loinc__codes", curie=LOINC.curie('codes'),
+                   model_uri=LOINC.loinc__codes, domain=None, range=Optional[Union[Union[str, LoincTermId], List[Union[str, LoincTermId]]]])
 
-slots.codes = Slot(uri=LOINC.codes, name="codes", curie=LOINC.curie('codes'),
-                   model_uri=LOINC.codes, domain=None, range=Optional[Union[Union[str, LoincTermId], List[Union[str, LoincTermId]]]])
+slots.loinc__parts = Slot(uri=LOINC.parts, name="loinc__parts", curie=LOINC.curie('parts'),
+                   model_uri=LOINC.loinc__parts, domain=None, range=Optional[Union[Union[str, LoincPartId], List[Union[str, LoincPartId]]]])
 
-slots.parts = Slot(uri=LOINC.parts, name="parts", curie=LOINC.curie('parts'),
-                   model_uri=LOINC.parts, domain=None, range=Optional[Union[Union[str, LoincPartId], List[Union[str, LoincPartId]]]])
+slots.entity__id = Slot(uri=LOINC.id, name="entity__id", curie=LOINC.curie('id'),
+                   model_uri=LOINC.entity__id, domain=None, range=URIRef)
 
-slots.id = Slot(uri=LOINC.id, name="id", curie=LOINC.curie('id'),
-                   model_uri=LOINC.id, domain=None, range=URIRef)
+slots.entity__entity_label = Slot(uri=RDFS.label, name="entity__entity_label", curie=RDFS.curie('label'),
+                   model_uri=LOINC.entity__entity_label, domain=None, range=Optional[str])
 
-slots.label = Slot(uri=RDFS.label, name="label", curie=RDFS.curie('label'),
-                   model_uri=LOINC.label, domain=None, range=Optional[str])
+slots.entity__entity_description = Slot(uri=RDFS.description, name="entity__entity_description", curie=RDFS.curie('description'),
+                   model_uri=LOINC.entity__entity_description, domain=None, range=Optional[str])
 
-slots.description = Slot(uri=RDFS.description, name="description", curie=RDFS.curie('description'),
-                   model_uri=LOINC.description, domain=None, range=Optional[str])
+slots.entity__sub_class_of = Slot(uri=RDFS.subClassOf, name="entity__sub_class_of", curie=RDFS.curie('subClassOf'),
+                   model_uri=LOINC.entity__sub_class_of, domain=None, range=Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]])
 
-slots.loinc_number = Slot(uri=LOINC.loinc_number, name="loinc_number", curie=LOINC.curie('loinc_number'),
-                   model_uri=LOINC.loinc_number, domain=None, range=Optional[str])
+slots.loincTerm__loinc_number = Slot(uri=LOINC.loinc_number, name="loincTerm__loinc_number", curie=LOINC.curie('loinc_number'),
+                   model_uri=LOINC.loincTerm__loinc_number, domain=None, range=Optional[str])
 
-slots.long_common_name = Slot(uri=LOINC.long_common_name, name="long_common_name", curie=LOINC.curie('long_common_name'),
-                   model_uri=LOINC.long_common_name, domain=None, range=Optional[str])
+slots.loincTerm__long_common_name = Slot(uri=LOINC.long_common_name, name="loincTerm__long_common_name", curie=LOINC.curie('long_common_name'),
+                   model_uri=LOINC.loincTerm__long_common_name, domain=None, range=Optional[str])
 
-slots.formal_name = Slot(uri=LOINC.formal_name, name="formal_name", curie=LOINC.curie('formal_name'),
-                   model_uri=LOINC.formal_name, domain=None, range=Optional[str])
+slots.loincTerm__short_name = Slot(uri=LOINC.short_name, name="loincTerm__short_name", curie=LOINC.curie('short_name'),
+                   model_uri=LOINC.loincTerm__short_name, domain=None, range=Optional[str])
 
-slots.short_name = Slot(uri=LOINC.short_name, name="short_name", curie=LOINC.curie('short_name'),
-                   model_uri=LOINC.short_name, domain=None, range=Optional[str])
+slots.loincTerm__status = Slot(uri=LOINC.status, name="loincTerm__status", curie=LOINC.curie('status'),
+                   model_uri=LOINC.loincTerm__status, domain=None, range=Optional[str])
 
-slots.status = Slot(uri=LOINC.status, name="status", curie=LOINC.curie('status'),
-                   model_uri=LOINC.status, domain=None, range=Optional[str])
+slots.loincTerm__loinc_class = Slot(uri=LOINC.loinc_class, name="loincTerm__loinc_class", curie=LOINC.curie('loinc_class'),
+                   model_uri=LOINC.loincTerm__loinc_class, domain=None, range=Optional[str])
 
-slots.loinc_class = Slot(uri=LOINC.loinc_class, name="loinc_class", curie=LOINC.curie('loinc_class'),
-                   model_uri=LOINC.loinc_class, domain=None, range=Optional[str])
+slots.loincTerm__loinc_class_type = Slot(uri=LOINC.loinc_class_type, name="loincTerm__loinc_class_type", curie=LOINC.curie('loinc_class_type'),
+                   model_uri=LOINC.loincTerm__loinc_class_type, domain=None, range=Optional[str])
 
-slots.loinc_class_type = Slot(uri=LOINC.loinc_class_type, name="loinc_class_type", curie=LOINC.curie('loinc_class_type'),
-                   model_uri=LOINC.loinc_class_type, domain=None, range=Optional[str])
+slots.loincTerm__primary_component = Slot(uri=LOINC_PROPERTY.COMPONENT, name="loincTerm__primary_component", curie=LOINC_PROPERTY.curie('COMPONENT'),
+                   model_uri=LOINC.loincTerm__primary_component, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.primary_component = Slot(uri=LOINC_PROPERTY.COMPONENT, name="primary_component", curie=LOINC_PROPERTY.curie('COMPONENT'),
-                   model_uri=LOINC.primary_component, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_property = Slot(uri=LOINC_PROPERTY.PROPERTY, name="loincTerm__primary_property", curie=LOINC_PROPERTY.curie('PROPERTY'),
+                   model_uri=LOINC.loincTerm__primary_property, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.primary_property = Slot(uri=LOINC_PROPERTY.PROPERTY, name="primary_property", curie=LOINC_PROPERTY.curie('PROPERTY'),
-                   model_uri=LOINC.primary_property, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_time_aspect = Slot(uri=LOINC_PROPERTY.TIME_ASPECT, name="loincTerm__primary_time_aspect", curie=LOINC_PROPERTY.curie('TIME_ASPECT'),
+                   model_uri=LOINC.loincTerm__primary_time_aspect, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.primary_time_aspect = Slot(uri=LOINC_PROPERTY.TIME_ASPECT, name="primary_time_aspect", curie=LOINC_PROPERTY.curie('TIME_ASPECT'),
-                   model_uri=LOINC.primary_time_aspect, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_system = Slot(uri=LOINC_PROPERTY.SYSTEM, name="loincTerm__primary_system", curie=LOINC_PROPERTY.curie('SYSTEM'),
+                   model_uri=LOINC.loincTerm__primary_system, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.primary_system = Slot(uri=LOINC_PROPERTY.SYSTEM, name="primary_system", curie=LOINC_PROPERTY.curie('SYSTEM'),
-                   model_uri=LOINC.primary_system, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_scale_typ = Slot(uri=LOINC_PROPERTY.SCALE_TYP, name="loincTerm__primary_scale_typ", curie=LOINC_PROPERTY.curie('SCALE_TYP'),
+                   model_uri=LOINC.loincTerm__primary_scale_typ, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.primary_scale_typ = Slot(uri=LOINC_PROPERTY.SCALE_TYP, name="primary_scale_typ", curie=LOINC_PROPERTY.curie('SCALE_TYP'),
-                   model_uri=LOINC.primary_scale_typ, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_method_typ = Slot(uri=LOINC_PROPERTY.METHOD_TYP, name="loincTerm__primary_method_typ", curie=LOINC_PROPERTY.curie('METHOD_TYP'),
+                   model_uri=LOINC.loincTerm__primary_method_typ, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.primary_method_typ = Slot(uri=LOINC_PROPERTY.METHOD_TYP, name="primary_method_typ", curie=LOINC_PROPERTY.curie('METHOD_TYP'),
-                   model_uri=LOINC.primary_method_typ, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_analyte = Slot(uri=LOINC_PROPERTY.analyte, name="loincTerm__detailed_analyte", curie=LOINC_PROPERTY.curie('analyte'),
+                   model_uri=LOINC.loincTerm__detailed_analyte, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_analyte = Slot(uri=LOINC_PROPERTY.analyte, name="detailed_analyte", curie=LOINC_PROPERTY.curie('analyte'),
-                   model_uri=LOINC.detailed_analyte, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_challenge = Slot(uri=LOINC_PROPERTY.challenge, name="loincTerm__detailed_challenge", curie=LOINC_PROPERTY.curie('challenge'),
+                   model_uri=LOINC.loincTerm__detailed_challenge, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_challenge = Slot(uri=LOINC_PROPERTY.challenge, name="detailed_challenge", curie=LOINC_PROPERTY.curie('challenge'),
-                   model_uri=LOINC.detailed_challenge, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_adjustment = Slot(uri=LOINC_PROPERTY.adjustment, name="loincTerm__detailed_adjustment", curie=LOINC_PROPERTY.curie('adjustment'),
+                   model_uri=LOINC.loincTerm__detailed_adjustment, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_adjustment = Slot(uri=LOINC_PROPERTY.adjustment, name="detailed_adjustment", curie=LOINC_PROPERTY.curie('adjustment'),
-                   model_uri=LOINC.detailed_adjustment, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_count = Slot(uri=LOINC_PROPERTY.count, name="loincTerm__detailed_count", curie=LOINC_PROPERTY.curie('count'),
+                   model_uri=LOINC.loincTerm__detailed_count, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_count = Slot(uri=LOINC_PROPERTY.count, name="detailed_count", curie=LOINC_PROPERTY.curie('count'),
-                   model_uri=LOINC.detailed_count, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_time_core = Slot(uri=LOINC_PROPERTY['time-core'], name="loincTerm__detailed_time_core", curie=LOINC_PROPERTY.curie('time-core'),
+                   model_uri=LOINC.loincTerm__detailed_time_core, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_time_core = Slot(uri=LOINC_PROPERTY['time-core'], name="detailed_time_core", curie=LOINC_PROPERTY.curie('time-core'),
-                   model_uri=LOINC.detailed_time_core, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_time_modifier = Slot(uri=LOINC_PROPERTY['time-modifier'], name="loincTerm__detailed_time_modifier", curie=LOINC_PROPERTY.curie('time-modifier'),
+                   model_uri=LOINC.loincTerm__detailed_time_modifier, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_time_modifier = Slot(uri=LOINC_PROPERTY['time-modifier'], name="detailed_time_modifier", curie=LOINC_PROPERTY.curie('time-modifier'),
-                   model_uri=LOINC.detailed_time_modifier, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_system_core = Slot(uri=LOINC_PROPERTY['system-core'], name="loincTerm__detailed_system_core", curie=LOINC_PROPERTY.curie('system-core'),
+                   model_uri=LOINC.loincTerm__detailed_system_core, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_system_core = Slot(uri=LOINC_PROPERTY['system-core'], name="detailed_system_core", curie=LOINC_PROPERTY.curie('system-core'),
-                   model_uri=LOINC.detailed_system_core, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__detailed_super_system = Slot(uri=LOINC_PROPERTY['super-system'], name="loincTerm__detailed_super_system", curie=LOINC_PROPERTY.curie('super-system'),
+                   model_uri=LOINC.loincTerm__detailed_super_system, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.detailed_super_system = Slot(uri=LOINC_PROPERTY['super-system'], name="detailed_super_system", curie=LOINC_PROPERTY.curie('super-system'),
-                   model_uri=LOINC.detailed_super_system, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__syntax_analyte_core = Slot(uri=LOINC_PROPERTY['analyte-core'], name="loincTerm__syntax_analyte_core", curie=LOINC_PROPERTY.curie('analyte-core'),
+                   model_uri=LOINC.loincTerm__syntax_analyte_core, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.syntax_analyte_core = Slot(uri=LOINC_PROPERTY['analyte-core'], name="syntax_analyte_core", curie=LOINC_PROPERTY.curie('analyte-core'),
-                   model_uri=LOINC.syntax_analyte_core, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__syntax_analyte_suffix = Slot(uri=LOINC_PROPERTY['analyte-suffix'], name="loincTerm__syntax_analyte_suffix", curie=LOINC_PROPERTY.curie('analyte-suffix'),
+                   model_uri=LOINC.loincTerm__syntax_analyte_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.syntax_analyte_suffix = Slot(uri=LOINC_PROPERTY['analyte-suffix'], name="syntax_analyte_suffix", curie=LOINC_PROPERTY.curie('analyte-suffix'),
-                   model_uri=LOINC.syntax_analyte_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__syntax_analyte_numerator = Slot(uri=LOINC_PROPERTY['analyte-numerator'], name="loincTerm__syntax_analyte_numerator", curie=LOINC_PROPERTY.curie('analyte-numerator'),
+                   model_uri=LOINC.loincTerm__syntax_analyte_numerator, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.syntax_analyte_numerator = Slot(uri=LOINC_PROPERTY['analyte-numerator'], name="syntax_analyte_numerator", curie=LOINC_PROPERTY.curie('analyte-numerator'),
-                   model_uri=LOINC.syntax_analyte_numerator, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__syntax_analyte_divisor = Slot(uri=LOINC_PROPERTY['analyte-divisor'], name="loincTerm__syntax_analyte_divisor", curie=LOINC_PROPERTY.curie('analyte-divisor'),
+                   model_uri=LOINC.loincTerm__syntax_analyte_divisor, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.syntax_analyte_divisor = Slot(uri=LOINC_PROPERTY['analyte-divisor'], name="syntax_analyte_divisor", curie=LOINC_PROPERTY.curie('analyte-divisor'),
-                   model_uri=LOINC.syntax_analyte_divisor, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__syntax_analyte_divisor_suffix = Slot(uri=LOINC_PROPERTY['analyte-divisor-suffix'], name="loincTerm__syntax_analyte_divisor_suffix", curie=LOINC_PROPERTY.curie('analyte-divisor-suffix'),
+                   model_uri=LOINC.loincTerm__syntax_analyte_divisor_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.syntax_analyte_divisor_suffix = Slot(uri=LOINC_PROPERTY['analyte-divisor-suffix'], name="syntax_analyte_divisor_suffix", curie=LOINC_PROPERTY.curie('analyte-divisor-suffix'),
-                   model_uri=LOINC.syntax_analyte_divisor_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_gene = Slot(uri=LOINC_PROPERTY.analyte_gene, name="loincTerm__semantic_analyte_gene", curie=LOINC_PROPERTY.curie('analyte_gene'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_gene, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_gene = Slot(uri=LOINC_PROPERTY.analyte_gene, name="semantic_analyte_gene", curie=LOINC_PROPERTY.curie('analyte_gene'),
-                   model_uri=LOINC.semantic_analyte_gene, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_genetic_variant = Slot(uri=LOINC_PROPERTY['analyte-genetic-variant'], name="loincTerm__semantic_analyte_genetic_variant", curie=LOINC_PROPERTY.curie('analyte-genetic-variant'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_genetic_variant, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_genetic_variant = Slot(uri=LOINC_PROPERTY['analyte-genetic-variant'], name="semantic_analyte_genetic_variant", curie=LOINC_PROPERTY.curie('analyte-genetic-variant'),
-                   model_uri=LOINC.semantic_analyte_genetic_variant, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_chemical = Slot(uri=LOINC_PROPERTY['analyte-chemical'], name="loincTerm__semantic_analyte_chemical", curie=LOINC_PROPERTY.curie('analyte-chemical'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_chemical = Slot(uri=LOINC_PROPERTY['analyte-chemical'], name="semantic_analyte_chemical", curie=LOINC_PROPERTY.curie('analyte-chemical'),
-                   model_uri=LOINC.semantic_analyte_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_divisor_chemical = Slot(uri=LOINC_PROPERTY['analyte-divisor-chemical'], name="loincTerm__semantic_analyte_divisor_chemical", curie=LOINC_PROPERTY.curie('analyte-divisor-chemical'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_divisor_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_divisor_chemical = Slot(uri=LOINC_PROPERTY['analyte-divisor-chemical'], name="semantic_analyte_divisor_chemical", curie=LOINC_PROPERTY.curie('analyte-divisor-chemical'),
-                   model_uri=LOINC.semantic_analyte_divisor_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_clinical_drug = Slot(uri=LOINC_PROPERTY['analyte-clinical-drug'], name="loincTerm__semantic_analyte_clinical_drug", curie=LOINC_PROPERTY.curie('analyte-clinical-drug'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_clinical_drug, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_clinical_drug = Slot(uri=LOINC_PROPERTY['analyte-clinical-drug'], name="semantic_analyte_clinical_drug", curie=LOINC_PROPERTY.curie('analyte-clinical-drug'),
-                   model_uri=LOINC.semantic_analyte_clinical_drug, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_system_core_anatomic_entity = Slot(uri=LOINC_PROPERTY['system-core-anatomic-entity'], name="loincTerm__semantic_system_core_anatomic_entity", curie=LOINC_PROPERTY.curie('system-core-anatomic-entity'),
+                   model_uri=LOINC.loincTerm__semantic_system_core_anatomic_entity, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_system_core_anatomic_entity = Slot(uri=LOINC_PROPERTY['system-core-anatomic-entity'], name="semantic_system_core_anatomic_entity", curie=LOINC_PROPERTY.curie('system-core-anatomic-entity'),
-                   model_uri=LOINC.semantic_system_core_anatomic_entity, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_organism = Slot(uri=LOINC_PROPERTY['analyte-organism'], name="loincTerm__semantic_analyte_organism", curie=LOINC_PROPERTY.curie('analyte-organism'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_organism, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_organism = Slot(uri=LOINC_PROPERTY['analyte-organism'], name="semantic_analyte_organism", curie=LOINC_PROPERTY.curie('analyte-organism'),
-                   model_uri=LOINC.semantic_analyte_organism, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_challenge_route = Slot(uri=LOINC_PROPERTY['challenge-route'], name="loincTerm__semantic_challenge_route", curie=LOINC_PROPERTY.curie('challenge-route'),
+                   model_uri=LOINC.loincTerm__semantic_challenge_route, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_challenge_route = Slot(uri=LOINC_PROPERTY['challenge-route'], name="semantic_challenge_route", curie=LOINC_PROPERTY.curie('challenge-route'),
-                   model_uri=LOINC.semantic_challenge_route, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__semantic_analyte_allergen = Slot(uri=LOINC_PROPERTY['analyte-allergen'], name="loincTerm__semantic_analyte_allergen", curie=LOINC_PROPERTY.curie('analyte-allergen'),
+                   model_uri=LOINC.loincTerm__semantic_analyte_allergen, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.semantic_analyte_allergen = Slot(uri=LOINC_PROPERTY['analyte-allergen'], name="semantic_analyte_allergen", curie=LOINC_PROPERTY.curie('analyte-allergen'),
-                   model_uri=LOINC.semantic_analyte_allergen, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__metadata_class = Slot(uri=LOINC_PROPERTY.class_, name="loincTerm__metadata_class", curie=LOINC_PROPERTY.curie('class_'),
+                   model_uri=LOINC.loincTerm__metadata_class, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.metadata_class = Slot(uri=LOINC_PROPERTY.class_, name="metadata_class", curie=LOINC_PROPERTY.curie('class_'),
-                   model_uri=LOINC.metadata_class, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__metadata_category = Slot(uri=LOINC_PROPERTY.category, name="loincTerm__metadata_category", curie=LOINC_PROPERTY.curie('category'),
+                   model_uri=LOINC.loincTerm__metadata_category, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.metadata_category = Slot(uri=LOINC_PROPERTY.category, name="metadata_category", curie=LOINC_PROPERTY.curie('category'),
-                   model_uri=LOINC.metadata_category, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_anatomic_location_imaging_focus = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-imaging-focus'], name="loincTerm__rad_anatomic_location_imaging_focus", curie=LOINC_PROPERTY.curie('rad-anatomic-location-imaging-focus'),
+                   model_uri=LOINC.loincTerm__rad_anatomic_location_imaging_focus, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_anatomic_location_imaging_focus = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-imaging-focus'], name="rad_anatomic_location_imaging_focus", curie=LOINC_PROPERTY.curie('rad-anatomic-location-imaging-focus'),
-                   model_uri=LOINC.rad_anatomic_location_imaging_focus, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_anatomic_location_laterality = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality'], name="loincTerm__rad_anatomic_location_laterality", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality'),
+                   model_uri=LOINC.loincTerm__rad_anatomic_location_laterality, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_anatomic_location_laterality = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality'], name="rad_anatomic_location_laterality", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality'),
-                   model_uri=LOINC.rad_anatomic_location_laterality, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_anatomic_location_laterality_presence = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality-presence'], name="loincTerm__rad_anatomic_location_laterality_presence", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality-presence'),
+                   model_uri=LOINC.loincTerm__rad_anatomic_location_laterality_presence, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_anatomic_location_laterality_presence = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality-presence'], name="rad_anatomic_location_laterality_presence", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality-presence'),
-                   model_uri=LOINC.rad_anatomic_location_laterality_presence, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_anatomic_location_region_imaged = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-region-imaged'], name="loincTerm__rad_anatomic_location_region_imaged", curie=LOINC_PROPERTY.curie('rad-anatomic-location-region-imaged'),
+                   model_uri=LOINC.loincTerm__rad_anatomic_location_region_imaged, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_anatomic_location_region_imaged = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-region-imaged'], name="rad_anatomic_location_region_imaged", curie=LOINC_PROPERTY.curie('rad-anatomic-location-region-imaged'),
-                   model_uri=LOINC.rad_anatomic_location_region_imaged, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_guidance_for_action = Slot(uri=LOINC_PROPERTY['rad-guidance-for-action'], name="loincTerm__rad_guidance_for_action", curie=LOINC_PROPERTY.curie('rad-guidance-for-action'),
+                   model_uri=LOINC.loincTerm__rad_guidance_for_action, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_guidance_for_action = Slot(uri=LOINC_PROPERTY['rad-guidance-for-action'], name="rad_guidance_for_action", curie=LOINC_PROPERTY.curie('rad-guidance-for-action'),
-                   model_uri=LOINC.rad_guidance_for_action, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_guidance_for_approach = Slot(uri=LOINC_PROPERTY['rad-guidance-for-approach'], name="loincTerm__rad_guidance_for_approach", curie=LOINC_PROPERTY.curie('rad-guidance-for-approach'),
+                   model_uri=LOINC.loincTerm__rad_guidance_for_approach, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_guidance_for_approach = Slot(uri=LOINC_PROPERTY['rad-guidance-for-approach'], name="rad_guidance_for_approach", curie=LOINC_PROPERTY.curie('rad-guidance-for-approach'),
-                   model_uri=LOINC.rad_guidance_for_approach, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_guidance_for_object = Slot(uri=LOINC_PROPERTY['rad-guidance-for-object'], name="loincTerm__rad_guidance_for_object", curie=LOINC_PROPERTY.curie('rad-guidance-for-object'),
+                   model_uri=LOINC.loincTerm__rad_guidance_for_object, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_guidance_for_object = Slot(uri=LOINC_PROPERTY['rad-guidance-for-object'], name="rad_guidance_for_object", curie=LOINC_PROPERTY.curie('rad-guidance-for-object'),
-                   model_uri=LOINC.rad_guidance_for_object, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_guidance_for_presence = Slot(uri=LOINC_PROPERTY['rad-guidance-for-presence'], name="loincTerm__rad_guidance_for_presence", curie=LOINC_PROPERTY.curie('rad-guidance-for-presence'),
+                   model_uri=LOINC.loincTerm__rad_guidance_for_presence, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_guidance_for_presence = Slot(uri=LOINC_PROPERTY['rad-guidance-for-presence'], name="rad_guidance_for_presence", curie=LOINC_PROPERTY.curie('rad-guidance-for-presence'),
-                   model_uri=LOINC.rad_guidance_for_presence, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_maneuver_maneuver_type = Slot(uri=LOINC_PROPERTY['rad-maneuver-maneuver-type'], name="loincTerm__rad_maneuver_maneuver_type", curie=LOINC_PROPERTY.curie('rad-maneuver-maneuver-type'),
+                   model_uri=LOINC.loincTerm__rad_maneuver_maneuver_type, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_maneuver_maneuver_type = Slot(uri=LOINC_PROPERTY['rad-maneuver-maneuver-type'], name="rad_maneuver_maneuver_type", curie=LOINC_PROPERTY.curie('rad-maneuver-maneuver-type'),
-                   model_uri=LOINC.rad_maneuver_maneuver_type, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_modality_subtype = Slot(uri=LOINC_PROPERTY['rad-modality-subtype'], name="loincTerm__rad_modality_subtype", curie=LOINC_PROPERTY.curie('rad-modality-subtype'),
+                   model_uri=LOINC.loincTerm__rad_modality_subtype, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_modality_subtype = Slot(uri=LOINC_PROPERTY['rad-modality-subtype'], name="rad_modality_subtype", curie=LOINC_PROPERTY.curie('rad-modality-subtype'),
-                   model_uri=LOINC.rad_modality_subtype, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_modality_type = Slot(uri=LOINC_PROPERTY['rad-modality-type'], name="loincTerm__rad_modality_type", curie=LOINC_PROPERTY.curie('rad-modality-type'),
+                   model_uri=LOINC.loincTerm__rad_modality_type, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_modality_type = Slot(uri=LOINC_PROPERTY['rad-modality-type'], name="rad_modality_type", curie=LOINC_PROPERTY.curie('rad-modality-type'),
-                   model_uri=LOINC.rad_modality_type, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_pharmaceutical_route = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-route'], name="loincTerm__rad_pharmaceutical_route", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-route'),
+                   model_uri=LOINC.loincTerm__rad_pharmaceutical_route, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_pharmaceutical_route = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-route'], name="rad_pharmaceutical_route", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-route'),
-                   model_uri=LOINC.rad_pharmaceutical_route, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_pharmaceutical_substance_given = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-substance-given'], name="loincTerm__rad_pharmaceutical_substance_given", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-substance-given'),
+                   model_uri=LOINC.loincTerm__rad_pharmaceutical_substance_given, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_pharmaceutical_substance_given = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-substance-given'], name="rad_pharmaceutical_substance_given", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-substance-given'),
-                   model_uri=LOINC.rad_pharmaceutical_substance_given, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_reason_for_exam = Slot(uri=LOINC_PROPERTY['rad-reason-for-exam'], name="loincTerm__rad_reason_for_exam", curie=LOINC_PROPERTY.curie('rad-reason-for-exam'),
+                   model_uri=LOINC.loincTerm__rad_reason_for_exam, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_reason_for_exam = Slot(uri=LOINC_PROPERTY['rad-reason-for-exam'], name="rad_reason_for_exam", curie=LOINC_PROPERTY.curie('rad-reason-for-exam'),
-                   model_uri=LOINC.rad_reason_for_exam, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_subject = Slot(uri=LOINC_PROPERTY['rad-subject'], name="loincTerm__rad_subject", curie=LOINC_PROPERTY.curie('rad-subject'),
+                   model_uri=LOINC.loincTerm__rad_subject, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_subject = Slot(uri=LOINC_PROPERTY['rad-subject'], name="rad_subject", curie=LOINC_PROPERTY.curie('rad-subject'),
-                   model_uri=LOINC.rad_subject, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_timing = Slot(uri=LOINC_PROPERTY['rad-timing'], name="loincTerm__rad_timing", curie=LOINC_PROPERTY.curie('rad-timing'),
+                   model_uri=LOINC.loincTerm__rad_timing, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_timing = Slot(uri=LOINC_PROPERTY['rad-timing'], name="rad_timing", curie=LOINC_PROPERTY.curie('rad-timing'),
-                   model_uri=LOINC.rad_timing, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_view_aggregation = Slot(uri=LOINC_PROPERTY.rad_view_aggregation, name="loincTerm__rad_view_aggregation", curie=LOINC_PROPERTY.curie('rad_view_aggregation'),
+                   model_uri=LOINC.loincTerm__rad_view_aggregation, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_view_aggregation = Slot(uri=LOINC_PROPERTY.rad_view_aggregation, name="rad_view_aggregation", curie=LOINC_PROPERTY.curie('rad_view_aggregation'),
-                   model_uri=LOINC.rad_view_aggregation, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__rad_view_view_type = Slot(uri=LOINC_PROPERTY.rad_view_view_type, name="loincTerm__rad_view_view_type", curie=LOINC_PROPERTY.curie('rad_view_view_type'),
+                   model_uri=LOINC.loincTerm__rad_view_view_type, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.rad_view_view_type = Slot(uri=LOINC_PROPERTY.rad_view_view_type, name="rad_view_view_type", curie=LOINC_PROPERTY.curie('rad_view_view_type'),
-                   model_uri=LOINC.rad_view_view_type, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__document_kind = Slot(uri=LOINC_PROPERTY['document-kind'], name="loincTerm__document_kind", curie=LOINC_PROPERTY.curie('document-kind'),
+                   model_uri=LOINC.loincTerm__document_kind, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.document_kind = Slot(uri=LOINC_PROPERTY['document-kind'], name="document_kind", curie=LOINC_PROPERTY.curie('document-kind'),
-                   model_uri=LOINC.document_kind, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__document_role = Slot(uri=LOINC_PROPERTY['document-role'], name="loincTerm__document_role", curie=LOINC_PROPERTY.curie('document-role'),
+                   model_uri=LOINC.loincTerm__document_role, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.document_role = Slot(uri=LOINC_PROPERTY['document-role'], name="document_role", curie=LOINC_PROPERTY.curie('document-role'),
-                   model_uri=LOINC.document_role, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__document_setting = Slot(uri=LOINC_PROPERTY['document-setting'], name="loincTerm__document_setting", curie=LOINC_PROPERTY.curie('document-setting'),
+                   model_uri=LOINC.loincTerm__document_setting, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.document_setting = Slot(uri=LOINC_PROPERTY['document-setting'], name="document_setting", curie=LOINC_PROPERTY.curie('document-setting'),
-                   model_uri=LOINC.document_setting, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__document_subject_matter_domain = Slot(uri=LOINC_PROPERTY['document-subject-matter-domain'], name="loincTerm__document_subject_matter_domain", curie=LOINC_PROPERTY.curie('document-subject-matter-domain'),
+                   model_uri=LOINC.loincTerm__document_subject_matter_domain, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.document_subject_matter_domain = Slot(uri=LOINC_PROPERTY['document-subject-matter-domain'], name="document_subject_matter_domain", curie=LOINC_PROPERTY.curie('document-subject-matter-domain'),
-                   model_uri=LOINC.document_subject_matter_domain, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__document_type_of_service = Slot(uri=LOINC_PROPERTY['document-type-of-service'], name="loincTerm__document_type_of_service", curie=LOINC_PROPERTY.curie('document-type-of-service'),
+                   model_uri=LOINC.loincTerm__document_type_of_service, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.document_type_of_service = Slot(uri=LOINC_PROPERTY['document-type-of-service'], name="document_type_of_service", curie=LOINC_PROPERTY.curie('document-type-of-service'),
-                   model_uri=LOINC.document_type_of_service, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincPart__part_number = Slot(uri=LOINC.part_number, name="loincPart__part_number", curie=LOINC.curie('part_number'),
+                   model_uri=LOINC.loincPart__part_number, domain=None, range=Optional[str])
 
-slots.part_number = Slot(uri=LOINC.part_number, name="part_number", curie=LOINC.curie('part_number'),
-                   model_uri=LOINC.part_number, domain=None, range=Optional[str])
+slots.loincPart__part_type_name = Slot(uri=LOINC['part-type-name'], name="loincPart__part_type_name", curie=LOINC.curie('part-type-name'),
+                   model_uri=LOINC.loincPart__part_type_name, domain=None, range=Optional[str])
 
-slots.part_type_name = Slot(uri=LOINC['part-type-name'], name="part_type_name", curie=LOINC.curie('part-type-name'),
-                   model_uri=LOINC.part_type_name, domain=None, range=Optional[str])
+slots.loincPart__part_name = Slot(uri=LOINC.part_name, name="loincPart__part_name", curie=LOINC.curie('part_name'),
+                   model_uri=LOINC.loincPart__part_name, domain=None, range=Optional[str])
 
-slots.part_name = Slot(uri=LOINC.part_name, name="part_name", curie=LOINC.curie('part_name'),
-                   model_uri=LOINC.part_name, domain=None, range=Optional[str])
+slots.loincPart__part_display_name = Slot(uri=LOINC.part_display_name, name="loincPart__part_display_name", curie=LOINC.curie('part_display_name'),
+                   model_uri=LOINC.loincPart__part_display_name, domain=None, range=Optional[str])
 
-slots.part_display_name = Slot(uri=LOINC.part_display_name, name="part_display_name", curie=LOINC.curie('part_display_name'),
-                   model_uri=LOINC.part_display_name, domain=None, range=Optional[str])
-
-slots.part_status = Slot(uri=LOINC.status, name="part_status", curie=LOINC.curie('status'),
-                   model_uri=LOINC.part_status, domain=None, range=Optional[str])
+slots.loincPart__part_status = Slot(uri=LOINC.status, name="loincPart__part_status", curie=LOINC.curie('status'),
+                   model_uri=LOINC.loincPart__part_status, domain=None, range=Optional[str])

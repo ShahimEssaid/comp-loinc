@@ -1,4 +1,7 @@
 import re
 
 from loinclib.loinc_graph_schema import PropertyType, NodeType, EdgeType, NameSpaceEnum
-from loinclib.loinc_graph import Graph
+
+from .schema_v2 import *
+# from .graph_v2 import  *
+from .snomed_release_loader import *

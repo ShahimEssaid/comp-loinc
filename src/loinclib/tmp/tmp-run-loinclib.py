@@ -12,7 +12,7 @@ release.load_AccessoryFiles_PartFile_Part_csv()
 release.parse_LoincTable_Loinc_csv()
 release.load_tree_component()
 
-print(release.graph.nodes(data=True)[NodePrefix.loinc_part + 'LP115711-6'])
+print(release.nx_graph.nodes(data=True)[NodePrefix.loinc_part + 'LP115711-6'])
 
 
 

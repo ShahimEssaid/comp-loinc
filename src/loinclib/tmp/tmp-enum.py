@@ -15,3 +15,8 @@ a = SomeEnum.One
 
 print(repr(a))
 
+
+a2 = SomeEnum('one')
+
+print(a2)
+

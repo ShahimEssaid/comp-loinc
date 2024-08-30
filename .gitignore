@@ -3,7 +3,6 @@
 /tmp/
 /out*
 
-.idea/
 .DS_Store
 
 secrets.yaml
@@ -142,7 +141,9 @@ dmypy.json
 
 
 
-/loinc_release/
+/loinc_release*
 /loinc_trees/
 /comp_loinc/
 /comploinc_out/
+
+/*_release
