@@ -5,8 +5,24 @@ class SnomedNodeType(StrEnum):
   Concept = 'Concept'
 
 
+class SnomedProperteis(StrEnum):
+  fully_specified_name = '900000000000003001'
+
+
 class SnomedEdges(StrEnum):
   is_a = '116680003'
+  maps_to = 'maps_to'  # this maps external ids to one and only one SNOMED concept
+
+  # the following edges are used in the LOINC SNOMED module
+  component = '246093002'
+  technique = '246501002'
+  property = '370130000'
+  scale_type = '370132008'
+  specimen_substance = '370133003'
+  time_aspect = '370134009'
+  inheres_in = '704319004'
+  precondition = '704326004'
+  direct_site = '704327008'
 
 # 10:45 $ csvtool -t TAB  col 8 sct2_Relationship_Snapshot_INT_20240801.txt | sort | uniq -c
 # 135 1003703000

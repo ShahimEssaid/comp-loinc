@@ -12,7 +12,7 @@ class SnomedSources(StrEnum):
 
 
 class SnomedReleaseLoader:
-  # def __init__(self, config, home_path: Path):
+
   def __init__(self, *, graph: LoinclibGraph, config, home_path: Path):
     self.config = config
     self.home_path = home_path
@@ -23,19 +23,24 @@ class SnomedReleaseLoader:
     relationship_path = self.config['snomed']['release'][release_version]['files']['relationship']
     return (self.home_path / relationship_path).absolute()
 
-  def read_relations_tsv(self) -> pd.DataFrame:
-    # with open(self.get_relations_path(), 'r') as f:
-    #   return pd.read_csv(f, dtype=str, na_filter=False, sep='\t')
+  def read_relationship(self) -> pd.DataFrame:
     return pd.read_csv(self.get_relations_path(), dtype=str, na_filter=False, sep='\t')
 
-  def load_relations_tsv(self) -> None:
-    if SnomedSources.relations in self.graph.loaded_sources:
+  def load_selected_relations(self, *types_: StrEnum) -> None:
+
+    loaded_relationships = self.graph.loaded_sources.get(SnomedSources.relations, {})
+    new_relationships = False
+    for type_ in types_:
+      if type_ not in loaded_relationships:
+        new_relationships = True
+
+    if not new_relationships:
       return
 
-    for tpl in self.read_relations_tsv().itertuples():
+    for tpl in self.read_relationship().itertuples():
       # @formatter:off
       (
-        row_number,
+       index,
        id_,
        effective_time,
        active,
@@ -50,16 +55,19 @@ class SnomedReleaseLoader:
        ) = tpl
       # @formatter:on
 
-
       type_ = None
       try:
         type_ = SnomedEdges(type_id)
       except ValueError:
         pass
-      if type_:
+
+      if type_ in loaded_relationships:
+        continue
+
+      if type_ in types_:
         from_node: Node = self.graph.getsert_node(type_=SnomedNodeType.Concept, code=source_id)
         to_node: Node = self.graph.getsert_node(type_=SnomedNodeType.Concept, code=destination_id)
-        from_node.add_edge_single(SnomedEdges(type_id), to_node=to_node, error_if_duplicate=False)
+        from_node.add_edge_single(type_, to_node=to_node, error_if_duplicate=False)
 
-
-    self.graph.loaded_sources[SnomedSources.relations] = {}
+    for type_ in types_:
+      loaded_relationships[type_] = True

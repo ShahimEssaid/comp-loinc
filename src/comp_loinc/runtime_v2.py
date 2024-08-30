@@ -7,7 +7,7 @@ import yaml
 from linkml_runtime import SchemaView
 
 from loinclib import LoinclibGraph
-from loinclib.loinc_release_loader_v2 import LoincReleaseLoader
+from loinclib.loinc_loader_v2 import LoincReleaseLoader
 
 
 class Runtime:
