@@ -7,7 +7,7 @@ import yaml
 from linkml_runtime import SchemaView
 
 from loinclib import LoinclibGraph
-from loinclib.loinc_loader_v2 import LoincReleaseLoader
+from loinclib.loinc_loader_v2 import LoincLoader
 
 
 class Runtime:
@@ -35,12 +35,12 @@ class Runtime:
     self.schema_views: t.Dict[str, SchemaView] = dict()
     self.current_schema_view: t.Optional[SchemaView] = None
 
-    self.__loinc_release_loader: t.Optional[LoincReleaseLoader] = None
+    self.__loinc_release_loader: t.Optional[LoincLoader] = None
 
   def get_loinc_release_loader(self):
     if self.__loinc_release_loader is None:
       release_path = self.get_loinc_release_path()
-      self.__loinc_release_loader = LoincReleaseLoader(release_path=release_path, runtime=self)
+      self.__loinc_release_loader = LoincLoader(release_path=release_path, runtime=self)
     return self.__loinc_release_loader
 
   def load_linkml_schema(self, file_name: str, as_name: str = None, reload: bool = False) -> SchemaView:

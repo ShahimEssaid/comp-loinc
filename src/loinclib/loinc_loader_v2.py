@@ -5,6 +5,7 @@ import pandas as pd
 
 import loinclib.loinc_schema_v2 as LS
 from loinclib import LoinclibGraph
+from loinclib.loinc_schema_v2 import LoincPartEdge
 from loinclib.schema_v2 import Node
 
 
@@ -14,9 +15,11 @@ class LoincSources(StrEnum):
   AccessoryFiles__PartFile__LoincPartLink_PrimaryCsv = 'AccessoryFiles/PartFile/LoincPartLink_Primary.csv'
   AccessoryFiles__PartFile__LoincPartLink_SupplementaryCsv = 'AccessoryFiles/PartFile/LoincPartLink_Supplementary.csv'
   AccessoryFiles__PartFile__PartRelatedCodeMappingCsv = 'AccessoryFiles/PartFile/PartRelatedCodeMapping.csv'
+  AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv = 'AccessoryFiles/ComponentHierarchyBySystem/ComponentHierarchyBySystem.csv'
+  AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv__part_parents = 'AccessoryFiles/ComponentHierarchyBySystem/ComponentHierarchyBySystem.csv'
 
 
-class LoincReleaseLoader:
+class LoincLoader:
 
   def __init__(self, *, graph: LoinclibGraph, config, home_path: Path):
     self.graph = graph
@@ -158,6 +161,31 @@ class LoincReleaseLoader:
 
     self.graph.loaded_sources[LoincSources.AccessoryFiles__PartFile__LoincPartLink_SupplementaryCsv] = {}
 
+  def load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv(self):
+    if LoincSources.AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv__part_parents in self.graph.loaded_sources:
+      return
+
+    for tpl in self.read_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv().itertuples():
+      # @formatter:off
+      (
+        row_number,
+        path_to_root,
+        sequence,
+        immediate_parent,
+        code,
+        code_text
+      ) = tpl
+      # @formatter:off
+
+      if code.startswith('LP'):
+
+        part_node: Node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, code)
+        part_node.set_property(type_=LS.LoincPartProps.code_text__from_comp_hierarch, value=code_text)
+        parent_node: Node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, immediate_parent)
+        part_node.add_edge_single(type_=LoincPartEdge.parent_comp_by_system, to_node=parent_node)
+
+    self.graph.loaded_sources[LoincSources.AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv__part_parents] = {}
+
   def read_loinc_table__loinc_csv(self) -> pd.DataFrame:
     return pd.read_csv(self.release_path / LoincSources.LoincTable__LoincCsv, dtype=str, na_filter=False)
 
@@ -175,6 +203,10 @@ class LoincReleaseLoader:
   def read_accessory_files__part_file__part_related_code_mapping_csv(self) -> pd.DataFrame:
     return pd.read_csv(self.release_path / LoincSources.AccessoryFiles__PartFile__PartRelatedCodeMappingCsv,
                        dtype=str, na_filter=False)
+  def read_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv(self) -> pd.DataFrame:
+    return pd.read_csv(self.release_path / LoincSources.AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv,
+                       dtype=str, na_filter=False)
+
 
   def get_loinc_release_path(self):
     release_path = None

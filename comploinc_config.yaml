@@ -2,8 +2,18 @@ loinc:
   release:
     default: '2.67'
     '2.67':
-      version: '2.67'
+      version: '2.78'
       path: 'loinc_release/2.67' # runtime home directory-relative path
+    '2.78':
+      version:  '2.78'
+      path: 'loinc_release/Loinc_2.78'
+
+loinc_tree:
+  release:
+    default: '2.78'
+    '2.78':
+      tree_path: 'loinc_trees/2024-08-31'
+
 
 snomed:
   release:
@@ -15,8 +25,8 @@ snomed:
 
 loinc_snomed:
   release:
-    default: _20231015
-    _20231015:
+    default: '20231015'
+    '20231015':
       files:
         description: 'loinc_snomed_release/Snapshot/Terminology/xsct2_Description_Snapshot-en_LO1010000_20231015.txt'
         identifier: 'loinc_snomed_release/Snapshot/Terminology/xsct2_Identifier_Snapshot_LO1010000_20231015.txt'

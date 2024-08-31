@@ -8,7 +8,7 @@ from linkml_runtime import SchemaView
 
 from comp_loinc import Runtime
 from comp_loinc.datamodel.comp_loinc_v2 import LoincTerm
-from loinclib.loinc_loader_v2 import LoincReleaseLoader
+from loinclib.loinc_loader_v2 import LoincLoader
 from loinclib.loinc_schema_v2 import LoincNodeType, LoincTermProps
 
 
@@ -28,8 +28,8 @@ class LoincBuilders:
   def lt_inst_all(self):
     typer.echo(f'Running lt_inst_all')
     graph = self.runtime.graph
-    loinc_loader = LoincReleaseLoader(graph=graph, home_path=self.runtime.home_path,
-                                      config=self.runtime.config)
+    loinc_loader = LoincLoader(graph=graph, home_path=self.runtime.home_path,
+                               config=self.runtime.config)
     loinc_loader.load_loinc_table__loinc_csv()
     for node in self.runtime.graph.get_nodes(LoincNodeType.LoincTerm):
       props = node.get_properties()

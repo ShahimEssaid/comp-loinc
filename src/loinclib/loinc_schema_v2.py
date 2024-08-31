@@ -135,10 +135,11 @@ class LoincPartProps(StrEnum):
   part_name = 'part_name'
   part_display_name = 'part_display_name'
   status = 'status'
+  code_text__from_comp_hierarch = 'part_text__from_comp_hierarch'
 
 
-class LoincPartEdges(StrEnum):
-  pass
+class LoincPartEdge(StrEnum):
+  parent_comp_by_system = ''  # This edge comes from ComponentHierarchyBySystem.csv
 
 # loinc_schema: Schema = Schema()
 #
