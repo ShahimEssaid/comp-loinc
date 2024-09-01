@@ -5,7 +5,7 @@ import pandas as pd
 from pandas import DataFrame
 
 from loinclib import LoinclibGraph
-from loinclib.loinc_schema_v2 import LoincNodeType
+from loinclib.loinc_schema import LoincNodeType
 from loinclib.loinc_tree_schema import LoincTreeEdges, LoincTreeProps
 
 

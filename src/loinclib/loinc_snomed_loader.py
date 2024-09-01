@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 
 from loinclib import LoinclibGraph, SnomedNodeType, SnomedEdges
-from loinclib.loinc_schema_v2 import LoincNodeType
+from loinclib.loinc_schema import LoincNodeType
 from loinclib.snomed_schema_v2 import SnomedProperteis
 
 

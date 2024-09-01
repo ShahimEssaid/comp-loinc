@@ -7,9 +7,9 @@ from linkml_owl.dumpers.owl_dumper import OWLDumper
 from linkml_runtime import SchemaView
 
 from comp_loinc import Runtime
-from comp_loinc.datamodel.comp_loinc_v2 import LoincTerm
-from loinclib.loinc_loader_v2 import LoincLoader
-from loinclib.loinc_schema_v2 import LoincNodeType, LoincTermProps
+from comp_loinc.datamodel.comp_loinc import LoincTerm
+from loinclib.loinc_loader import LoincLoader
+from loinclib.loinc_schema import LoincNodeType, LoincTermProps
 
 
 class LoincBuilders:

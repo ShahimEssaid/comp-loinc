@@ -1,7 +1,7 @@
 import typing as t
 
-import comp_loinc.datamodel.comp_loinc_v2 as v2
-from comp_loinc.datamodel.comp_loinc_v2 import Entity
+import comp_loinc.datamodel.comp_loinc as v2
+from comp_loinc.datamodel.comp_loinc import Entity
 
 
 # class Modules:

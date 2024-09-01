@@ -1,6 +1,6 @@
 
-from .runtime_v2 import Runtime, Builder
-from .cli_v2 import  CompLoincCli, cli
+from .runtime import Runtime, Builder
+from .cli import  CompLoincCli, cli
 from importlib import resources
 
 from . import schema
