@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging.config
 import typing as t
 from pathlib import Path
 
@@ -76,6 +77,8 @@ class CompLoincCli:
       raise ValueError(f'Work directory: {self.work_dir} does not exist.')
 
     self.config = Configuration(home_path= self.work_dir, config_file=config_file.absolute())
+    logging.config.dictConfig(self.config.get_logging_configuration())
+
     self.loinc_builders.configuration = self.config
 
     self.runtime = Runtime(configuration=self.config, name='cli')

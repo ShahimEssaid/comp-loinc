@@ -48,3 +48,6 @@ class Configuration:
     default = self.config['loinc_snomed']['release']['default']
     path = self.config['loinc_snomed']['release'][default]['files']['relationship']
     return self.home_path / path
+
+  def get_logging_configuration(self):
+    return self.config['logging']

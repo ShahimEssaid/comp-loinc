@@ -31,11 +31,7 @@ class Runtime:
 
     # logging.config.dictConfig(self.config['logging'])
     self.logger: Logger = logging.getLogger(f'{self.name}_runtime')
-    if not self.logger.hasHandlers():
-      print('========================== IF NOT')
-      self.logger.addHandler(logging.StreamHandler(stream=sys.stdout))
-      self.logger.setLevel(logging.INFO)
-    self.logger.info('INFO change ============')
+    self.logger.info('test info logging =================== ')
 
   def load_linkml_schema(self, file_name: str, as_name: str = None, reload: bool = False) -> SchemaView:
     from comp_loinc import schemas_path
