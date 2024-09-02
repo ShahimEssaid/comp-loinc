@@ -1,5 +1,5 @@
-# Auto generated from comp_loinc_v2.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-08-27T10:29:10
+# Auto generated from comp_loinc.yaml by pythongen.py version: 0.0.1
+# Generation date: 2024-09-02T05:14:13
 # Schema: loinc-owl-core-schema
 #
 # id: https://loinc.org/core
@@ -37,6 +37,7 @@ LOINC = CurieNamespace('loinc', 'https://loinc.org/')
 LOINC_PROPERTY = CurieNamespace('loinc_property', 'http://loinc.org/property/')
 OWL = CurieNamespace('owl', 'http://www.w3.org/2002/07/owl#')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
+SCT = CurieNamespace('sct', 'http://snomed.info/sct')
 DEFAULT_ = LOINC
 
 
@@ -44,6 +45,10 @@ DEFAULT_ = LOINC
 
 # Class references
 class EntityId(URIorCURIE):
+    pass
+
+
+class SnomedConceptId(EntityId):
     pass
 
 
@@ -99,6 +104,7 @@ class Entity(YAMLRoot):
     entity_label: Optional[str] = None
     entity_description: Optional[str] = None
     sub_class_of: Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]] = empty_list()
+    equivalent_class: Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -115,6 +121,34 @@ class Entity(YAMLRoot):
         if not isinstance(self.sub_class_of, list):
             self.sub_class_of = [self.sub_class_of] if self.sub_class_of is not None else []
         self.sub_class_of = [v if isinstance(v, EntityId) else EntityId(v) for v in self.sub_class_of]
+
+        if not isinstance(self.equivalent_class, list):
+            self.equivalent_class = [self.equivalent_class] if self.equivalent_class is not None else []
+        self.equivalent_class = [v if isinstance(v, EntityId) else EntityId(v) for v in self.equivalent_class]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class SnomedConcept(Entity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = SCT["SnomedConcept"]
+    class_class_curie: ClassVar[str] = "sct:SnomedConcept"
+    class_name: ClassVar[str] = "SnomedConcept"
+    class_model_uri: ClassVar[URIRef] = LOINC.SnomedConcept
+
+    id: Union[str, SnomedConceptId] = None
+    fully_specified_name: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SnomedConceptId):
+            self.id = SnomedConceptId(self.id)
+
+        if self.fully_specified_name is not None and not isinstance(self.fully_specified_name, str):
+            self.fully_specified_name = str(self.fully_specified_name)
 
         super().__post_init__(**kwargs)
 
@@ -459,6 +493,12 @@ slots.entity__entity_description = Slot(uri=RDFS.description, name="entity__enti
 
 slots.entity__sub_class_of = Slot(uri=RDFS.subClassOf, name="entity__sub_class_of", curie=RDFS.curie('subClassOf'),
                    model_uri=LOINC.entity__sub_class_of, domain=None, range=Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]])
+
+slots.entity__equivalent_class = Slot(uri=OWL.equivalentClass, name="entity__equivalent_class", curie=OWL.curie('equivalentClass'),
+                   model_uri=LOINC.entity__equivalent_class, domain=None, range=Optional[Union[Union[str, EntityId], List[Union[str, EntityId]]]])
+
+slots.snomedConcept__fully_specified_name = Slot(uri=SCT.fully_specified_name, name="snomedConcept__fully_specified_name", curie=SCT.curie('fully_specified_name'),
+                   model_uri=LOINC.snomedConcept__fully_specified_name, domain=None, range=Optional[str])
 
 slots.loincTerm__loinc_number = Slot(uri=LOINC.loinc_number, name="loincTerm__loinc_number", curie=LOINC.curie('loinc_number'),
                    model_uri=LOINC.loincTerm__loinc_number, domain=None, range=Optional[str])

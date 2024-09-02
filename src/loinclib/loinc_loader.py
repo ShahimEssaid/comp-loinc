@@ -4,9 +4,10 @@ from pathlib import Path
 import pandas as pd
 
 import loinclib.loinc_schema as LS
+from comp_loinc.datamodel import LoincPart
 from loinclib import LoinclibGraph
 from loinclib.config import Configuration
-from loinclib.loinc_schema import LoincPartEdge
+from loinclib.loinc_schema import LoincPartEdge, LoincPartProps
 from loinclib.graph import Node
 
 
@@ -85,6 +86,7 @@ class LoincLoader:
       node.set_property(type_=LS.LoincTermProps.class_, value=class_)
       node.set_property(type_=LS.LoincTermProps.definition_description, value=definition_description)
       node.set_property(type_=LS.LoincTermProps.class_type, value=class_type)
+      node.set_property(type_=LS.LoincTermProps.status, value=status)
 
       # edges
 
@@ -103,6 +105,7 @@ class LoincLoader:
        part_display_name,
        status) = tpl
       # @formatter:on
+
 
       node: Node = self.graph.getsert_node(type_=LS.LoincNodeType.LoincPart, code=part_number)
       node.set_property(type_=LS.LoincPartProps.part_number, value=part_number)
@@ -176,12 +179,26 @@ class LoincLoader:
       ) = tpl
       # @formatter:off
 
-      if code.startswith('LP'):
+      if not code.startswith('LP'):
+        continue
 
-        part_node: Node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, code)
-        part_node.set_property(type_=LS.LoincPartProps.code_text__from_comp_hierarch, value=code_text)
-        parent_node: Node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, immediate_parent)
-        part_node.add_edge_single(type_=LoincPartEdge.parent_comp_by_system, to_node=parent_node)
+      part_node: Node = self.graph.get_node_by_code(type_=LS.LoincNodeType.LoincPart, code=code)
+      if part_node is None:
+        part_node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, code)
+        part_node.set_property(type_=LoincPartProps.part_number , value=code)
+        part_node.set_property(type_=LoincPartProps.from_hierarchy, value=True)
+
+
+      part_node.set_property(type_=LS.LoincPartProps.code_text__from_comp_hierarch, value=code_text)
+
+
+      parent_node: Node = self.graph.get_node_by_code(type_=LS.LoincNodeType.LoincPart, code=immediate_parent)
+      if parent_node is None:
+        parent_node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, immediate_parent)
+        parent_node.set_property(type_=LoincPartProps.part_number, value=immediate_parent)
+        parent_node.set_property(type_=LoincPartProps.from_hierarchy, value=True)
+
+      part_node.add_edge_single(type_=LoincPartEdge.parent_comp_by_system, to_node=parent_node)
 
     self.graph.loaded_sources[LoincSources.AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv__part_parents] = {}
 

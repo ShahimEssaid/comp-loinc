@@ -4,7 +4,7 @@ from unittest import TestCase
 from comp_loinc import Runtime
 from loinclib.loinc_loader import LoincLoader
 from loinclib.loinc_schema import LoincNodeType
-from loinclib import SnomedReleaseLoader, SnomedNodeType, SnomedEdges, Configuration
+from loinclib import SnomedLoader, SnomedNodeType, SnomedEdges, Configuration
 from loinclib.loinc_snomed_loader import LoincSnomedLoader
 from loinclib.loinc_tree_loader import LoincTreeLoader
 
@@ -34,7 +34,7 @@ class TestLoading(TestCase):
   def test_load_snomed(self):
     configuration = Configuration()
     runtime = Runtime(configuration=configuration)
-    snomed_loader = SnomedReleaseLoader(config=configuration, graph=runtime.graph)
+    snomed_loader = SnomedLoader(config=configuration, graph=runtime.graph)
     #
     snomed_loader.load_selected_relations(SnomedEdges.is_a)
     #

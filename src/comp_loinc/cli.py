@@ -10,6 +10,7 @@ import typer
 
 from comp_loinc import Runtime
 from comp_loinc.loinc_builder_steps import LoincBuilderSteps
+from comp_loinc.snomed_builder_steps import SnomedBuilderSteps
 from loinclib import Configuration
 
 LOINC_RELEASE_DIR_NAME = 'loinc_release'
@@ -55,6 +56,9 @@ class CompLoincCli:
     self.loinc_builders = LoincBuilderSteps(configuration=self.config)
     self.loinc_builders.setup_cli_builder_steps_all(self.builder_cli)
 
+    self.snomed_builders = SnomedBuilderSteps(configuration=self.config)
+    self.snomed_builders.setup_cli_builder_steps_all(self.builder_cli)
+
   def callback(self, *,
       work_dir: t.Annotated[
         t.Optional[Path], typer.Option(help='CompLOINC work directory, defaults to current work directory.',
@@ -93,9 +97,11 @@ class CompLoincCli:
     logging.config.dictConfig(self.config.get_logging_configuration())
 
     self.loinc_builders.configuration = self.config
+    self.snomed_builders.configuration = self.config
 
     self.runtime = Runtime(configuration=self.config, name='cli')
     self.loinc_builders.runtime = self.runtime
+    self.snomed_builders.runtime = self.runtime
 
     self.builder_cli.runtime = self.runtime
 

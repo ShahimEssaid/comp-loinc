@@ -8,11 +8,14 @@ from linkml_runtime import SchemaView
 
 from comp_loinc import Runtime
 from comp_loinc.datamodel import LoincPart
-from comp_loinc.datamodel.comp_loinc import LoincTerm
-from loinclib import Configuration
+from comp_loinc.datamodel.comp_loinc import LoincTerm, SnomedConcept
+from loinclib import Configuration, SnomedEdges, Node, SnomedProperteis, Edge
 from loinclib import LoincLoader
 from loinclib import LoincNodeType, LoincTermProps
-from loinclib.loinc_schema import LoincPartProps
+from loinclib.loinc_schema import LoincPartProps, LoincPartEdge
+from loinclib.loinc_snomed_loader import LoincSnomedLoader
+from loinclib.loinc_tree_loader import LoincTreeLoader
+from loinclib.loinc_tree_schema import LoincTreeProps
 
 
 class LoincBuilderSteps:
@@ -27,19 +30,37 @@ class LoincBuilderSteps:
     builder.cli.command('lt-inst-all', help='Instantiate all LOINC terms into current module.')(
         self.term_instance_all)
 
+    builder.cli.command('lt-parent', help='Make LOINC terms a child of a grouper LoincTerm class.')(
+        self.loinc_term_parent)
+
     builder.cli.command('lp-inst-all', help='Instantiate all LOINC parts into current module.')(
         self.part_instance_all)
 
-    builder.cli.command('label', help='Add rdfs:label to current entities.')(self.add_labels)
-    builder.cli.command('annotate', help='Add annotations to current entities.')(self.add_annotations)
+    builder.cli.command('lp-sct-equiv',
+                        help='Asserts LOINC part to SNOMED equivalence axioms for all available mappings..')(
+        self.part_snomed_quivalences)
+
+    builder.cli.command('lp-part-hierarchy-all',
+                        help='Asserts part hierarchy for all parts based on component hierarchy file.')(
+        self.part_hierarchy_all)
+
+
+    builder.cli.command('lp-part-tree-hierarchy-all',
+                        help='Asserts part hierarchy for all parts based on tree files.')(
+        self.part_tree_hierarchy_all)
+
+    builder.cli.command('l-label', help='Add rdfs:label to current entities.')(self.label)
+    builder.cli.command('l-annotate', help='Add annotations to current entities.')(self.annotate)
 
     builder.cli.command('load-schema', help='Loads a LinkML schema file and gives it a name. '
                                             'It also makes it the "current" schema to operate on with schema related builder steps.')(
         self.load_linkml_schema)
     builder.cli.command('save-owl', help='Saves the current module to an owl file.')(self.save_to_owl)
 
-  def term_instance_all(self):
-    typer.echo(f'Running lt_inst_all')
+  def term_instance_all(self,
+      active_only: t.Annotated[
+        bool, typer.Option('--active', help='Use active concepts only. Defaults to true.')] = False,
+  ):
     graph = self.runtime.graph
     loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
     loinc_loader.load_loinc_table__loinc_csv()
@@ -48,6 +69,11 @@ class LoincBuilderSteps:
       count = count + 1
       if self.configuration.fast_run and count > 100:
         break
+
+      status = node.get_property(LoincTermProps.status)
+      if active_only and status != 'ACTIVE':
+        continue
+
       loinc_number = node.get_property(LoincTermProps.loinc_number)
 
       # add if not already instantiated, to not override an existing one
@@ -55,8 +81,10 @@ class LoincBuilderSteps:
         loinc_term = LoincTerm(id=loinc_number)
         self.runtime.current_module.add_entity(loinc_term)
 
-  def part_instance_all(self):
-    typer.echo(f'Running lp_inst_all')
+  def part_instance_all(self,
+      active_only: t.Annotated[
+        bool, typer.Option('--active', help='Use active concepts only. Defaults to true.')] = False,
+  ):
     graph = self.runtime.graph
     loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
     loinc_loader.load_accessory_files__part_file__part_csv()
@@ -65,6 +93,10 @@ class LoincBuilderSteps:
       count = count + 1
       if self.configuration.fast_run and count > 100:
         break
+      status = node.get_property(LoincPartProps.status)
+      if active_only and status != 'ACTIVE':
+        continue
+
       number = node.get_property(LoincPartProps.part_number)
 
       # add if not already instantiated, to not override an existing one
@@ -72,24 +104,77 @@ class LoincBuilderSteps:
         part = LoincPart(id=number)
         self.runtime.current_module.add_entity(part)
 
-  def add_labels(self):
+  def label(self):
+    graph = self.runtime.graph
+    loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
+    loinc_loader.load_loinc_table__loinc_csv()
+    loinc_loader.load_accessory_files__part_file__part_csv()
+    loinc_loader.load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv()
+
+    loinc_tree_loader = LoincTreeLoader(config=self.configuration, graph=graph)
+    loinc_tree_loader.load_class_tree()
+    loinc_tree_loader.load_component_tree()
+    loinc_tree_loader.load_component_by_system_tree()
+    loinc_tree_loader.load_panel_tree()
+    loinc_tree_loader.load_system_tree()
+    loinc_tree_loader.load_method_tree()
+    loinc_tree_loader.load_document_tree()
+
     loinc_term: LoincTerm
     for loinc_term in self.runtime.current_module.get_entities_of_type(LoincTerm):
       node = self.runtime.graph.get_node_by_code(type_=LoincNodeType.LoincTerm, code=loinc_term.id)
+      if node is None:
+        continue
       long_name = node.get_property(LoincTermProps.long_common_name)
-      loinc_term.entity_label = f'LT   {long_name}'
+      class_ = node.get_property(LoincTermProps.class_)
+      loinc_term.entity_label = f'LT   {class_}   {long_name}'
 
     loinc_part: LoincPart
     for loinc_part in self.runtime.current_module.get_entities_of_type(LoincPart):
       node = self.runtime.graph.get_node_by_code(type_=LoincNodeType.LoincPart, code=loinc_part.id)
-      part_name = node.get_property(LoincPartProps.part_name)
-      loinc_part.entity_label = f'LP   {part_name}'
+      if node is None:
+        continue
 
-  def add_annotations(self):
+      final_name = node.get_property(LoincPartProps.part_display_name)
+      if final_name is None:
+        final_name = node.get_property(LoincPartProps.code_text__from_comp_hierarch)
+      if final_name is None:
+        final_name = node.get_property(LoincTreeProps.code_text)
+      if final_name is None:
+        final_name = f'NONAME:{loinc_part.id}'
+      part_type_name = node.get_property(LoincPartProps.part_type_name)
+      if part_type_name is None:
+        part_type_name = f'NOTYPENAME:{loinc_part.id}'
+
+      prefix = 'LP'
+      if node.get_property(LoincPartProps.from_hierarchy):
+        prefix = 'LHP'
+      if node.get_property(LoincTreeProps.from_trees):
+        prefix = 'LTP'
+
+      loinc_part.entity_label = f'{prefix}   {part_type_name}   {final_name}'
+
+  def annotate(self):
+    graph = self.runtime.graph
+    loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
+    loinc_loader.load_loinc_table__loinc_csv()
+    loinc_loader.load_accessory_files__part_file__part_csv()
+    loinc_loader.load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv()
+
+    loinc_tree_loader = LoincTreeLoader(config=self.configuration, graph=graph)
+    loinc_tree_loader.load_class_tree()
+    loinc_tree_loader.load_component_tree()
+    loinc_tree_loader.load_component_by_system_tree()
+    loinc_tree_loader.load_panel_tree()
+    loinc_tree_loader.load_system_tree()
+    loinc_tree_loader.load_method_tree()
+    loinc_tree_loader.load_document_tree()
+
     loinc_term: LoincTerm
     for loinc_term in self.runtime.current_module.get_entities_of_type(LoincTerm):
       node = self.runtime.graph.get_node_by_code(type_=LoincNodeType.LoincTerm, code=loinc_term.id)
-
+      if node is None:
+        continue
       number = node.get_property(LoincTermProps.loinc_number)
       long_name = node.get_property(LoincTermProps.long_common_name)
       class_type = node.get_property(LoincTermProps.class_type)
@@ -103,6 +188,9 @@ class LoincBuilderSteps:
     loinc_part: LoincPart
     for loinc_part in self.runtime.current_module.get_entities_of_type(LoincPart):
       node = self.runtime.graph.get_node_by_code(type_=LoincNodeType.LoincPart, code=loinc_part.id)
+      if node is None:
+        continue
+
       part_number = node.get_property(LoincPartProps.part_number)
       part_name = node.get_property(LoincPartProps.part_name)
       part_type = node.get_property(LoincPartProps.part_type_name)
@@ -112,6 +200,75 @@ class LoincBuilderSteps:
       loinc_part.part_name = part_name
       loinc_part.part_type_name = part_type
       loinc_part.part_display_name = part_display
+
+  def loinc_term_parent(self):
+    term: LoincTerm
+    loinc_term_parent = self.runtime.current_module.get_entity(entity_class=LoincTerm, entity_id='LoincTerm')
+    if loinc_term_parent is None:
+      loinc_term_parent = LoincTerm(id='LoincTerm')
+      self.runtime.current_module.add_entity(loinc_term_parent)
+    for term in self.runtime.current_module.get_entities_of_type(entity_class=LoincTerm):
+      if term == loinc_term_parent:
+        continue
+      term.sub_class_of.append(loinc_term_parent)
+
+  def part_snomed_quivalences(self):
+    graph = self.runtime.graph
+    loader = LoincSnomedLoader(config=self.configuration, graph=self.runtime.graph)
+    loader.load_part_mapping()
+
+    part: LoincPart
+    part_node: Node
+    snomed_concept: SnomedConcept
+    snomed_node: Node
+
+    for part_node in graph.get_nodes(type_=LoincNodeType.LoincPart):
+      for edge in part_node.get_all_out_edges():
+        if edge.edge_type.type_ is SnomedEdges.maps_to:
+          snomed_node: Node = edge.to_node
+
+          part_id = part_node.get_property(type_=LoincPartProps.part_number)
+          snomed_id = snomed_node.get_property(type_=SnomedProperteis.concept_id)
+
+          part = self.runtime.current_module.get_entity(entity_class=LoincPart, entity_id=part_id)
+          if part is None:
+            part = LoincPart(id=part_id)
+            self.runtime.current_module.add_entity(part)
+
+          snomed_concept = self.runtime.current_module.get_entity(entity_class=SnomedConcept, entity_id=snomed_id)
+          if snomed_concept is None:
+            snomed_concept = SnomedConcept(id=snomed_id)
+            self.runtime.current_module.add_entity(snomed_concept)
+
+          part.equivalent_class.append(snomed_concept.id)
+
+  def part_hierarchy_all(self):
+    graph = self.runtime.graph
+    loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
+    loinc_loader.load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv()
+
+    for child_part_node in graph.get_nodes(type_=LoincNodeType.LoincPart):
+      child_part_number = child_part_node.get_property(type_=LoincPartProps.part_number)
+      edge: Edge
+      for edge in child_part_node.get_all_out_edges():
+        if edge.edge_type.type_ is LoincPartEdge.parent_comp_by_system:
+          parent_part_node = edge.to_node
+          parent_part_number = parent_part_node.get_property(type_=LoincPartProps.part_number)
+
+          child_part = self.runtime.current_module.get_entity(entity_id=child_part_number, entity_class=LoincPart)
+          if child_part is None:
+            child_part = LoincPart(id=child_part_number)
+            self.runtime.current_module.add_entity(child_part)
+
+          parent_part = self.runtime.current_module.get_entity(entity_id=parent_part_number, entity_class=LoincPart)
+          if parent_part is None:
+            parent_part = LoincPart(id=parent_part_number)
+            self.runtime.current_module.add_entity(parent_part)
+          if not parent_part in child_part.sub_class_of:
+            child_part.sub_class_of.append(parent_part)
+
+  def part_tree_hierarchy_all(self):
+    pass
 
   def load_linkml_schema(self, filename: t.Annotated[str, typer.Option('--file-name', '-f',
                                                                        help='The LinkML schema file name in the schema directory. For example: "comp_loinc.yaml"')],
@@ -139,7 +296,7 @@ class LoincBuilderSteps:
     if owl_file_path is None:
       owl_file_path = Path(self.runtime.current_module.name + '.owl')
     if not owl_file_path.is_absolute():
-      owl_file_path = self.configuration.output  / owl_file_path
+      owl_file_path = self.configuration.output / owl_file_path
 
     owl_file_path.parent.mkdir(parents=True, exist_ok=True)
     typer.echo(f'Writing file: {owl_file_path}')

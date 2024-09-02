@@ -6,6 +6,7 @@ class SnomedNodeType(StrEnum):
 
 
 class SnomedProperteis(StrEnum):
+  concept_id = ''
   fully_specified_name = '900000000000003001'
 
 
@@ -24,6 +25,22 @@ class SnomedEdges(StrEnum):
   precondition = '704326004'
   direct_site = '704327008'
 
+#   loinc snomed relationships
+#   08:05 $ csvtool -t TAB  col 8 xsct2_Relationship_Snapshot_LO1010000_20231015.txt | sort | uniq -c
+#   27445   116680003  is-a
+#   23707   246093002
+#   6617    246501002
+#   23835   370130000
+#   23834   370132008
+#   3       370133003
+#   23782   370134009
+#   127     704319004
+#   378     704326004
+#   23220   704327008
+#   1       typeId
+
+
+# international snomed relationships
 # 10:45 $ csvtool -t TAB  col 8 sct2_Relationship_Snapshot_INT_20240801.txt | sort | uniq -c
 # 135 1003703000
 # 877 1003735000

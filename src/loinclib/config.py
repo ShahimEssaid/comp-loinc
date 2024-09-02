@@ -37,6 +37,12 @@ class Configuration:
     relationship_path = self.config['snomed']['release'][release_version]['files']['relationship']
     return (self.home_path / relationship_path).absolute()
 
+
+  def get_snomed_description_path(self) -> Path:
+    default = self.config['snomed']['release']['default']
+    path = self.config['snomed']['release'][default]['files']['description']
+    return (self.home_path / path).absolute()
+
   def get_loinc_snomed_description_path(self) -> Path:
     default = self.config['loinc_snomed']['release']['default']
     path = self.config['loinc_snomed']['release'][default]['files']['description']
@@ -50,6 +56,11 @@ class Configuration:
   def get_loinc_snomed_relationship_path(self) -> Path:
     default = self.config['loinc_snomed']['release']['default']
     path = self.config['loinc_snomed']['release'][default]['files']['relationship']
+    return self.home_path / path
+
+  def get_loinc_snomed_part_mapping_path(self) -> Path:
+    default = self.config['loinc_snomed']['release']['default']
+    path = self.config['loinc_snomed']['release'][default]['files']['part_mapping']
     return self.home_path / path
 
   def get_logging_configuration(self):

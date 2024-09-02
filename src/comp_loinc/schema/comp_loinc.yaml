@@ -6,6 +6,7 @@ prefixes:
   loinc_property: http://loinc.org/property/
   owl: http://www.w3.org/2002/07/owl#
   rdfs: http://www.w3.org/2000/01/rdf-schema#
+  sct: http://snomed.info/sct
 default_prefix: loinc
 default_range: string
 imports:
@@ -47,15 +48,29 @@ classes:
         slot_uri: rdfs:subClassOf
         multivalued: true
         range: Entity
+      equivalent_class:
+        annotations:
+          owl: EquivalentClasses
+        slot_uri: owl:equivalentClass
+        multivalued: true
+        range: Entity
     class_uri: owl:Class
+    annotations:
+      owl: Class
+
+  SnomedConcept:
+    is_a: Entity
+    class_uri: sct:SnomedConcept
+    attributes:
+      fully_specified_name:
+        slot_uri: sct:fully_specified_name
+        annotations:
+          owl: AnnotationAssertion
     annotations:
       owl: Class
 
   LoincEntity:
     is_a: Entity
-    attributes:
-    annotations:
-      owl: Class
 
   LoincTerm:
     is_a: LoincEntity

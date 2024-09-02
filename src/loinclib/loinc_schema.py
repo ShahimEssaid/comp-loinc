@@ -13,6 +13,7 @@ class LoincTermProps(StrEnum):
   class_ = 'class'
   class_type = 'class_type'
   definition_description = 'definition_description'
+  status = 'status'
 
 
 
@@ -136,10 +137,12 @@ class LoincPartProps(StrEnum):
   part_display_name = 'part_display_name'
   status = 'status'
   code_text__from_comp_hierarch = 'part_text__from_comp_hierarch'
+  code_text__from_tree = 'code_text__from_tree'
+  from_hierarchy = 'from_hierarchy'
 
 
 class LoincPartEdge(StrEnum):
-  parent_comp_by_system = ''  # This edge comes from ComponentHierarchyBySystem.csv
+  parent_comp_by_system = 'parent_comp_by_system'  # This edge comes from ComponentHierarchyBySystem.csv
 
 # loinc_schema: Schema = Schema()
 #

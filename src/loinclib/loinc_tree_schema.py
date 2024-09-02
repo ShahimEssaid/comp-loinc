@@ -6,3 +6,4 @@ class LoincTreeEdges(StrEnum):
 
 class LoincTreeProps(StrEnum):
   code_text = 'code_text'
+  from_trees = 'from_trees'
