@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import logging.config
+import sys
 import typing as t
 from pathlib import Path
+from sys import argv
 
 import typer
 
@@ -29,12 +31,11 @@ class BuilderCli:
   def callback(self):
     pass
 
-  def set_current_module(self, name: t.Annotated[str, typer.Option(help='Set the current module to this name.')]):
+  def set_current_module(self, name: t.Annotated[str, typer.Option('--name', '-n',help='Set the current module to this name.')]):
     from comp_loinc.module import Module
     if name not in self.runtime.modules:
       self.runtime.modules[name] = Module(name=name, runtime=self.runtime)
     self.runtime.current_module = self.runtime.modules[name]
-
 
 
 class CompLoincCli:
@@ -53,38 +54,63 @@ class CompLoincCli:
     self.loinc_builders = LoincBuilderSteps(configuration=self.config)
     self.loinc_builders.setup_cli_builder_steps_all(self.builder_cli)
 
-
   def callback(self, *,
-      work_dir: t.Annotated[t.Optional[Path], typer.Option(
-          help='CompLOINC work directory, defaults to current work directory.'
-          , default_factory=Path.cwd)],
+      work_dir: t.Annotated[
+        t.Optional[Path], typer.Option(help='CompLOINC work directory, defaults to current work directory.',
+                                       default_factory=Path.cwd)],
       config_file: t.Annotated[
         t.Optional[Path], typer.Option(help='Configuration file name. Defaults to "comploinc_config.yaml"')] = Path(
           'comploinc_config.yaml'),
-      graph_path: t.Annotated[t.Optional[Path], typer.Option(
-          help='Pickled graph path, relative to current work directory path')] = None,
 
-      loinc_release: t.Annotated[t.Optional[Path], typer.Option(
-          help=f'Path to a directory containing an unpacked LOINC release. Defaults to: ./{LOINC_RELEASE_DIR_NAME}')] = None,
-      pickled_path: t.Annotated[t.Optional[Path], typer.Option(
-          help='Path to an already pickled loinclib graph.')] = None,
-      to_pickle_path: t.Annotated[t.Optional[Path], typer.Option(
-          help='A path to which  the loinclib Graph will be saved to.')] = None,
+      fast_run: t.Annotated[bool, typer.Option(help='Turns on a fast run feature which is useful for development.', hidden=True)] = False,
+
+      # graph_path: t.Annotated[
+      #   t.Optional[Path], typer.Option(help='Pickled graph path, relative to current work directory path')] = None,
+      #
+      # loinc_release: t.Annotated[t.Optional[Path], typer.Option(
+      #     help=f'Path to a directory containing an unpacked LOINC release. Defaults to: ./{LOINC_RELEASE_DIR_NAME}')] = None,
+      #
+      # pickled_path: t.Annotated[
+      #   t.Optional[Path], typer.Option(help='Path to an already pickled loinclib graph.')] = None,
+      #
+      # to_pickle_path: t.Annotated[
+      #   t.Optional[Path], typer.Option(help='A path to which  the loinclib Graph will be saved to.')] = None,
 
   ):
     self.work_dir = work_dir.absolute()
     if not self.work_dir.exists():
       raise ValueError(f'Work directory: {self.work_dir} does not exist.')
 
-    self.config = Configuration(home_path= self.work_dir, config_file=config_file.absolute())
+    self.config = Configuration(home_path=self.work_dir, config_file=config_file.absolute())
+    self.config.fast_run = fast_run
+
     logging.config.dictConfig(self.config.get_logging_configuration())
 
     self.loinc_builders.configuration = self.config
 
     self.runtime = Runtime(configuration=self.config, name='cli')
+    self.loinc_builders.runtime = self.runtime
+
     self.builder_cli.runtime = self.runtime
 
 
-cli = CompLoincCli().cli
+comploinc_cli = CompLoincCli().cli
 
 
+def comploinc_file_cli():
+  cwd = Path.cwd()
+  cli_file_path = Path(argv[1])
+  if not cli_file_path.is_absolute():
+    cli_file_path = cwd / cli_file_path
+
+  args = ['comploinc-file']
+  with open(cli_file_path, 'r') as f:
+    for line in f:
+      line = line.strip()
+      if line and not line.startswith('#'):
+        args.append(line)
+
+  sys.argv = args
+  print(f'running command: {args}')
+
+  comploinc_cli()

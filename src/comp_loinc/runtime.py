@@ -29,9 +29,7 @@ class Runtime:
     self.schema_views: t.Dict[str, SchemaView] = dict()
     self.current_schema_view: t.Optional[SchemaView] = None
 
-    # logging.config.dictConfig(self.config['logging'])
     self.logger: Logger = logging.getLogger(f'{self.name}_runtime')
-    self.logger.info('test info logging =================== ')
 
   def load_linkml_schema(self, file_name: str, as_name: str = None, reload: bool = False) -> SchemaView:
     from comp_loinc import schemas_path

@@ -45,6 +45,10 @@ class Module:
       raise ValueError(f'Replacing entity {entity} not allowed.')
     self.entities_by_type.setdefault(type(entity), {})[entity.id] = entity
 
+  def get_entities_of_type(self, entity_class: t.Type[Entity]) -> t.Iterator[Entity]:
+    for entity in self.entities_by_type.get(entity_class, {}).values():
+      yield entity
+
   def get_all_entities(self) -> t.Iterator[Entity]:
     for entity_map in self.entities_by_type.values():
       for entity in entity_map.values():

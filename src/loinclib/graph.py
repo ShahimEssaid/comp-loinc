@@ -149,8 +149,9 @@ class NodeType(PropertyOwnerType):
 
   def get_node(self, code: str) -> t.Optional[Node]:
     node_id = self.get_id_from_code(code)
-    if node_id in self.schema.graph.nx_graph.nodes:
-      return Node(node_id=node_id, node_type=self)
+    data = self.schema.graph.nx_graph.nodes.get(node_id)
+    if data is not None:
+      return Node(node_id=node_id, node_type=self, properties=data)
 
   def getsert_node(self, code: str) -> Node:
     node = self.get_node(code)
@@ -159,8 +160,9 @@ class NodeType(PropertyOwnerType):
     node_id = self.get_id_from_code(code)
     graph = self.schema.graph.nx_graph
     graph.add_node(node_id)
-    graph.nodes[node_id][SchemaEnum.TYPE_KEY] = self.type_
-    node = Node(node_id=node_id, node_type=self)
+    data =graph.nodes[node_id]
+    data[SchemaEnum.TYPE_KEY] = self.type_
+    node = Node(node_id=node_id, node_type=self, properties=data)
     return node
 
   def get_id_from_code(self, code: str) -> str:
@@ -245,7 +247,8 @@ class PropertyType(SchemaType):
     self.property_owner_type = property_owner_type
 
   def get_value(self, element: Node | Edge) -> t.Any:
-    element.get_properties().get(self.type_)
+    properties = element.get_properties()
+    return properties.get(self.type_)
 
   def set_value(self, element: Node | Edge, value: t.Any) -> None:
     if value is None:
@@ -277,13 +280,13 @@ class LoinclibGraph:
     if node_data:
       type_ = node_data[SchemaEnum.TYPE_KEY]
       node_type = self.schema.get_node_type(type_)
-      return Node(node_id=node_id, node_type=node_type)
+      return Node(node_id=node_id, node_type=node_type, properties=node_data)
 
   def get_nodes(self, type_: StrEnum) -> t.Iterator[Node]:
     for node, node_data in self.nx_graph.nodes.items():
       node_type = node_data.get(SchemaEnum.TYPE_KEY, None)
       if type_ is node_type:
-        yield Node(node_id=node, node_type=self.schema.get_node_type(type_))
+        yield Node(node_id=node, node_type=self.schema.get_node_type(type_),properties=node_data)
 
   def getsert_node(self, type_: StrEnum, code: str) -> Node:
     return self.schema.get_node_type(type_).getsert_node(code=code)
@@ -311,10 +314,11 @@ class Element:
 
 
 class Node(Element):
-  def __init__(self, *, node_id: str, node_type: NodeType):
+  def __init__(self, *, node_id: str, node_type: NodeType, properties: dict):
     super().__init__(graph=node_type.schema.graph)
     self.node_id = node_id
     self.node_type: NodeType = node_type
+    self.properties = properties
 
   def get_property(self, type_: StrEnum) -> t.Any:
     return self.node_type.get_property_type(type_).get_value(self)

@@ -1,0 +1,15 @@
+# this turns on a fast run for dev mode
+#--fast-run
+
+builder
+  set-module
+    -n
+    labels
+  lt-inst-all
+  lp-inst-all
+  label
+  annotate
+  load-schema
+    -f
+    comp_loinc.yaml
+  save-owl

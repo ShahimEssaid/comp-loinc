@@ -34,8 +34,6 @@ loinc_snomed:
 
 logging:
   formatters:
-    brief:
-      format: '%(message)s'
     default:
       format: '%(asctime)s %(levelname)-8s %(name)-15s %(message)s'
       datefmt: '%Y-%m-%d %H:%M:%S'
@@ -55,7 +53,7 @@ logging:
   disable_existing_loggers: False
   loggers:
     '':
-      level: INFO
+      level: WARN
       handlers: [console]
 #    cli_runtime:
 #      handlers: [console]

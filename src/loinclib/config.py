@@ -14,6 +14,8 @@ class Configuration:
       with open(self.config_path, 'r') as f:
         self.config = yaml.safe_load(f)
 
+    self.fast_run = False
+
   def get_loinc_release_path(self):
     try:
       default = self.config['loinc']['release']['default']
@@ -51,3 +53,4 @@ class Configuration:
 
   def get_logging_configuration(self):
     return self.config['logging']
+

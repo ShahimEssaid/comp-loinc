@@ -1,6 +1,6 @@
 import sys
 
-from comp_loinc import cli
+from comp_loinc import comploinc_cli
 
 sys.argv = ['cli_run',
 
@@ -27,4 +27,4 @@ sys.argv = ['cli_run',
 #             '--help'
 #             ]
 
-cli()
+comploinc_cli()
