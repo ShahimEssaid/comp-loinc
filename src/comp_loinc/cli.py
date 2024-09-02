@@ -6,7 +6,8 @@ from pathlib import Path
 import typer
 
 from comp_loinc import Runtime
-from comp_loinc.loinc_builders import LoincBuilders
+from comp_loinc.loinc_builder_steps import LoincBuilderSteps
+from loinclib import Configuration
 
 LOINC_RELEASE_DIR_NAME = 'loinc_release'
 LOINC_TREES_DIR_NAME = 'loinc_trees'
@@ -14,23 +15,51 @@ LOINC_TREES_DIR_NAME = 'loinc_trees'
 COMPLOINC_OUT_DIR_NAME = 'comploinc_out'
 
 
+class BuilderCli:
+
+  def __init__(self, runtime: Runtime):
+    self.runtime = runtime
+
+    self.cli = typer.Typer(chain=True)
+    self.cli.callback(invoke_without_command=True)(self.callback)
+
+    self.cli.command('set-module')(self.set_current_module)
+
+  def callback(self):
+    pass
+
+  def set_current_module(self, name: t.Annotated[str, typer.Option(help='Set the current module to this name.')]):
+    from comp_loinc.module import Module
+    if name not in self.runtime.modules:
+      self.runtime.modules[name] = Module(name=name, runtime=self.runtime)
+    self.runtime.current_module = self.runtime.modules[name]
+
+
+
 class CompLoincCli:
 
   def __init__(self):
-    self.runtime = Runtime()
+    self.work_dir = None
+    self.config: t.Optional[Configuration] = None
+    self.runtime: t.Optional[Runtime] = None
+
     self.cli = typer.Typer()
     self.cli.callback(invoke_without_command=True)(self.callback)
-    self.work_dir = None
 
-    self.cli.add_typer(self.runtime.builder.cli, name='builder')
+    self.builder_cli = BuilderCli(runtime=self.runtime)
+    self.cli.add_typer(self.builder_cli.cli, name='builder')
 
-    self.loinc_builders = LoincBuilders(self.runtime)
-    self.loinc_builders.setup_builder_cli_all()
+    self.loinc_builders = LoincBuilderSteps(configuration=self.config)
+    self.loinc_builders.setup_cli_builder_steps_all(self.builder_cli)
+
 
   def callback(self, *,
       work_dir: t.Annotated[t.Optional[Path], typer.Option(
           help='CompLOINC work directory, defaults to current work directory.'
           , default_factory=Path.cwd)],
+      config_file: t.Annotated[
+        t.Optional[Path], typer.Option(help='Configuration file name. Defaults to "comploinc_config.yaml"')] = Path(
+          'comploinc_config.yaml'),
       graph_path: t.Annotated[t.Optional[Path], typer.Option(
           help='Pickled graph path, relative to current work directory path')] = None,
 
@@ -46,6 +75,13 @@ class CompLoincCli:
     if not self.work_dir.exists():
       raise ValueError(f'Work directory: {self.work_dir} does not exist.')
 
+    self.config = Configuration(home_path= self.work_dir, config_file=config_file.absolute())
+    self.loinc_builders.configuration = self.config
+
+    self.runtime = Runtime(configuration=self.config, name='cli')
+    self.builder_cli.runtime = self.runtime
+
 
 cli = CompLoincCli().cli
+
 

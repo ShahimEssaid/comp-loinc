@@ -1,7 +1,7 @@
-
-from .runtime import Runtime, Builder
-from .cli import  CompLoincCli, cli
 from importlib import resources
 
 from . import schema
+from .runtime import Runtime
+from .cli import CompLoincCli, cli, BuilderCli
+
 schemas_path = resources.files(schema)

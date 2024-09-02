@@ -1,32 +1,26 @@
+import logging
+import sys
 import typing as t
+from logging import Logger
 from pathlib import Path
 
 import linkml_runtime
-import typer
-import yaml
 from linkml_runtime import SchemaView
 
 from loinclib import LoinclibGraph
-from loinclib.loinc_loader import LoincLoader
+from loinclib.config import Configuration
 
 
 class Runtime:
-  def __init__(self, *, home_path: Path = Path.cwd(), pickled_graph_path: Path = None, config_path: Path = None, ):
-    self.home_path = home_path.absolute()
+  def __init__(self, *,
+      name: str = 'default',
+      pickled_graph_path: Path = None,
+      configuration: Configuration):
+    self.configuration = configuration
+    self.name = name
     self.pickled_graph_path = pickled_graph_path
 
-    if config_path:
-      self.config_path = config_path.absolute()
-    else:
-      self.config_path = self.home_path / 'comploinc_config.yaml'
-
-    self.config = None
-    if self.config_path.exists():
-      with open(self.config_path, 'r') as f:
-        self.config = yaml.safe_load(f)
-
     self.graph = LoinclibGraph(graph_path=self.pickled_graph_path)
-    self.builder = Builder(self)
 
     from comp_loinc.module import Module
     self.modules: t.Dict[str, Module] = dict()
@@ -35,13 +29,13 @@ class Runtime:
     self.schema_views: t.Dict[str, SchemaView] = dict()
     self.current_schema_view: t.Optional[SchemaView] = None
 
-    self.__loinc_release_loader: t.Optional[LoincLoader] = None
-
-  def get_loinc_release_loader(self):
-    if self.__loinc_release_loader is None:
-      release_path = self.get_loinc_release_path()
-      self.__loinc_release_loader = LoincLoader(release_path=release_path, runtime=self)
-    return self.__loinc_release_loader
+    # logging.config.dictConfig(self.config['logging'])
+    self.logger: Logger = logging.getLogger(f'{self.name}_runtime')
+    if not self.logger.hasHandlers():
+      print('========================== IF NOT')
+      self.logger.addHandler(logging.StreamHandler(stream=sys.stdout))
+      self.logger.setLevel(logging.INFO)
+    self.logger.info('INFO change ============')
 
   def load_linkml_schema(self, file_name: str, as_name: str = None, reload: bool = False) -> SchemaView:
     from comp_loinc import schemas_path
@@ -60,23 +54,3 @@ class Runtime:
       return schema_view
     else:
       raise ValueError(f'Schema file {schema_path} does not exist while trying to load as name: {as_name}')
-
-
-class Builder:
-
-  def __init__(self, runtime: Runtime):
-    self.runtime = runtime
-
-    self.cli = typer.Typer(chain=True)
-    self.cli.callback(invoke_without_command=True)(self.callback)
-
-    self.cli.command('set-module')(self.set_current_module)
-
-  def callback(self):
-    pass
-
-  def set_current_module(self, name: t.Annotated[str, typer.Option(help='Set the current module to this name.')]):
-    from comp_loinc.module import Module
-    if name not in self.runtime.modules:
-      self.runtime.modules[name] = Module(name=name, runtime=self.runtime)
-    self.runtime.current_module = self.runtime.modules[name]

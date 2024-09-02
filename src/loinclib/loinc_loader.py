@@ -5,6 +5,7 @@ import pandas as pd
 
 import loinclib.loinc_schema as LS
 from loinclib import LoinclibGraph
+from loinclib.config import Configuration
 from loinclib.loinc_schema import LoincPartEdge
 from loinclib.graph import Node
 
@@ -21,12 +22,10 @@ class LoincSources(StrEnum):
 
 class LoincLoader:
 
-  def __init__(self, *, graph: LoinclibGraph, config, home_path: Path):
+  def __init__(self, *, graph: LoinclibGraph, configuration: Configuration):
     self.graph = graph
-    # self.runtime = runtime
-    self.config = config
-    self.home_path = home_path
-    self.release_path = self.get_loinc_release_path()
+    self.configuration = configuration
+    self.release_path = self.configuration.get_loinc_release_path()
 
   def load_loinc_table__loinc_csv(self) -> None:
 
@@ -206,24 +205,3 @@ class LoincLoader:
   def read_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv(self) -> pd.DataFrame:
     return pd.read_csv(self.release_path / LoincSources.AccessoryFiles__ComponentHierarchyBySystem__ComponentHierarchyBySystemCsv,
                        dtype=str, na_filter=False)
-
-
-  def get_loinc_release_path(self):
-    release_path = None
-    if self.config:
-      loinc = self.config.get('loinc', None)
-      if loinc:
-        release = loinc.get('release', None)
-        if release:
-          default_ver = release.get('default', None)
-          if default_ver:
-            loinc_ver = release.get(default_ver, None)
-            if loinc_ver:
-              loinc_ver_path = loinc_ver.get('path', None)
-              if loinc_ver_path:
-                release_path = self.home_path / loinc_ver_path
-
-    if release_path is None:
-      release_path = self.home_path / 'loinc_release'
-
-    return release_path.absolute()

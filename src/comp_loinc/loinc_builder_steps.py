@@ -8,28 +8,30 @@ from linkml_runtime import SchemaView
 
 from comp_loinc import Runtime
 from comp_loinc.datamodel.comp_loinc import LoincTerm
-from loinclib.loinc_loader import LoincLoader
-from loinclib.loinc_schema import LoincNodeType, LoincTermProps
+from loinclib import Configuration
+from loinclib import LoincLoader
+from loinclib import LoincNodeType, LoincTermProps
 
 
-class LoincBuilders:
+class LoincBuilderSteps:
 
-  def __init__(self, runtime: Runtime):
-    self.runtime = runtime
+  def __init__(self, *,
+      configuration: Configuration):
+    self.configuration = configuration
+    self.runtime: t.Optional[Runtime] = None
 
-  def setup_builder_cli_all(self):
-    self.runtime.builder.cli.command('lt-inst-all', help='Instantiate all LOINC terms into current module.')(
-        self.lt_inst_all)
-    self.runtime.builder.cli.command('load-schema', help='Loads a LinkML schema file and gives it a name. '
-                                                         'It also makes it the "current" schema to operate on with schema related builder steps.')(
+  def setup_cli_builder_steps_all(self, builder):
+    builder.cli.command('lt-inst-all', help='Instantiate all LOINC terms into current module.')(
+        self.term_instance_all)
+    builder.cli.command('load-schema', help='Loads a LinkML schema file and gives it a name. '
+                                                 'It also makes it the "current" schema to operate on with schema related builder steps.')(
         self.load_linkml_schema)
-    self.runtime.builder.cli.command('save-owl', help='Saves the current module to an owl file.')(self.save_to_owl)
+    builder.cli.command('save-owl', help='Saves the current module to an owl file.')(self.save_to_owl)
 
-  def lt_inst_all(self):
+  def term_instance_all(self):
     typer.echo(f'Running lt_inst_all')
     graph = self.runtime.graph
-    loinc_loader = LoincLoader(graph=graph, home_path=self.runtime.home_path,
-                               config=self.runtime.config)
+    loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
     loinc_loader.load_loinc_table__loinc_csv()
     for node in self.runtime.graph.get_nodes(LoincNodeType.LoincTerm):
       props = node.get_properties()

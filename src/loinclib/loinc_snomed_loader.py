@@ -1,9 +1,8 @@
 from enum import StrEnum
-from pathlib import Path
 
 import pandas as pd
 
-from loinclib import LoinclibGraph, SnomedNodeType, SnomedEdges
+from loinclib import LoinclibGraph, SnomedNodeType, SnomedEdges, Configuration
 from loinclib.loinc_schema import LoincNodeType
 from loinclib.snomed_schema_v2 import SnomedProperteis
 
@@ -15,34 +14,18 @@ class LoincSnomedSources(StrEnum):
 
 
 class LoincSnomedLoader:
-  def __init__(self, config, home_path: Path, graph: LoinclibGraph):
-    self.home_path = home_path
-    self.config = config
+  def __init__(self, config, graph: LoinclibGraph):
+    self.config: Configuration = config
     self.graph = graph
 
-  def get_description_path(self) -> Path:
-    default = self.config['loinc_snomed']['release']['default']
-    path = self.config['loinc_snomed']['release'][default]['files']['description']
-    return self.home_path / path
-
-  def get_identifier_path(self) -> Path:
-    default = self.config['loinc_snomed']['release']['default']
-    path = self.config['loinc_snomed']['release'][default]['files']['identifier']
-    return self.home_path / path
-
-  def get_relationship_path(self) -> Path:
-    default = self.config['loinc_snomed']['release']['default']
-    path = self.config['loinc_snomed']['release'][default]['files']['relationship']
-    return self.home_path / path
-
   def read_description(self):
-    return pd.read_csv(self.get_description_path(), dtype=str, na_filter=False, sep='\t')
+    return pd.read_csv(self.config.get_loinc_snomed_description_path(), dtype=str, na_filter=False, sep='\t')
 
   def read_identifiers(self):
-    return pd.read_csv(self.get_identifier_path(), dtype=str, na_filter=False, sep='\t')
+    return pd.read_csv(self.config.get_loinc_snomed_identifier_path(), dtype=str, na_filter=False, sep='\t')
 
   def read_relationship(self):
-    return pd.read_csv(self.get_relationship_path(), dtype=str, na_filter=False, sep='\t')
+    return pd.read_csv(self.config.get_loinc_snomed_relationship_path(), dtype=str, na_filter=False, sep='\t')
 
   def load_description(self):
     if LoincSnomedSources.description in self.graph.loaded_sources:
@@ -66,7 +49,6 @@ class LoincSnomedLoader:
 
       snomed_node = self.graph.getsert_node(SnomedNodeType.Concept, concept_id)
       snomed_node.set_property(type_=SnomedProperteis.fully_specified_name, value=term)
-
 
     self.graph.loaded_sources[LoincSnomedSources.description] = {}
 
@@ -114,11 +96,9 @@ class LoincSnomedLoader:
       ) = tpl
       # @formatter:on
 
-
       from_node = self.graph.getsert_node(type_=SnomedNodeType.Concept, code=source_id)
       to_node = self.graph.getsert_node(type_=SnomedNodeType.Concept, code=destination_id)
       type_ = SnomedEdges(type_id)
       from_node.add_edge_single(type_=type_, to_node=to_node)
-
 
     self.graph.loaded_sources[LoincSnomedSources.relation] = {}

@@ -1,9 +1,8 @@
 from enum import StrEnum
-from pathlib import Path
 
 import pandas as pd
 
-from loinclib import LoinclibGraph, Node
+from loinclib import LoinclibGraph, Node, Configuration
 from loinclib.snomed_schema_v2 import SnomedNodeType, SnomedEdges
 
 
@@ -13,18 +12,12 @@ class SnomedSources(StrEnum):
 
 class SnomedReleaseLoader:
 
-  def __init__(self, *, graph: LoinclibGraph, config, home_path: Path):
+  def __init__(self, *, graph: LoinclibGraph, config: Configuration):
     self.config = config
-    self.home_path = home_path
     self.graph = graph
 
-  def get_relations_path(self) -> Path:
-    release_version = self.config['snomed']['release']['default']
-    relationship_path = self.config['snomed']['release'][release_version]['files']['relationship']
-    return (self.home_path / relationship_path).absolute()
-
   def read_relationship(self) -> pd.DataFrame:
-    return pd.read_csv(self.get_relations_path(), dtype=str, na_filter=False, sep='\t')
+    return pd.read_csv(self.config.get_snomed_relations_path(), dtype=str, na_filter=False, sep='\t')
 
   def load_selected_relations(self, *types_: StrEnum) -> None:
 

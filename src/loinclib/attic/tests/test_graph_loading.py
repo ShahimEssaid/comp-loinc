@@ -4,7 +4,7 @@ from unittest import TestCase
 from comp_loinc import Runtime
 from loinclib.loinc_loader import LoincLoader
 from loinclib.loinc_schema import LoincNodeType
-from loinclib import SnomedReleaseLoader, SnomedNodeType, SnomedEdges
+from loinclib import SnomedReleaseLoader, SnomedNodeType, SnomedEdges, Configuration
 from loinclib.loinc_snomed_loader import LoincSnomedLoader
 from loinclib.loinc_tree_loader import LoincTreeLoader
 
@@ -18,8 +18,9 @@ class TestLoading(TestCase):
     pass
 
   def test_load_primary(self):
-    runtime = Runtime()
-    loinc_loader = LoincLoader(config=runtime.config, graph=runtime.graph, home_path=runtime.home_path)
+    configuration = Configuration()
+    runtime = Runtime(configuration=configuration)
+    loinc_loader = LoincLoader(graph=runtime.graph, configuration=configuration)
     loinc_loader.load_accessory_files__part_file__loinc_part_link_primary_csv()
     loinc_loader.load_accessory_files__part_file__loinc_part_link_supplementary_csv()
 
@@ -31,8 +32,9 @@ class TestLoading(TestCase):
     print(runtime)
 
   def test_load_snomed(self):
-    runtime = Runtime()
-    snomed_loader = SnomedReleaseLoader(config=runtime.config, home_path=runtime.home_path, graph=runtime.graph)
+    configuration = Configuration()
+    runtime = Runtime(configuration=configuration)
+    snomed_loader = SnomedReleaseLoader(config=configuration, graph=runtime.graph)
     #
     snomed_loader.load_selected_relations(SnomedEdges.is_a)
     #
@@ -44,8 +46,10 @@ class TestLoading(TestCase):
     print('done')
 
   def tests_load_loinc_snomed(self):
-    runtime = Runtime()
-    loinc_snomed_loader = LoincSnomedLoader(config=runtime.config, home_path=runtime.home_path, graph=runtime.graph)
+    configuration = Configuration()
+    runtime = Runtime(configuration=configuration)
+
+    loinc_snomed_loader = LoincSnomedLoader(config=configuration, graph=runtime.graph)
     loinc_snomed_loader.load_description()
     loinc_snomed_loader.load_identifier()
     loinc_snomed_loader.load_relationship()
@@ -55,14 +59,16 @@ class TestLoading(TestCase):
       print(edge)
 
   def test_load_part_parent(self):
-    runtime = Runtime()
-    loinc_loader = LoincLoader(config=runtime.config, graph=runtime.graph, home_path=runtime.home_path)
+    configuration = Configuration()
+    runtime = Runtime(configuration=configuration)
+    loinc_loader = LoincLoader(graph=runtime.graph, configuration=configuration)
     loinc_loader.load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv()
 
 
   def test_load_trees(self):
-    runtime = Runtime()
-    tree_loader = LoincTreeLoader(config=runtime.config, home_path=runtime.home_path, graph=runtime.graph)
+    configuration = Configuration()
+    runtime = Runtime(configuration=configuration)
+    tree_loader = LoincTreeLoader(config=configuration, graph=runtime.graph)
     tree_loader.load_class_tree()
     tree_loader.load_component_tree()
     tree_loader.load_component_by_system_tree()

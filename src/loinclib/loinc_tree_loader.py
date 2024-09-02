@@ -1,5 +1,4 @@
 from enum import StrEnum
-from pathlib import Path
 
 import pandas as pd
 from pandas import DataFrame
@@ -20,34 +19,27 @@ class LoincTreeSource(StrEnum):
 
 
 class LoincTreeLoader:
-  def __init__(self, config, home_path: Path, graph: LoinclibGraph):
-    self.home_path = home_path
+  def __init__(self, config, graph: LoinclibGraph):
     self.config = config
     self.graph = graph
 
   def load_class_tree(self):
     self.load_tree(LoincTreeSource.class_tree)
 
-
   def load_component_tree(self):
     self.load_tree(LoincTreeSource.component_tree)
-
 
   def load_component_by_system_tree(self):
     self.load_tree(LoincTreeSource.component_by_system_tree)
 
-
   def load_document_tree(self):
     self.load_tree(LoincTreeSource.document_tree)
-
 
   def load_method_tree(self):
     self.load_tree(LoincTreeSource.method_tree)
 
-
   def load_panel_tree(self):
     self.load_tree(LoincTreeSource.panel_tree)
-
 
   def load_system_tree(self):
     self.load_tree(LoincTreeSource.system_tree)
@@ -91,10 +83,5 @@ class LoincTreeLoader:
     pass
 
   def read_source(self, source: LoincTreeSource) -> DataFrame:
-    path = self.get_trees_path() / source.value
+    path = self.config.get_trees_path() / source.value
     return pd.read_csv(path, dtype=str, na_filter=False)
-
-  def get_trees_path(self) -> Path:
-    default = self.config['loinc_tree']['release']['default']
-    path = self.config['loinc_tree']['release'][default]['tree_path']
-    return self.home_path / path
