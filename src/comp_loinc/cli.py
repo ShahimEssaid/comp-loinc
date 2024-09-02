@@ -31,7 +31,8 @@ class BuilderCli:
   def callback(self):
     pass
 
-  def set_current_module(self, name: t.Annotated[str, typer.Option('--name', '-n',help='Set the current module to this name.')]):
+  def set_current_module(self,
+      name: t.Annotated[str, typer.Option('--name', '-n', help='Set the current module to this name.')]):
     from comp_loinc.module import Module
     if name not in self.runtime.modules:
       self.runtime.modules[name] = Module(name=name, runtime=self.runtime)
@@ -62,7 +63,11 @@ class CompLoincCli:
         t.Optional[Path], typer.Option(help='Configuration file name. Defaults to "comploinc_config.yaml"')] = Path(
           'comploinc_config.yaml'),
 
-      fast_run: t.Annotated[bool, typer.Option(help='Turns on a fast run feature which is useful for development.', hidden=True)] = False,
+      output_dir: t.Annotated[t.Optional[Path], typer.Option('--out-dir', '-o',
+                                                             help='The output folder name. Defaults to "output".')] = 'output',
+
+      fast_run: t.Annotated[
+        bool, typer.Option(help='Turns on a fast run feature which is useful for development.', hidden=True)] = False,
 
       # graph_path: t.Annotated[
       #   t.Optional[Path], typer.Option(help='Pickled graph path, relative to current work directory path')] = None,
@@ -83,6 +88,7 @@ class CompLoincCli:
 
     self.config = Configuration(home_path=self.work_dir, config_file=config_file.absolute())
     self.config.fast_run = fast_run
+    self.config.output = self.work_dir / output_dir
 
     logging.config.dictConfig(self.config.get_logging_configuration())
 

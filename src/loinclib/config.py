@@ -15,6 +15,7 @@ class Configuration:
         self.config = yaml.safe_load(f)
 
     self.fast_run = False
+    self.output = self.home_path / 'output'
 
   def get_loinc_release_path(self):
     try:

@@ -1,10 +1,13 @@
 # this turns on a fast run for dev mode
-#--fast-run
+--fast-run
+
+-o
+out-dev
 
 builder
   set-module
     -n
-    labels
+    dev
   lt-inst-all
   lp-inst-all
   label

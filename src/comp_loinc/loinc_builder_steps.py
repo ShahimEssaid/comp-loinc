@@ -139,7 +139,7 @@ class LoincBuilderSteps:
     if owl_file_path is None:
       owl_file_path = Path(self.runtime.current_module.name + '.owl')
     if not owl_file_path.is_absolute():
-      owl_file_path = self.configuration.home_path / 'output' / owl_file_path
+      owl_file_path = self.configuration.output  / owl_file_path
 
     owl_file_path.parent.mkdir(parents=True, exist_ok=True)
     typer.echo(f'Writing file: {owl_file_path}')
