@@ -121,7 +121,7 @@ classes:
         range: LoincPart
         required: false
         annotations:
-          owl: ObjectSomeValuesFrom, SomethingElse
+          owl: ObjectSomeValuesFrom
 
       supplementary_property:
         slot_uri: loinc_property:PROPERTY
@@ -129,7 +129,7 @@ classes:
         range: LoincPart
         required: false
         annotations:
-          owl: ObjectSomeValuesFrom, SomethingElse
+          owl: ObjectSomeValuesFrom
 
       # 3
       primary_time_aspect:

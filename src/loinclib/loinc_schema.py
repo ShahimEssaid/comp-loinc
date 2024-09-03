@@ -136,8 +136,10 @@ class LoincPartProps(StrEnum):
   part_name = 'part_name'
   part_display_name = 'part_display_name'
   status = 'status'
+
   code_text__from_comp_hierarch = 'part_text__from_comp_hierarch'
   code_text__from_tree = 'code_text__from_tree'
+
   from_hierarchy = 'from_hierarchy'
 
 
