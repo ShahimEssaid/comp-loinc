@@ -5,16 +5,16 @@
 out-comploinc
 
 builder
-
   set-module
     -n
-    loinc-parts-tree-hierarchy
-
-  lp-part-tree-hierarchy-all
-
-  lp-parent
-
+    primary-equiv-def
+  lt-inst-all
+  lt-primary-equiv-def
+#    --active
+#  l-label
+#  l-annotate
   load-schema
       -f
       comp_loinc.yaml
+      --equivalent-term
   save-owl

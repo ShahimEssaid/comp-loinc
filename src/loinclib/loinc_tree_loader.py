@@ -4,7 +4,7 @@ import pandas as pd
 from pandas import DataFrame
 
 from loinclib import LoinclibGraph
-from loinclib.loinc_schema import LoincNodeType
+from loinclib.loinc_schema import LoincNodeType, LoincPartProps
 from loinclib.loinc_tree_schema import LoincTreeEdges, LoincTreeProps
 
 
@@ -80,13 +80,15 @@ class LoincTreeLoader:
       if part_node is None:
         part_node = self.graph.getsert_node(type_=LoincNodeType.LoincPart, code=code)
         part_node.set_property(type_=LoincTreeProps.from_trees, value=True)
+        part_node.set_property(type_=LoincPartProps.part_number, value=code)
       part_node.set_property(type_=LoincTreeProps.code_text, value=code_text)
 
       if parent_id:
         parent_node = self.graph.get_node_by_code(type_=LoincNodeType.LoincPart, code=records_by_id[parent_id][1])
         if parent_node is None:
-          part_node = self.graph.getsert_node(type_=LoincNodeType.LoincPart, code=records_by_id[parent_id][1])
-          part_node.set_property(type_=LoincTreeProps.from_trees, value=True)
+          parent_node = self.graph.getsert_node(type_=LoincNodeType.LoincPart, code=records_by_id[parent_id][1])
+          parent_node.set_property(type_=LoincTreeProps.from_trees, value=True)
+          parent_node.set_property(type_=LoincPartProps.part_number, value=records_by_id[parent_id][1])
         parent_node.set_property(type_=LoincTreeProps.code_text, value=records_by_id[parent_id][2])
 
         part_node.add_edge_single(type_=LoincTreeEdges.tree_parent, to_node=parent_node)

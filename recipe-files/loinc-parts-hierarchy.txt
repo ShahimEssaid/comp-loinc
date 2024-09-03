@@ -12,6 +12,8 @@ builder
 
   lp-part-hierarchy-all
 
+  lp-parent
+
   load-schema
       -f
       comp_loinc.yaml

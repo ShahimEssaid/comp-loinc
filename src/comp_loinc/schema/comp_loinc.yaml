@@ -161,7 +161,7 @@ classes:
 
       # for detailed model slots: https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#detailedmodel
 
-      detailed_analyte:
+      supplementary_analyte:
         slot_uri: loinc_property:analyte
         multivalued: false
         range: LoincPart
@@ -169,7 +169,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      detailed_challenge:
+      supplementary_challenge:
         slot_uri: loinc_property:challenge
         multivalued: false
         range: LoincPart
@@ -177,7 +177,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      detailed_adjustment:
+      supplementary_adjustment:
         slot_uri: loinc_property:adjustment
         multivalued: false
         range: LoincPart
@@ -185,7 +185,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      detailed_count:
+      supplementary_count:
         slot_uri: loinc_property:count
         multivalued: false
         range: LoincPart
@@ -194,7 +194,7 @@ classes:
           owl: ObjectSomeValuesFrom
       # property: # same as above for primary
 
-      detailed_time_core:
+      supplementary_time_core:
         slot_uri: loinc_property:time-core
         multivalued: false
         range: LoincPart
@@ -202,7 +202,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      detailed_time_modifier:
+      supplementary_time_modifier:
         slot_uri: loinc_property:time-modifier
         multivalued: false
         range: LoincPart
@@ -210,7 +210,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      detailed_system_core:
+      supplementary_system_core:
         slot_uri: loinc_property:system-core
         multivalued: false
         range: LoincPart
@@ -218,7 +218,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      detailed_super_system:
+      supplementary_super_system:
         slot_uri: loinc_property:super-system
         multivalued: false
         range: LoincPart
@@ -229,7 +229,7 @@ classes:
       #method:  # same as above for primary
 
       # syntax enhancements: https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#syntax-enhancement
-      syntax_analyte_core:
+      supplementary_analyte_core:
         slot_uri: loinc_property:analyte-core
         multivalued: false
         range: LoincPart
@@ -237,7 +237,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      syntax_analyte_suffix:
+      supplementary_analyte_suffix:
         slot_uri: loinc_property:analyte-suffix
         multivalued: false
         range: LoincPart
@@ -245,7 +245,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      syntax_analyte_numerator:
+      supplementary_analyte_numerator:
         slot_uri: loinc_property:analyte-numerator
         multivalued: false
         range: LoincPart
@@ -253,7 +253,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      syntax_analyte_divisor:
+      supplementary_analyte_divisor:
         slot_uri: loinc_property:analyte-divisor
         multivalued: false
         range: LoincPart
@@ -261,7 +261,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      syntax_analyte_divisor_suffix:
+      supplementary_analyte_divisor_suffix:
         slot_uri: loinc_property:analyte-divisor-suffix
         multivalued: false
         range: LoincPart
@@ -271,7 +271,7 @@ classes:
 
 
       # semantic enhancements: https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#semantic-enhancement
-      semantic_analyte_gene:
+      supplementary_analyte_gene:
         slot_uri: loinc_property:analyte_gene
         multivalued: false
         range: LoincPart
@@ -279,7 +279,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_analyte_genetic_variant:
+      supplementary_analyte_genetic_variant:
         slot_uri: loinc_property:analyte-genetic-variant
         multivalued: false
         range: LoincPart
@@ -287,7 +287,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_analyte_chemical:
+      supplementary_analyte_chemical:
         slot_uri: loinc_property:analyte-chemical
         multivalued: false
         range: LoincPart
@@ -295,7 +295,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_analyte_divisor_chemical:
+      supplementary_analyte_divisor_chemical:
         slot_uri: loinc_property:analyte-divisor-chemical
         multivalued: false
         range: LoincPart
@@ -303,7 +303,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_analyte_clinical_drug:
+      supplementary_analyte_clinical_drug:
         slot_uri: loinc_property:analyte-clinical-drug
         multivalued: false
         range: LoincPart
@@ -311,7 +311,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_system_core_anatomic_entity:
+      supplementary_system_core_anatomic_entity:
         slot_uri: loinc_property:system-core-anatomic-entity
         multivalued: false
         range: LoincPart
@@ -319,7 +319,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_analyte_organism:
+      supplementary_analyte_organism:
         slot_uri: loinc_property:analyte-organism
         multivalued: false
         range: LoincPart
@@ -327,7 +327,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_challenge_route:
+      supplementary_challenge_route:
         slot_uri: loinc_property:challenge-route
         multivalued: false
         range: LoincPart
@@ -335,7 +335,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      semantic_analyte_allergen:
+      supplementary_analyte_allergen:
         slot_uri: loinc_property:analyte-allergen
         multivalued: false
         range: LoincPart
@@ -363,7 +363,7 @@ classes:
           owl: ObjectSomeValuesFrom
 
       # radiology: https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#radiology
-      rad_anatomic_location_imaging_focus:
+      primary_rad_anatomic_location_imaging_focus:
         slot_uri: loinc_property:rad-anatomic-location-imaging-focus
         multivalued: false
         range: LoincPart
@@ -371,7 +371,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_anatomic_location_laterality:
+      primary_rad_anatomic_location_laterality:
         slot_uri: loinc_property:rad-anatomic-location-laterality
         multivalued: false
         range: LoincPart
@@ -379,7 +379,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_anatomic_location_laterality_presence:
+      primary_rad_anatomic_location_laterality_presence:
         slot_uri: loinc_property:rad-anatomic-location-laterality-presence
         multivalued: false
         range: LoincPart
@@ -387,7 +387,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_anatomic_location_region_imaged:
+      primary_rad_anatomic_location_region_imaged:
         slot_uri: loinc_property:rad-anatomic-location-region-imaged
         multivalued: false
         range: LoincPart
@@ -395,7 +395,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_guidance_for_action:
+      primary_rad_guidance_for_action:
         slot_uri: loinc_property:rad-guidance-for-action
         multivalued: false
         range: LoincPart
@@ -403,7 +403,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_guidance_for_approach:
+      primary_rad_guidance_for_approach:
         slot_uri: loinc_property:rad-guidance-for-approach
         multivalued: false
         range: LoincPart
@@ -411,7 +411,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_guidance_for_object:
+      primary_rad_guidance_for_object:
         slot_uri: loinc_property:rad-guidance-for-object
         multivalued: false
         range: LoincPart
@@ -419,7 +419,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_guidance_for_presence:
+      primary_rad_guidance_for_presence:
         slot_uri: loinc_property:rad-guidance-for-presence
         multivalued: false
         range: LoincPart
@@ -427,14 +427,14 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_maneuver_maneuver_type:
+      primary_rad_maneuver_maneuver_type:
         slot_uri: loinc_property:rad-maneuver-maneuver-type
         multivalued: false
         range: LoincPart
         required: false
         annotations:
           owl: ObjectSomeValuesFrom
-      rad_modality_subtype:
+      primary_rad_modality_subtype:
         slot_uri: loinc_property:rad-modality-subtype
         multivalued: false
         range: LoincPart
@@ -442,7 +442,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_modality_type:
+      primary_rad_modality_type:
         slot_uri: loinc_property:rad-modality-type
         multivalued: false
         range: LoincPart
@@ -450,7 +450,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_pharmaceutical_route:
+      primary_rad_pharmaceutical_route:
         slot_uri: loinc_property:rad-pharmaceutical-route
         multivalued: false
         range: LoincPart
@@ -458,7 +458,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_pharmaceutical_substance_given:
+      primary_rad_pharmaceutical_substance_given:
         slot_uri: loinc_property:rad-pharmaceutical-substance-given
         multivalued: false
         range: LoincPart
@@ -466,7 +466,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_reason_for_exam:
+      primary_rad_reason_for_exam:
         slot_uri: loinc_property:rad-reason-for-exam
         multivalued: false
         range: LoincPart
@@ -474,7 +474,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_subject:
+      primary_rad_subject:
         slot_uri: loinc_property:rad-subject
         multivalued: false
         range: LoincPart
@@ -482,7 +482,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_timing:
+      primary_rad_timing:
         slot_uri: loinc_property:rad-timing
         multivalued: false
         range: LoincPart
@@ -490,7 +490,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_view_aggregation:
+      primary_rad_view_aggregation:
         slot_uri: loinc_property:rad_view_aggregation
         multivalued: false
         range: LoincPart
@@ -498,7 +498,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      rad_view_view_type:
+      primary_rad_view_view_type:
         slot_uri: loinc_property:rad_view_view_type
         multivalued: false
         range: LoincPart
@@ -507,7 +507,7 @@ classes:
           owl: ObjectSomeValuesFrom
 
       # document ontology  https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#documentontology
-      document_kind:
+      primary_document_kind:
         slot_uri: loinc_property:document-kind
         multivalued: false
         range: LoincPart
@@ -515,7 +515,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      document_role:
+      primary_document_role:
         slot_uri: loinc_property:document-role
         multivalued: false
         range: LoincPart
@@ -523,7 +523,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      document_setting:
+      primary_document_setting:
         slot_uri: loinc_property:document-setting
         multivalued: false
         range: LoincPart
@@ -531,7 +531,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      document_subject_matter_domain:
+      primary_document_subject_matter_domain:
         slot_uri: loinc_property:document-subject-matter-domain
         multivalued: false
         range: LoincPart
@@ -539,7 +539,7 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      document_type_of_service:
+      primary_document_type_of_service:
         slot_uri: loinc_property:document-type-of-service
         multivalued: false
         range: LoincPart

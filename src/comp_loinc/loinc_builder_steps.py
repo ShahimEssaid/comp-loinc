@@ -5,14 +5,15 @@ import funowl
 import typer
 from linkml_owl.dumpers.owl_dumper import OWLDumper
 from linkml_runtime import SchemaView
+from linkml_runtime.linkml_model import ClassDefinition, SlotDefinition, Annotation
 
 from comp_loinc import Runtime
-from comp_loinc.datamodel import LoincPart
+from comp_loinc.datamodel import LoincPart, LoincPartId
 from comp_loinc.datamodel.comp_loinc import LoincTerm, SnomedConcept
 from loinclib import Configuration, SnomedEdges, Node, SnomedProperteis, Edge
 from loinclib import LoincLoader
 from loinclib import LoincNodeType, LoincTermProps
-from loinclib.loinc_schema import LoincPartProps, LoincPartEdge
+from loinclib.loinc_schema import LoincPartProps, LoincPartEdge, LoincTermPrimaryEdges
 from loinclib.loinc_snomed_loader import LoincSnomedLoader
 from loinclib.loinc_tree_loader import LoincTreeLoader
 from loinclib.loinc_tree_schema import LoincTreeProps
@@ -33,8 +34,15 @@ class LoincBuilderSteps:
     builder.cli.command('lt-parent', help='Make LOINC terms a child of a grouper LoincTerm class.')(
         self.loinc_term_parent)
 
+    builder.cli.command('lt-primary-equiv-def',
+                        help='Assert equivalence axioms based on primary model of already instantiated LOINC terms.')(
+        self.loinc_primary_equivalence)
+
     builder.cli.command('lp-inst-all', help='Instantiate all LOINC parts into current module.')(
         self.part_instance_all)
+
+    builder.cli.command('lp-parent', help='Make LOINC parts a child of a grouper LoincPart class.')(
+        self.part_parent)
 
     builder.cli.command('lp-sct-equiv',
                         help='Asserts LOINC part to SNOMED equivalence axioms for all available mappings..')(
@@ -43,7 +51,6 @@ class LoincBuilderSteps:
     builder.cli.command('lp-part-hierarchy-all',
                         help='Asserts part hierarchy for all parts based on component hierarchy file.')(
         self.part_hierarchy_all)
-
 
     builder.cli.command('lp-part-tree-hierarchy-all',
                         help='Asserts part hierarchy for all parts based on tree files.')(
@@ -88,6 +95,18 @@ class LoincBuilderSteps:
     graph = self.runtime.graph
     loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
     loinc_loader.load_accessory_files__part_file__part_csv()
+    loinc_loader.load_accessory_files__part_file__part_csv()
+    loinc_loader.load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv()
+
+    loinc_tree_loader = LoincTreeLoader(config=self.configuration, graph=graph)
+    loinc_tree_loader.load_class_tree()
+    loinc_tree_loader.load_component_tree()
+    loinc_tree_loader.load_component_by_system_tree()
+    loinc_tree_loader.load_panel_tree()
+    loinc_tree_loader.load_system_tree()
+    loinc_tree_loader.load_method_tree()
+    loinc_tree_loader.load_document_tree()
+
     count = 0
     for node in self.runtime.graph.get_nodes(LoincNodeType.LoincPart):
       count = count + 1
@@ -144,7 +163,7 @@ class LoincBuilderSteps:
         final_name = f'NONAME:{loinc_part.id}'
       part_type_name = node.get_property(LoincPartProps.part_type_name)
       if part_type_name is None:
-        part_type_name = f'NOTYPENAME:{loinc_part.id}'
+        part_type_name = f'NOTYPENAME'
 
       prefix = 'LP'
       if node.get_property(LoincPartProps.from_hierarchy):
@@ -210,7 +229,22 @@ class LoincBuilderSteps:
     for term in self.runtime.current_module.get_entities_of_type(entity_class=LoincTerm):
       if term == loinc_term_parent:
         continue
-      term.sub_class_of.append(loinc_term_parent)
+      if not term.sub_class_of:
+        term.sub_class_of.append(loinc_term_parent)
+
+  def part_parent(self):
+    loinc_part_parent = self.runtime.current_module.get_entity(entity_class=LoincPart, entity_id='LoincPart')
+    if loinc_part_parent is None:
+      loinc_part_parent = LoincPart(id='LoincPart')
+      self.runtime.current_module.add_entity(loinc_part_parent)
+
+    part: LoincPart
+    for part in self.runtime.current_module.get_entities_of_type(entity_class=LoincPart):
+      if part == loinc_part_parent:
+        continue
+
+      if not part.sub_class_of:
+        part.sub_class_of.append(loinc_part_parent)
 
   def part_snomed_quivalences(self):
     graph = self.runtime.graph
@@ -247,6 +281,16 @@ class LoincBuilderSteps:
     loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
     loinc_loader.load_part_parents_from_accessory_files__component_hierarchy_by_system__component_hierarchy_by_system_csv()
 
+    loinc_tree_loader = LoincTreeLoader(config=self.configuration, graph=graph)
+    loinc_tree_loader.load_class_tree()
+    loinc_tree_loader.load_component_tree()
+    loinc_tree_loader.load_component_by_system_tree()
+    loinc_tree_loader.load_panel_tree()
+    loinc_tree_loader.load_system_tree()
+    loinc_tree_loader.load_method_tree()
+    loinc_tree_loader.load_document_tree()
+
+
     for child_part_node in graph.get_nodes(type_=LoincNodeType.LoincPart):
       child_part_number = child_part_node.get_property(type_=LoincPartProps.part_number)
       edge: Edge
@@ -270,14 +314,100 @@ class LoincBuilderSteps:
   def part_tree_hierarchy_all(self):
     pass
 
+  def loinc_primary_equivalence(self):
+    graph = self.runtime.graph
+    loinc_loader = LoincLoader(graph=graph, configuration=self.configuration)
+    loinc_loader.load_accessory_files__part_file__loinc_part_link_primary_csv()
+
+    loinc_term: LoincTerm
+    for loinc_term in self.runtime.current_module.get_entities_of_type(entity_class=LoincTerm):
+      loinc_term_id = loinc_term.id
+      loinc_term_node = self.runtime.graph.get_node_by_code(type_=LoincNodeType.LoincTerm, code=loinc_term_id)
+      edge: Edge
+      for edge in loinc_term_node.get_all_out_edges():
+        edge_type = edge.edge_type.type_
+        loinc_part_id = LoincPartId(edge.to_node.get_property(type_=LoincPartProps.part_number))
+
+        match edge_type:
+          case LoincTermPrimaryEdges.primary_component:
+            loinc_term.primary_component = loinc_part_id
+          case LoincTermPrimaryEdges.primary_property:
+            loinc_term.primary_property = loinc_part_id
+          case LoincTermPrimaryEdges.primary_time_aspect:
+            loinc_term.primary_time_aspect = loinc_part_id
+          case LoincTermPrimaryEdges.primary_system:
+            loinc_term.primary_system = loinc_part_id
+          case LoincTermPrimaryEdges.primary_scale_type:
+            loinc_term.primary_scale_typ = loinc_part_id
+          case LoincTermPrimaryEdges.primary_method_type:
+            loinc_term.primary_method_typ = loinc_part_id
+
+          case LoincTermPrimaryEdges.primary_document_kind:
+            loinc_term.primary_document_kind = loinc_part_id
+          case LoincTermPrimaryEdges.primary_document_role:
+            loinc_term.primary_document_role = loinc_part_id
+          case LoincTermPrimaryEdges.primary_document_subject_matter_domain:
+            loinc_term.primary_document_subject_matter_domain = loinc_part_id
+          case LoincTermPrimaryEdges.primary_document_type_of_service:
+            loinc_term.primary_document_type_of_service = loinc_part_id
+
+          case LoincTermPrimaryEdges.primary_rad_anatomic_location_imaging_focus:
+            loinc_term.primary_rad_anatomic_location_imaging_focus = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_anatomic_location_laterality:
+            loinc_term.primary_rad_anatomic_location_laterality = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_anatomic_location_laterality_presence:
+            loinc_term.primary_rad_anatomic_location_laterality_presence = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_anatomic_location_region_imaged:
+            loinc_term.primary_rad_anatomic_location_region_imaged = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_guidance_for_action:
+            loinc_term.primary_rad_guidance_for_action = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_guidance_for_approach:
+            loinc_term.primary_rad_guidance_for_approach = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_guidance_for_object:
+            loinc_term.primary_rad_guidance_for_object = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_guidance_for_presence:
+            loinc_term.primary_rad_guidance_for_presence = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_maneuver_maneuver_type:
+            loinc_term.primary_rad_maneuver_maneuver_type = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_modality_subtype:
+            loinc_term.primary_rad_modality_subtype = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_modality_type:
+            loinc_term.primary_rad_modality_type = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_pharmaceutical_route:
+            loinc_term.primary_rad_pharmaceutical_route = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_pharmaceutical_substance_given:
+            loinc_term.primary_rad_pharmaceutical_substance_given = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_reason_for_exam:
+            loinc_term.primary_rad_reason_for_exam = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_subject:
+            loinc_term.primary_rad_subject = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_timing:
+            loinc_term.primary_rad_timing = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_view_aggregation:
+            loinc_term.primary_rad_view_aggregation = loinc_part_id
+          case LoincTermPrimaryEdges.primary_rad_view_view_type:
+            loinc_term.primary_rad_view_view_type = loinc_part_id
+
+
   def load_linkml_schema(self, filename: t.Annotated[str, typer.Option('--file-name', '-f',
                                                                        help='The LinkML schema file name in the schema directory. For example: "comp_loinc.yaml"')],
       schema_name: t.Annotated[str, typer.Option('--schema-name', '-n',
                                                  help='A name to hold the loaded schema under. Defaults to the file name without the .yaml suffix')] = None,
       reload: t.Annotated[bool, typer.Option('--reload', '-r',
-                                             help='A previously loaded schema under the same name will be reloaded if true.')] = False) -> SchemaView:
+                                             help='A previously loaded schema under the same name will be reloaded if true.')] = False,
+      equivalent_term: t.Annotated[bool, typer.Option('--equivalent-term', help='Modifies the LoincTerm OWL annotations from "ObjectSomeValuesFrom" to '
+                                                                                '"EquivalentClasses, IntersectionOf"')] = False
+  ) -> SchemaView:
     typer.echo(f'Running load_linkml_schema')
     schema_view = self.runtime.load_linkml_schema(filename, schema_name, reload)
+    if equivalent_term:
+      class_def: ClassDefinition = schema_view.get_class(class_name='LoincTerm')
+      attribute: SlotDefinition
+      for attribute in class_def.attributes.values():
+        owl_annotation: Annotation = attribute.annotations.get('owl', None)
+        if owl_annotation and 'ObjectSomeValuesFrom' in owl_annotation.value:
+          attribute.annotations['owl'] = Annotation(value='ObjectSomeValuesFrom, IntersectionOf, EquivalentClasses', tag='owl')
+
     self.runtime.current_schema_view = schema_view
     return schema_view
 

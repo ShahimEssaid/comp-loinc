@@ -1,5 +1,5 @@
 # Auto generated from comp_loinc.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-09-02T05:14:13
+# Generation date: 2024-09-02T17:06:29
 # Schema: loinc-owl-core-schema
 #
 # id: https://loinc.org/core
@@ -195,53 +195,53 @@ class LoincTerm(LoincEntity):
     primary_system: Optional[Union[str, LoincPartId]] = None
     primary_scale_typ: Optional[Union[str, LoincPartId]] = None
     primary_method_typ: Optional[Union[str, LoincPartId]] = None
-    detailed_analyte: Optional[Union[str, LoincPartId]] = None
-    detailed_challenge: Optional[Union[str, LoincPartId]] = None
-    detailed_adjustment: Optional[Union[str, LoincPartId]] = None
-    detailed_count: Optional[Union[str, LoincPartId]] = None
-    detailed_time_core: Optional[Union[str, LoincPartId]] = None
-    detailed_time_modifier: Optional[Union[str, LoincPartId]] = None
-    detailed_system_core: Optional[Union[str, LoincPartId]] = None
-    detailed_super_system: Optional[Union[str, LoincPartId]] = None
-    syntax_analyte_core: Optional[Union[str, LoincPartId]] = None
-    syntax_analyte_suffix: Optional[Union[str, LoincPartId]] = None
-    syntax_analyte_numerator: Optional[Union[str, LoincPartId]] = None
-    syntax_analyte_divisor: Optional[Union[str, LoincPartId]] = None
-    syntax_analyte_divisor_suffix: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_gene: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_genetic_variant: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_chemical: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_divisor_chemical: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_clinical_drug: Optional[Union[str, LoincPartId]] = None
-    semantic_system_core_anatomic_entity: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_organism: Optional[Union[str, LoincPartId]] = None
-    semantic_challenge_route: Optional[Union[str, LoincPartId]] = None
-    semantic_analyte_allergen: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte: Optional[Union[str, LoincPartId]] = None
+    supplementary_challenge: Optional[Union[str, LoincPartId]] = None
+    supplementary_adjustment: Optional[Union[str, LoincPartId]] = None
+    supplementary_count: Optional[Union[str, LoincPartId]] = None
+    supplementary_time_core: Optional[Union[str, LoincPartId]] = None
+    supplementary_time_modifier: Optional[Union[str, LoincPartId]] = None
+    supplementary_system_core: Optional[Union[str, LoincPartId]] = None
+    supplementary_super_system: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_core: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_suffix: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_numerator: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_divisor: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_divisor_suffix: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_gene: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_genetic_variant: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_chemical: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_divisor_chemical: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_clinical_drug: Optional[Union[str, LoincPartId]] = None
+    supplementary_system_core_anatomic_entity: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_organism: Optional[Union[str, LoincPartId]] = None
+    supplementary_challenge_route: Optional[Union[str, LoincPartId]] = None
+    supplementary_analyte_allergen: Optional[Union[str, LoincPartId]] = None
     metadata_class: Optional[Union[str, LoincPartId]] = None
     metadata_category: Optional[Union[str, LoincPartId]] = None
-    rad_anatomic_location_imaging_focus: Optional[Union[str, LoincPartId]] = None
-    rad_anatomic_location_laterality: Optional[Union[str, LoincPartId]] = None
-    rad_anatomic_location_laterality_presence: Optional[Union[str, LoincPartId]] = None
-    rad_anatomic_location_region_imaged: Optional[Union[str, LoincPartId]] = None
-    rad_guidance_for_action: Optional[Union[str, LoincPartId]] = None
-    rad_guidance_for_approach: Optional[Union[str, LoincPartId]] = None
-    rad_guidance_for_object: Optional[Union[str, LoincPartId]] = None
-    rad_guidance_for_presence: Optional[Union[str, LoincPartId]] = None
-    rad_maneuver_maneuver_type: Optional[Union[str, LoincPartId]] = None
-    rad_modality_subtype: Optional[Union[str, LoincPartId]] = None
-    rad_modality_type: Optional[Union[str, LoincPartId]] = None
-    rad_pharmaceutical_route: Optional[Union[str, LoincPartId]] = None
-    rad_pharmaceutical_substance_given: Optional[Union[str, LoincPartId]] = None
-    rad_reason_for_exam: Optional[Union[str, LoincPartId]] = None
-    rad_subject: Optional[Union[str, LoincPartId]] = None
-    rad_timing: Optional[Union[str, LoincPartId]] = None
-    rad_view_aggregation: Optional[Union[str, LoincPartId]] = None
-    rad_view_view_type: Optional[Union[str, LoincPartId]] = None
-    document_kind: Optional[Union[str, LoincPartId]] = None
-    document_role: Optional[Union[str, LoincPartId]] = None
-    document_setting: Optional[Union[str, LoincPartId]] = None
-    document_subject_matter_domain: Optional[Union[str, LoincPartId]] = None
-    document_type_of_service: Optional[Union[str, LoincPartId]] = None
+    primary_rad_anatomic_location_imaging_focus: Optional[Union[str, LoincPartId]] = None
+    primary_rad_anatomic_location_laterality: Optional[Union[str, LoincPartId]] = None
+    primary_rad_anatomic_location_laterality_presence: Optional[Union[str, LoincPartId]] = None
+    primary_rad_anatomic_location_region_imaged: Optional[Union[str, LoincPartId]] = None
+    primary_rad_guidance_for_action: Optional[Union[str, LoincPartId]] = None
+    primary_rad_guidance_for_approach: Optional[Union[str, LoincPartId]] = None
+    primary_rad_guidance_for_object: Optional[Union[str, LoincPartId]] = None
+    primary_rad_guidance_for_presence: Optional[Union[str, LoincPartId]] = None
+    primary_rad_maneuver_maneuver_type: Optional[Union[str, LoincPartId]] = None
+    primary_rad_modality_subtype: Optional[Union[str, LoincPartId]] = None
+    primary_rad_modality_type: Optional[Union[str, LoincPartId]] = None
+    primary_rad_pharmaceutical_route: Optional[Union[str, LoincPartId]] = None
+    primary_rad_pharmaceutical_substance_given: Optional[Union[str, LoincPartId]] = None
+    primary_rad_reason_for_exam: Optional[Union[str, LoincPartId]] = None
+    primary_rad_subject: Optional[Union[str, LoincPartId]] = None
+    primary_rad_timing: Optional[Union[str, LoincPartId]] = None
+    primary_rad_view_aggregation: Optional[Union[str, LoincPartId]] = None
+    primary_rad_view_view_type: Optional[Union[str, LoincPartId]] = None
+    primary_document_kind: Optional[Union[str, LoincPartId]] = None
+    primary_document_role: Optional[Union[str, LoincPartId]] = None
+    primary_document_setting: Optional[Union[str, LoincPartId]] = None
+    primary_document_subject_matter_domain: Optional[Union[str, LoincPartId]] = None
+    primary_document_type_of_service: Optional[Union[str, LoincPartId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -285,71 +285,71 @@ class LoincTerm(LoincEntity):
         if self.primary_method_typ is not None and not isinstance(self.primary_method_typ, LoincPartId):
             self.primary_method_typ = LoincPartId(self.primary_method_typ)
 
-        if self.detailed_analyte is not None and not isinstance(self.detailed_analyte, LoincPartId):
-            self.detailed_analyte = LoincPartId(self.detailed_analyte)
+        if self.supplementary_analyte is not None and not isinstance(self.supplementary_analyte, LoincPartId):
+            self.supplementary_analyte = LoincPartId(self.supplementary_analyte)
 
-        if self.detailed_challenge is not None and not isinstance(self.detailed_challenge, LoincPartId):
-            self.detailed_challenge = LoincPartId(self.detailed_challenge)
+        if self.supplementary_challenge is not None and not isinstance(self.supplementary_challenge, LoincPartId):
+            self.supplementary_challenge = LoincPartId(self.supplementary_challenge)
 
-        if self.detailed_adjustment is not None and not isinstance(self.detailed_adjustment, LoincPartId):
-            self.detailed_adjustment = LoincPartId(self.detailed_adjustment)
+        if self.supplementary_adjustment is not None and not isinstance(self.supplementary_adjustment, LoincPartId):
+            self.supplementary_adjustment = LoincPartId(self.supplementary_adjustment)
 
-        if self.detailed_count is not None and not isinstance(self.detailed_count, LoincPartId):
-            self.detailed_count = LoincPartId(self.detailed_count)
+        if self.supplementary_count is not None and not isinstance(self.supplementary_count, LoincPartId):
+            self.supplementary_count = LoincPartId(self.supplementary_count)
 
-        if self.detailed_time_core is not None and not isinstance(self.detailed_time_core, LoincPartId):
-            self.detailed_time_core = LoincPartId(self.detailed_time_core)
+        if self.supplementary_time_core is not None and not isinstance(self.supplementary_time_core, LoincPartId):
+            self.supplementary_time_core = LoincPartId(self.supplementary_time_core)
 
-        if self.detailed_time_modifier is not None and not isinstance(self.detailed_time_modifier, LoincPartId):
-            self.detailed_time_modifier = LoincPartId(self.detailed_time_modifier)
+        if self.supplementary_time_modifier is not None and not isinstance(self.supplementary_time_modifier, LoincPartId):
+            self.supplementary_time_modifier = LoincPartId(self.supplementary_time_modifier)
 
-        if self.detailed_system_core is not None and not isinstance(self.detailed_system_core, LoincPartId):
-            self.detailed_system_core = LoincPartId(self.detailed_system_core)
+        if self.supplementary_system_core is not None and not isinstance(self.supplementary_system_core, LoincPartId):
+            self.supplementary_system_core = LoincPartId(self.supplementary_system_core)
 
-        if self.detailed_super_system is not None and not isinstance(self.detailed_super_system, LoincPartId):
-            self.detailed_super_system = LoincPartId(self.detailed_super_system)
+        if self.supplementary_super_system is not None and not isinstance(self.supplementary_super_system, LoincPartId):
+            self.supplementary_super_system = LoincPartId(self.supplementary_super_system)
 
-        if self.syntax_analyte_core is not None and not isinstance(self.syntax_analyte_core, LoincPartId):
-            self.syntax_analyte_core = LoincPartId(self.syntax_analyte_core)
+        if self.supplementary_analyte_core is not None and not isinstance(self.supplementary_analyte_core, LoincPartId):
+            self.supplementary_analyte_core = LoincPartId(self.supplementary_analyte_core)
 
-        if self.syntax_analyte_suffix is not None and not isinstance(self.syntax_analyte_suffix, LoincPartId):
-            self.syntax_analyte_suffix = LoincPartId(self.syntax_analyte_suffix)
+        if self.supplementary_analyte_suffix is not None and not isinstance(self.supplementary_analyte_suffix, LoincPartId):
+            self.supplementary_analyte_suffix = LoincPartId(self.supplementary_analyte_suffix)
 
-        if self.syntax_analyte_numerator is not None and not isinstance(self.syntax_analyte_numerator, LoincPartId):
-            self.syntax_analyte_numerator = LoincPartId(self.syntax_analyte_numerator)
+        if self.supplementary_analyte_numerator is not None and not isinstance(self.supplementary_analyte_numerator, LoincPartId):
+            self.supplementary_analyte_numerator = LoincPartId(self.supplementary_analyte_numerator)
 
-        if self.syntax_analyte_divisor is not None and not isinstance(self.syntax_analyte_divisor, LoincPartId):
-            self.syntax_analyte_divisor = LoincPartId(self.syntax_analyte_divisor)
+        if self.supplementary_analyte_divisor is not None and not isinstance(self.supplementary_analyte_divisor, LoincPartId):
+            self.supplementary_analyte_divisor = LoincPartId(self.supplementary_analyte_divisor)
 
-        if self.syntax_analyte_divisor_suffix is not None and not isinstance(self.syntax_analyte_divisor_suffix, LoincPartId):
-            self.syntax_analyte_divisor_suffix = LoincPartId(self.syntax_analyte_divisor_suffix)
+        if self.supplementary_analyte_divisor_suffix is not None and not isinstance(self.supplementary_analyte_divisor_suffix, LoincPartId):
+            self.supplementary_analyte_divisor_suffix = LoincPartId(self.supplementary_analyte_divisor_suffix)
 
-        if self.semantic_analyte_gene is not None and not isinstance(self.semantic_analyte_gene, LoincPartId):
-            self.semantic_analyte_gene = LoincPartId(self.semantic_analyte_gene)
+        if self.supplementary_analyte_gene is not None and not isinstance(self.supplementary_analyte_gene, LoincPartId):
+            self.supplementary_analyte_gene = LoincPartId(self.supplementary_analyte_gene)
 
-        if self.semantic_analyte_genetic_variant is not None and not isinstance(self.semantic_analyte_genetic_variant, LoincPartId):
-            self.semantic_analyte_genetic_variant = LoincPartId(self.semantic_analyte_genetic_variant)
+        if self.supplementary_analyte_genetic_variant is not None and not isinstance(self.supplementary_analyte_genetic_variant, LoincPartId):
+            self.supplementary_analyte_genetic_variant = LoincPartId(self.supplementary_analyte_genetic_variant)
 
-        if self.semantic_analyte_chemical is not None and not isinstance(self.semantic_analyte_chemical, LoincPartId):
-            self.semantic_analyte_chemical = LoincPartId(self.semantic_analyte_chemical)
+        if self.supplementary_analyte_chemical is not None and not isinstance(self.supplementary_analyte_chemical, LoincPartId):
+            self.supplementary_analyte_chemical = LoincPartId(self.supplementary_analyte_chemical)
 
-        if self.semantic_analyte_divisor_chemical is not None and not isinstance(self.semantic_analyte_divisor_chemical, LoincPartId):
-            self.semantic_analyte_divisor_chemical = LoincPartId(self.semantic_analyte_divisor_chemical)
+        if self.supplementary_analyte_divisor_chemical is not None and not isinstance(self.supplementary_analyte_divisor_chemical, LoincPartId):
+            self.supplementary_analyte_divisor_chemical = LoincPartId(self.supplementary_analyte_divisor_chemical)
 
-        if self.semantic_analyte_clinical_drug is not None and not isinstance(self.semantic_analyte_clinical_drug, LoincPartId):
-            self.semantic_analyte_clinical_drug = LoincPartId(self.semantic_analyte_clinical_drug)
+        if self.supplementary_analyte_clinical_drug is not None and not isinstance(self.supplementary_analyte_clinical_drug, LoincPartId):
+            self.supplementary_analyte_clinical_drug = LoincPartId(self.supplementary_analyte_clinical_drug)
 
-        if self.semantic_system_core_anatomic_entity is not None and not isinstance(self.semantic_system_core_anatomic_entity, LoincPartId):
-            self.semantic_system_core_anatomic_entity = LoincPartId(self.semantic_system_core_anatomic_entity)
+        if self.supplementary_system_core_anatomic_entity is not None and not isinstance(self.supplementary_system_core_anatomic_entity, LoincPartId):
+            self.supplementary_system_core_anatomic_entity = LoincPartId(self.supplementary_system_core_anatomic_entity)
 
-        if self.semantic_analyte_organism is not None and not isinstance(self.semantic_analyte_organism, LoincPartId):
-            self.semantic_analyte_organism = LoincPartId(self.semantic_analyte_organism)
+        if self.supplementary_analyte_organism is not None and not isinstance(self.supplementary_analyte_organism, LoincPartId):
+            self.supplementary_analyte_organism = LoincPartId(self.supplementary_analyte_organism)
 
-        if self.semantic_challenge_route is not None and not isinstance(self.semantic_challenge_route, LoincPartId):
-            self.semantic_challenge_route = LoincPartId(self.semantic_challenge_route)
+        if self.supplementary_challenge_route is not None and not isinstance(self.supplementary_challenge_route, LoincPartId):
+            self.supplementary_challenge_route = LoincPartId(self.supplementary_challenge_route)
 
-        if self.semantic_analyte_allergen is not None and not isinstance(self.semantic_analyte_allergen, LoincPartId):
-            self.semantic_analyte_allergen = LoincPartId(self.semantic_analyte_allergen)
+        if self.supplementary_analyte_allergen is not None and not isinstance(self.supplementary_analyte_allergen, LoincPartId):
+            self.supplementary_analyte_allergen = LoincPartId(self.supplementary_analyte_allergen)
 
         if self.metadata_class is not None and not isinstance(self.metadata_class, LoincPartId):
             self.metadata_class = LoincPartId(self.metadata_class)
@@ -357,74 +357,74 @@ class LoincTerm(LoincEntity):
         if self.metadata_category is not None and not isinstance(self.metadata_category, LoincPartId):
             self.metadata_category = LoincPartId(self.metadata_category)
 
-        if self.rad_anatomic_location_imaging_focus is not None and not isinstance(self.rad_anatomic_location_imaging_focus, LoincPartId):
-            self.rad_anatomic_location_imaging_focus = LoincPartId(self.rad_anatomic_location_imaging_focus)
+        if self.primary_rad_anatomic_location_imaging_focus is not None and not isinstance(self.primary_rad_anatomic_location_imaging_focus, LoincPartId):
+            self.primary_rad_anatomic_location_imaging_focus = LoincPartId(self.primary_rad_anatomic_location_imaging_focus)
 
-        if self.rad_anatomic_location_laterality is not None and not isinstance(self.rad_anatomic_location_laterality, LoincPartId):
-            self.rad_anatomic_location_laterality = LoincPartId(self.rad_anatomic_location_laterality)
+        if self.primary_rad_anatomic_location_laterality is not None and not isinstance(self.primary_rad_anatomic_location_laterality, LoincPartId):
+            self.primary_rad_anatomic_location_laterality = LoincPartId(self.primary_rad_anatomic_location_laterality)
 
-        if self.rad_anatomic_location_laterality_presence is not None and not isinstance(self.rad_anatomic_location_laterality_presence, LoincPartId):
-            self.rad_anatomic_location_laterality_presence = LoincPartId(self.rad_anatomic_location_laterality_presence)
+        if self.primary_rad_anatomic_location_laterality_presence is not None and not isinstance(self.primary_rad_anatomic_location_laterality_presence, LoincPartId):
+            self.primary_rad_anatomic_location_laterality_presence = LoincPartId(self.primary_rad_anatomic_location_laterality_presence)
 
-        if self.rad_anatomic_location_region_imaged is not None and not isinstance(self.rad_anatomic_location_region_imaged, LoincPartId):
-            self.rad_anatomic_location_region_imaged = LoincPartId(self.rad_anatomic_location_region_imaged)
+        if self.primary_rad_anatomic_location_region_imaged is not None and not isinstance(self.primary_rad_anatomic_location_region_imaged, LoincPartId):
+            self.primary_rad_anatomic_location_region_imaged = LoincPartId(self.primary_rad_anatomic_location_region_imaged)
 
-        if self.rad_guidance_for_action is not None and not isinstance(self.rad_guidance_for_action, LoincPartId):
-            self.rad_guidance_for_action = LoincPartId(self.rad_guidance_for_action)
+        if self.primary_rad_guidance_for_action is not None and not isinstance(self.primary_rad_guidance_for_action, LoincPartId):
+            self.primary_rad_guidance_for_action = LoincPartId(self.primary_rad_guidance_for_action)
 
-        if self.rad_guidance_for_approach is not None and not isinstance(self.rad_guidance_for_approach, LoincPartId):
-            self.rad_guidance_for_approach = LoincPartId(self.rad_guidance_for_approach)
+        if self.primary_rad_guidance_for_approach is not None and not isinstance(self.primary_rad_guidance_for_approach, LoincPartId):
+            self.primary_rad_guidance_for_approach = LoincPartId(self.primary_rad_guidance_for_approach)
 
-        if self.rad_guidance_for_object is not None and not isinstance(self.rad_guidance_for_object, LoincPartId):
-            self.rad_guidance_for_object = LoincPartId(self.rad_guidance_for_object)
+        if self.primary_rad_guidance_for_object is not None and not isinstance(self.primary_rad_guidance_for_object, LoincPartId):
+            self.primary_rad_guidance_for_object = LoincPartId(self.primary_rad_guidance_for_object)
 
-        if self.rad_guidance_for_presence is not None and not isinstance(self.rad_guidance_for_presence, LoincPartId):
-            self.rad_guidance_for_presence = LoincPartId(self.rad_guidance_for_presence)
+        if self.primary_rad_guidance_for_presence is not None and not isinstance(self.primary_rad_guidance_for_presence, LoincPartId):
+            self.primary_rad_guidance_for_presence = LoincPartId(self.primary_rad_guidance_for_presence)
 
-        if self.rad_maneuver_maneuver_type is not None and not isinstance(self.rad_maneuver_maneuver_type, LoincPartId):
-            self.rad_maneuver_maneuver_type = LoincPartId(self.rad_maneuver_maneuver_type)
+        if self.primary_rad_maneuver_maneuver_type is not None and not isinstance(self.primary_rad_maneuver_maneuver_type, LoincPartId):
+            self.primary_rad_maneuver_maneuver_type = LoincPartId(self.primary_rad_maneuver_maneuver_type)
 
-        if self.rad_modality_subtype is not None and not isinstance(self.rad_modality_subtype, LoincPartId):
-            self.rad_modality_subtype = LoincPartId(self.rad_modality_subtype)
+        if self.primary_rad_modality_subtype is not None and not isinstance(self.primary_rad_modality_subtype, LoincPartId):
+            self.primary_rad_modality_subtype = LoincPartId(self.primary_rad_modality_subtype)
 
-        if self.rad_modality_type is not None and not isinstance(self.rad_modality_type, LoincPartId):
-            self.rad_modality_type = LoincPartId(self.rad_modality_type)
+        if self.primary_rad_modality_type is not None and not isinstance(self.primary_rad_modality_type, LoincPartId):
+            self.primary_rad_modality_type = LoincPartId(self.primary_rad_modality_type)
 
-        if self.rad_pharmaceutical_route is not None and not isinstance(self.rad_pharmaceutical_route, LoincPartId):
-            self.rad_pharmaceutical_route = LoincPartId(self.rad_pharmaceutical_route)
+        if self.primary_rad_pharmaceutical_route is not None and not isinstance(self.primary_rad_pharmaceutical_route, LoincPartId):
+            self.primary_rad_pharmaceutical_route = LoincPartId(self.primary_rad_pharmaceutical_route)
 
-        if self.rad_pharmaceutical_substance_given is not None and not isinstance(self.rad_pharmaceutical_substance_given, LoincPartId):
-            self.rad_pharmaceutical_substance_given = LoincPartId(self.rad_pharmaceutical_substance_given)
+        if self.primary_rad_pharmaceutical_substance_given is not None and not isinstance(self.primary_rad_pharmaceutical_substance_given, LoincPartId):
+            self.primary_rad_pharmaceutical_substance_given = LoincPartId(self.primary_rad_pharmaceutical_substance_given)
 
-        if self.rad_reason_for_exam is not None and not isinstance(self.rad_reason_for_exam, LoincPartId):
-            self.rad_reason_for_exam = LoincPartId(self.rad_reason_for_exam)
+        if self.primary_rad_reason_for_exam is not None and not isinstance(self.primary_rad_reason_for_exam, LoincPartId):
+            self.primary_rad_reason_for_exam = LoincPartId(self.primary_rad_reason_for_exam)
 
-        if self.rad_subject is not None and not isinstance(self.rad_subject, LoincPartId):
-            self.rad_subject = LoincPartId(self.rad_subject)
+        if self.primary_rad_subject is not None and not isinstance(self.primary_rad_subject, LoincPartId):
+            self.primary_rad_subject = LoincPartId(self.primary_rad_subject)
 
-        if self.rad_timing is not None and not isinstance(self.rad_timing, LoincPartId):
-            self.rad_timing = LoincPartId(self.rad_timing)
+        if self.primary_rad_timing is not None and not isinstance(self.primary_rad_timing, LoincPartId):
+            self.primary_rad_timing = LoincPartId(self.primary_rad_timing)
 
-        if self.rad_view_aggregation is not None and not isinstance(self.rad_view_aggregation, LoincPartId):
-            self.rad_view_aggregation = LoincPartId(self.rad_view_aggregation)
+        if self.primary_rad_view_aggregation is not None and not isinstance(self.primary_rad_view_aggregation, LoincPartId):
+            self.primary_rad_view_aggregation = LoincPartId(self.primary_rad_view_aggregation)
 
-        if self.rad_view_view_type is not None and not isinstance(self.rad_view_view_type, LoincPartId):
-            self.rad_view_view_type = LoincPartId(self.rad_view_view_type)
+        if self.primary_rad_view_view_type is not None and not isinstance(self.primary_rad_view_view_type, LoincPartId):
+            self.primary_rad_view_view_type = LoincPartId(self.primary_rad_view_view_type)
 
-        if self.document_kind is not None and not isinstance(self.document_kind, LoincPartId):
-            self.document_kind = LoincPartId(self.document_kind)
+        if self.primary_document_kind is not None and not isinstance(self.primary_document_kind, LoincPartId):
+            self.primary_document_kind = LoincPartId(self.primary_document_kind)
 
-        if self.document_role is not None and not isinstance(self.document_role, LoincPartId):
-            self.document_role = LoincPartId(self.document_role)
+        if self.primary_document_role is not None and not isinstance(self.primary_document_role, LoincPartId):
+            self.primary_document_role = LoincPartId(self.primary_document_role)
 
-        if self.document_setting is not None and not isinstance(self.document_setting, LoincPartId):
-            self.document_setting = LoincPartId(self.document_setting)
+        if self.primary_document_setting is not None and not isinstance(self.primary_document_setting, LoincPartId):
+            self.primary_document_setting = LoincPartId(self.primary_document_setting)
 
-        if self.document_subject_matter_domain is not None and not isinstance(self.document_subject_matter_domain, LoincPartId):
-            self.document_subject_matter_domain = LoincPartId(self.document_subject_matter_domain)
+        if self.primary_document_subject_matter_domain is not None and not isinstance(self.primary_document_subject_matter_domain, LoincPartId):
+            self.primary_document_subject_matter_domain = LoincPartId(self.primary_document_subject_matter_domain)
 
-        if self.document_type_of_service is not None and not isinstance(self.document_type_of_service, LoincPartId):
-            self.document_type_of_service = LoincPartId(self.document_type_of_service)
+        if self.primary_document_type_of_service is not None and not isinstance(self.primary_document_type_of_service, LoincPartId):
+            self.primary_document_type_of_service = LoincPartId(self.primary_document_type_of_service)
 
         super().__post_init__(**kwargs)
 
@@ -536,71 +536,71 @@ slots.loincTerm__primary_scale_typ = Slot(uri=LOINC_PROPERTY.SCALE_TYP, name="lo
 slots.loincTerm__primary_method_typ = Slot(uri=LOINC_PROPERTY.METHOD_TYP, name="loincTerm__primary_method_typ", curie=LOINC_PROPERTY.curie('METHOD_TYP'),
                    model_uri=LOINC.loincTerm__primary_method_typ, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_analyte = Slot(uri=LOINC_PROPERTY.analyte, name="loincTerm__detailed_analyte", curie=LOINC_PROPERTY.curie('analyte'),
-                   model_uri=LOINC.loincTerm__detailed_analyte, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte = Slot(uri=LOINC_PROPERTY.analyte, name="loincTerm__supplementary_analyte", curie=LOINC_PROPERTY.curie('analyte'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_challenge = Slot(uri=LOINC_PROPERTY.challenge, name="loincTerm__detailed_challenge", curie=LOINC_PROPERTY.curie('challenge'),
-                   model_uri=LOINC.loincTerm__detailed_challenge, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_challenge = Slot(uri=LOINC_PROPERTY.challenge, name="loincTerm__supplementary_challenge", curie=LOINC_PROPERTY.curie('challenge'),
+                   model_uri=LOINC.loincTerm__supplementary_challenge, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_adjustment = Slot(uri=LOINC_PROPERTY.adjustment, name="loincTerm__detailed_adjustment", curie=LOINC_PROPERTY.curie('adjustment'),
-                   model_uri=LOINC.loincTerm__detailed_adjustment, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_adjustment = Slot(uri=LOINC_PROPERTY.adjustment, name="loincTerm__supplementary_adjustment", curie=LOINC_PROPERTY.curie('adjustment'),
+                   model_uri=LOINC.loincTerm__supplementary_adjustment, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_count = Slot(uri=LOINC_PROPERTY.count, name="loincTerm__detailed_count", curie=LOINC_PROPERTY.curie('count'),
-                   model_uri=LOINC.loincTerm__detailed_count, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_count = Slot(uri=LOINC_PROPERTY.count, name="loincTerm__supplementary_count", curie=LOINC_PROPERTY.curie('count'),
+                   model_uri=LOINC.loincTerm__supplementary_count, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_time_core = Slot(uri=LOINC_PROPERTY['time-core'], name="loincTerm__detailed_time_core", curie=LOINC_PROPERTY.curie('time-core'),
-                   model_uri=LOINC.loincTerm__detailed_time_core, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_time_core = Slot(uri=LOINC_PROPERTY['time-core'], name="loincTerm__supplementary_time_core", curie=LOINC_PROPERTY.curie('time-core'),
+                   model_uri=LOINC.loincTerm__supplementary_time_core, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_time_modifier = Slot(uri=LOINC_PROPERTY['time-modifier'], name="loincTerm__detailed_time_modifier", curie=LOINC_PROPERTY.curie('time-modifier'),
-                   model_uri=LOINC.loincTerm__detailed_time_modifier, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_time_modifier = Slot(uri=LOINC_PROPERTY['time-modifier'], name="loincTerm__supplementary_time_modifier", curie=LOINC_PROPERTY.curie('time-modifier'),
+                   model_uri=LOINC.loincTerm__supplementary_time_modifier, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_system_core = Slot(uri=LOINC_PROPERTY['system-core'], name="loincTerm__detailed_system_core", curie=LOINC_PROPERTY.curie('system-core'),
-                   model_uri=LOINC.loincTerm__detailed_system_core, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_system_core = Slot(uri=LOINC_PROPERTY['system-core'], name="loincTerm__supplementary_system_core", curie=LOINC_PROPERTY.curie('system-core'),
+                   model_uri=LOINC.loincTerm__supplementary_system_core, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__detailed_super_system = Slot(uri=LOINC_PROPERTY['super-system'], name="loincTerm__detailed_super_system", curie=LOINC_PROPERTY.curie('super-system'),
-                   model_uri=LOINC.loincTerm__detailed_super_system, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_super_system = Slot(uri=LOINC_PROPERTY['super-system'], name="loincTerm__supplementary_super_system", curie=LOINC_PROPERTY.curie('super-system'),
+                   model_uri=LOINC.loincTerm__supplementary_super_system, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__syntax_analyte_core = Slot(uri=LOINC_PROPERTY['analyte-core'], name="loincTerm__syntax_analyte_core", curie=LOINC_PROPERTY.curie('analyte-core'),
-                   model_uri=LOINC.loincTerm__syntax_analyte_core, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_core = Slot(uri=LOINC_PROPERTY['analyte-core'], name="loincTerm__supplementary_analyte_core", curie=LOINC_PROPERTY.curie('analyte-core'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_core, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__syntax_analyte_suffix = Slot(uri=LOINC_PROPERTY['analyte-suffix'], name="loincTerm__syntax_analyte_suffix", curie=LOINC_PROPERTY.curie('analyte-suffix'),
-                   model_uri=LOINC.loincTerm__syntax_analyte_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_suffix = Slot(uri=LOINC_PROPERTY['analyte-suffix'], name="loincTerm__supplementary_analyte_suffix", curie=LOINC_PROPERTY.curie('analyte-suffix'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__syntax_analyte_numerator = Slot(uri=LOINC_PROPERTY['analyte-numerator'], name="loincTerm__syntax_analyte_numerator", curie=LOINC_PROPERTY.curie('analyte-numerator'),
-                   model_uri=LOINC.loincTerm__syntax_analyte_numerator, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_numerator = Slot(uri=LOINC_PROPERTY['analyte-numerator'], name="loincTerm__supplementary_analyte_numerator", curie=LOINC_PROPERTY.curie('analyte-numerator'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_numerator, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__syntax_analyte_divisor = Slot(uri=LOINC_PROPERTY['analyte-divisor'], name="loincTerm__syntax_analyte_divisor", curie=LOINC_PROPERTY.curie('analyte-divisor'),
-                   model_uri=LOINC.loincTerm__syntax_analyte_divisor, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_divisor = Slot(uri=LOINC_PROPERTY['analyte-divisor'], name="loincTerm__supplementary_analyte_divisor", curie=LOINC_PROPERTY.curie('analyte-divisor'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_divisor, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__syntax_analyte_divisor_suffix = Slot(uri=LOINC_PROPERTY['analyte-divisor-suffix'], name="loincTerm__syntax_analyte_divisor_suffix", curie=LOINC_PROPERTY.curie('analyte-divisor-suffix'),
-                   model_uri=LOINC.loincTerm__syntax_analyte_divisor_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_divisor_suffix = Slot(uri=LOINC_PROPERTY['analyte-divisor-suffix'], name="loincTerm__supplementary_analyte_divisor_suffix", curie=LOINC_PROPERTY.curie('analyte-divisor-suffix'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_divisor_suffix, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_gene = Slot(uri=LOINC_PROPERTY.analyte_gene, name="loincTerm__semantic_analyte_gene", curie=LOINC_PROPERTY.curie('analyte_gene'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_gene, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_gene = Slot(uri=LOINC_PROPERTY.analyte_gene, name="loincTerm__supplementary_analyte_gene", curie=LOINC_PROPERTY.curie('analyte_gene'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_gene, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_genetic_variant = Slot(uri=LOINC_PROPERTY['analyte-genetic-variant'], name="loincTerm__semantic_analyte_genetic_variant", curie=LOINC_PROPERTY.curie('analyte-genetic-variant'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_genetic_variant, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_genetic_variant = Slot(uri=LOINC_PROPERTY['analyte-genetic-variant'], name="loincTerm__supplementary_analyte_genetic_variant", curie=LOINC_PROPERTY.curie('analyte-genetic-variant'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_genetic_variant, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_chemical = Slot(uri=LOINC_PROPERTY['analyte-chemical'], name="loincTerm__semantic_analyte_chemical", curie=LOINC_PROPERTY.curie('analyte-chemical'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_chemical = Slot(uri=LOINC_PROPERTY['analyte-chemical'], name="loincTerm__supplementary_analyte_chemical", curie=LOINC_PROPERTY.curie('analyte-chemical'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_divisor_chemical = Slot(uri=LOINC_PROPERTY['analyte-divisor-chemical'], name="loincTerm__semantic_analyte_divisor_chemical", curie=LOINC_PROPERTY.curie('analyte-divisor-chemical'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_divisor_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_divisor_chemical = Slot(uri=LOINC_PROPERTY['analyte-divisor-chemical'], name="loincTerm__supplementary_analyte_divisor_chemical", curie=LOINC_PROPERTY.curie('analyte-divisor-chemical'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_divisor_chemical, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_clinical_drug = Slot(uri=LOINC_PROPERTY['analyte-clinical-drug'], name="loincTerm__semantic_analyte_clinical_drug", curie=LOINC_PROPERTY.curie('analyte-clinical-drug'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_clinical_drug, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_clinical_drug = Slot(uri=LOINC_PROPERTY['analyte-clinical-drug'], name="loincTerm__supplementary_analyte_clinical_drug", curie=LOINC_PROPERTY.curie('analyte-clinical-drug'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_clinical_drug, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_system_core_anatomic_entity = Slot(uri=LOINC_PROPERTY['system-core-anatomic-entity'], name="loincTerm__semantic_system_core_anatomic_entity", curie=LOINC_PROPERTY.curie('system-core-anatomic-entity'),
-                   model_uri=LOINC.loincTerm__semantic_system_core_anatomic_entity, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_system_core_anatomic_entity = Slot(uri=LOINC_PROPERTY['system-core-anatomic-entity'], name="loincTerm__supplementary_system_core_anatomic_entity", curie=LOINC_PROPERTY.curie('system-core-anatomic-entity'),
+                   model_uri=LOINC.loincTerm__supplementary_system_core_anatomic_entity, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_organism = Slot(uri=LOINC_PROPERTY['analyte-organism'], name="loincTerm__semantic_analyte_organism", curie=LOINC_PROPERTY.curie('analyte-organism'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_organism, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_organism = Slot(uri=LOINC_PROPERTY['analyte-organism'], name="loincTerm__supplementary_analyte_organism", curie=LOINC_PROPERTY.curie('analyte-organism'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_organism, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_challenge_route = Slot(uri=LOINC_PROPERTY['challenge-route'], name="loincTerm__semantic_challenge_route", curie=LOINC_PROPERTY.curie('challenge-route'),
-                   model_uri=LOINC.loincTerm__semantic_challenge_route, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_challenge_route = Slot(uri=LOINC_PROPERTY['challenge-route'], name="loincTerm__supplementary_challenge_route", curie=LOINC_PROPERTY.curie('challenge-route'),
+                   model_uri=LOINC.loincTerm__supplementary_challenge_route, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__semantic_analyte_allergen = Slot(uri=LOINC_PROPERTY['analyte-allergen'], name="loincTerm__semantic_analyte_allergen", curie=LOINC_PROPERTY.curie('analyte-allergen'),
-                   model_uri=LOINC.loincTerm__semantic_analyte_allergen, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_analyte_allergen = Slot(uri=LOINC_PROPERTY['analyte-allergen'], name="loincTerm__supplementary_analyte_allergen", curie=LOINC_PROPERTY.curie('analyte-allergen'),
+                   model_uri=LOINC.loincTerm__supplementary_analyte_allergen, domain=None, range=Optional[Union[str, LoincPartId]])
 
 slots.loincTerm__metadata_class = Slot(uri=LOINC_PROPERTY.class_, name="loincTerm__metadata_class", curie=LOINC_PROPERTY.curie('class_'),
                    model_uri=LOINC.loincTerm__metadata_class, domain=None, range=Optional[Union[str, LoincPartId]])
@@ -608,74 +608,74 @@ slots.loincTerm__metadata_class = Slot(uri=LOINC_PROPERTY.class_, name="loincTer
 slots.loincTerm__metadata_category = Slot(uri=LOINC_PROPERTY.category, name="loincTerm__metadata_category", curie=LOINC_PROPERTY.curie('category'),
                    model_uri=LOINC.loincTerm__metadata_category, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_anatomic_location_imaging_focus = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-imaging-focus'], name="loincTerm__rad_anatomic_location_imaging_focus", curie=LOINC_PROPERTY.curie('rad-anatomic-location-imaging-focus'),
-                   model_uri=LOINC.loincTerm__rad_anatomic_location_imaging_focus, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_anatomic_location_imaging_focus = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-imaging-focus'], name="loincTerm__primary_rad_anatomic_location_imaging_focus", curie=LOINC_PROPERTY.curie('rad-anatomic-location-imaging-focus'),
+                   model_uri=LOINC.loincTerm__primary_rad_anatomic_location_imaging_focus, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_anatomic_location_laterality = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality'], name="loincTerm__rad_anatomic_location_laterality", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality'),
-                   model_uri=LOINC.loincTerm__rad_anatomic_location_laterality, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_anatomic_location_laterality = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality'], name="loincTerm__primary_rad_anatomic_location_laterality", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality'),
+                   model_uri=LOINC.loincTerm__primary_rad_anatomic_location_laterality, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_anatomic_location_laterality_presence = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality-presence'], name="loincTerm__rad_anatomic_location_laterality_presence", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality-presence'),
-                   model_uri=LOINC.loincTerm__rad_anatomic_location_laterality_presence, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_anatomic_location_laterality_presence = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-laterality-presence'], name="loincTerm__primary_rad_anatomic_location_laterality_presence", curie=LOINC_PROPERTY.curie('rad-anatomic-location-laterality-presence'),
+                   model_uri=LOINC.loincTerm__primary_rad_anatomic_location_laterality_presence, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_anatomic_location_region_imaged = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-region-imaged'], name="loincTerm__rad_anatomic_location_region_imaged", curie=LOINC_PROPERTY.curie('rad-anatomic-location-region-imaged'),
-                   model_uri=LOINC.loincTerm__rad_anatomic_location_region_imaged, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_anatomic_location_region_imaged = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-region-imaged'], name="loincTerm__primary_rad_anatomic_location_region_imaged", curie=LOINC_PROPERTY.curie('rad-anatomic-location-region-imaged'),
+                   model_uri=LOINC.loincTerm__primary_rad_anatomic_location_region_imaged, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_guidance_for_action = Slot(uri=LOINC_PROPERTY['rad-guidance-for-action'], name="loincTerm__rad_guidance_for_action", curie=LOINC_PROPERTY.curie('rad-guidance-for-action'),
-                   model_uri=LOINC.loincTerm__rad_guidance_for_action, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_guidance_for_action = Slot(uri=LOINC_PROPERTY['rad-guidance-for-action'], name="loincTerm__primary_rad_guidance_for_action", curie=LOINC_PROPERTY.curie('rad-guidance-for-action'),
+                   model_uri=LOINC.loincTerm__primary_rad_guidance_for_action, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_guidance_for_approach = Slot(uri=LOINC_PROPERTY['rad-guidance-for-approach'], name="loincTerm__rad_guidance_for_approach", curie=LOINC_PROPERTY.curie('rad-guidance-for-approach'),
-                   model_uri=LOINC.loincTerm__rad_guidance_for_approach, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_guidance_for_approach = Slot(uri=LOINC_PROPERTY['rad-guidance-for-approach'], name="loincTerm__primary_rad_guidance_for_approach", curie=LOINC_PROPERTY.curie('rad-guidance-for-approach'),
+                   model_uri=LOINC.loincTerm__primary_rad_guidance_for_approach, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_guidance_for_object = Slot(uri=LOINC_PROPERTY['rad-guidance-for-object'], name="loincTerm__rad_guidance_for_object", curie=LOINC_PROPERTY.curie('rad-guidance-for-object'),
-                   model_uri=LOINC.loincTerm__rad_guidance_for_object, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_guidance_for_object = Slot(uri=LOINC_PROPERTY['rad-guidance-for-object'], name="loincTerm__primary_rad_guidance_for_object", curie=LOINC_PROPERTY.curie('rad-guidance-for-object'),
+                   model_uri=LOINC.loincTerm__primary_rad_guidance_for_object, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_guidance_for_presence = Slot(uri=LOINC_PROPERTY['rad-guidance-for-presence'], name="loincTerm__rad_guidance_for_presence", curie=LOINC_PROPERTY.curie('rad-guidance-for-presence'),
-                   model_uri=LOINC.loincTerm__rad_guidance_for_presence, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_guidance_for_presence = Slot(uri=LOINC_PROPERTY['rad-guidance-for-presence'], name="loincTerm__primary_rad_guidance_for_presence", curie=LOINC_PROPERTY.curie('rad-guidance-for-presence'),
+                   model_uri=LOINC.loincTerm__primary_rad_guidance_for_presence, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_maneuver_maneuver_type = Slot(uri=LOINC_PROPERTY['rad-maneuver-maneuver-type'], name="loincTerm__rad_maneuver_maneuver_type", curie=LOINC_PROPERTY.curie('rad-maneuver-maneuver-type'),
-                   model_uri=LOINC.loincTerm__rad_maneuver_maneuver_type, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_maneuver_maneuver_type = Slot(uri=LOINC_PROPERTY['rad-maneuver-maneuver-type'], name="loincTerm__primary_rad_maneuver_maneuver_type", curie=LOINC_PROPERTY.curie('rad-maneuver-maneuver-type'),
+                   model_uri=LOINC.loincTerm__primary_rad_maneuver_maneuver_type, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_modality_subtype = Slot(uri=LOINC_PROPERTY['rad-modality-subtype'], name="loincTerm__rad_modality_subtype", curie=LOINC_PROPERTY.curie('rad-modality-subtype'),
-                   model_uri=LOINC.loincTerm__rad_modality_subtype, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_modality_subtype = Slot(uri=LOINC_PROPERTY['rad-modality-subtype'], name="loincTerm__primary_rad_modality_subtype", curie=LOINC_PROPERTY.curie('rad-modality-subtype'),
+                   model_uri=LOINC.loincTerm__primary_rad_modality_subtype, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_modality_type = Slot(uri=LOINC_PROPERTY['rad-modality-type'], name="loincTerm__rad_modality_type", curie=LOINC_PROPERTY.curie('rad-modality-type'),
-                   model_uri=LOINC.loincTerm__rad_modality_type, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_modality_type = Slot(uri=LOINC_PROPERTY['rad-modality-type'], name="loincTerm__primary_rad_modality_type", curie=LOINC_PROPERTY.curie('rad-modality-type'),
+                   model_uri=LOINC.loincTerm__primary_rad_modality_type, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_pharmaceutical_route = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-route'], name="loincTerm__rad_pharmaceutical_route", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-route'),
-                   model_uri=LOINC.loincTerm__rad_pharmaceutical_route, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_pharmaceutical_route = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-route'], name="loincTerm__primary_rad_pharmaceutical_route", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-route'),
+                   model_uri=LOINC.loincTerm__primary_rad_pharmaceutical_route, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_pharmaceutical_substance_given = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-substance-given'], name="loincTerm__rad_pharmaceutical_substance_given", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-substance-given'),
-                   model_uri=LOINC.loincTerm__rad_pharmaceutical_substance_given, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_pharmaceutical_substance_given = Slot(uri=LOINC_PROPERTY['rad-pharmaceutical-substance-given'], name="loincTerm__primary_rad_pharmaceutical_substance_given", curie=LOINC_PROPERTY.curie('rad-pharmaceutical-substance-given'),
+                   model_uri=LOINC.loincTerm__primary_rad_pharmaceutical_substance_given, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_reason_for_exam = Slot(uri=LOINC_PROPERTY['rad-reason-for-exam'], name="loincTerm__rad_reason_for_exam", curie=LOINC_PROPERTY.curie('rad-reason-for-exam'),
-                   model_uri=LOINC.loincTerm__rad_reason_for_exam, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_reason_for_exam = Slot(uri=LOINC_PROPERTY['rad-reason-for-exam'], name="loincTerm__primary_rad_reason_for_exam", curie=LOINC_PROPERTY.curie('rad-reason-for-exam'),
+                   model_uri=LOINC.loincTerm__primary_rad_reason_for_exam, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_subject = Slot(uri=LOINC_PROPERTY['rad-subject'], name="loincTerm__rad_subject", curie=LOINC_PROPERTY.curie('rad-subject'),
-                   model_uri=LOINC.loincTerm__rad_subject, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_subject = Slot(uri=LOINC_PROPERTY['rad-subject'], name="loincTerm__primary_rad_subject", curie=LOINC_PROPERTY.curie('rad-subject'),
+                   model_uri=LOINC.loincTerm__primary_rad_subject, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_timing = Slot(uri=LOINC_PROPERTY['rad-timing'], name="loincTerm__rad_timing", curie=LOINC_PROPERTY.curie('rad-timing'),
-                   model_uri=LOINC.loincTerm__rad_timing, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_timing = Slot(uri=LOINC_PROPERTY['rad-timing'], name="loincTerm__primary_rad_timing", curie=LOINC_PROPERTY.curie('rad-timing'),
+                   model_uri=LOINC.loincTerm__primary_rad_timing, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_view_aggregation = Slot(uri=LOINC_PROPERTY.rad_view_aggregation, name="loincTerm__rad_view_aggregation", curie=LOINC_PROPERTY.curie('rad_view_aggregation'),
-                   model_uri=LOINC.loincTerm__rad_view_aggregation, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_view_aggregation = Slot(uri=LOINC_PROPERTY.rad_view_aggregation, name="loincTerm__primary_rad_view_aggregation", curie=LOINC_PROPERTY.curie('rad_view_aggregation'),
+                   model_uri=LOINC.loincTerm__primary_rad_view_aggregation, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__rad_view_view_type = Slot(uri=LOINC_PROPERTY.rad_view_view_type, name="loincTerm__rad_view_view_type", curie=LOINC_PROPERTY.curie('rad_view_view_type'),
-                   model_uri=LOINC.loincTerm__rad_view_view_type, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_rad_view_view_type = Slot(uri=LOINC_PROPERTY.rad_view_view_type, name="loincTerm__primary_rad_view_view_type", curie=LOINC_PROPERTY.curie('rad_view_view_type'),
+                   model_uri=LOINC.loincTerm__primary_rad_view_view_type, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__document_kind = Slot(uri=LOINC_PROPERTY['document-kind'], name="loincTerm__document_kind", curie=LOINC_PROPERTY.curie('document-kind'),
-                   model_uri=LOINC.loincTerm__document_kind, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_document_kind = Slot(uri=LOINC_PROPERTY['document-kind'], name="loincTerm__primary_document_kind", curie=LOINC_PROPERTY.curie('document-kind'),
+                   model_uri=LOINC.loincTerm__primary_document_kind, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__document_role = Slot(uri=LOINC_PROPERTY['document-role'], name="loincTerm__document_role", curie=LOINC_PROPERTY.curie('document-role'),
-                   model_uri=LOINC.loincTerm__document_role, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_document_role = Slot(uri=LOINC_PROPERTY['document-role'], name="loincTerm__primary_document_role", curie=LOINC_PROPERTY.curie('document-role'),
+                   model_uri=LOINC.loincTerm__primary_document_role, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__document_setting = Slot(uri=LOINC_PROPERTY['document-setting'], name="loincTerm__document_setting", curie=LOINC_PROPERTY.curie('document-setting'),
-                   model_uri=LOINC.loincTerm__document_setting, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_document_setting = Slot(uri=LOINC_PROPERTY['document-setting'], name="loincTerm__primary_document_setting", curie=LOINC_PROPERTY.curie('document-setting'),
+                   model_uri=LOINC.loincTerm__primary_document_setting, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__document_subject_matter_domain = Slot(uri=LOINC_PROPERTY['document-subject-matter-domain'], name="loincTerm__document_subject_matter_domain", curie=LOINC_PROPERTY.curie('document-subject-matter-domain'),
-                   model_uri=LOINC.loincTerm__document_subject_matter_domain, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_document_subject_matter_domain = Slot(uri=LOINC_PROPERTY['document-subject-matter-domain'], name="loincTerm__primary_document_subject_matter_domain", curie=LOINC_PROPERTY.curie('document-subject-matter-domain'),
+                   model_uri=LOINC.loincTerm__primary_document_subject_matter_domain, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__document_type_of_service = Slot(uri=LOINC_PROPERTY['document-type-of-service'], name="loincTerm__document_type_of_service", curie=LOINC_PROPERTY.curie('document-type-of-service'),
-                   model_uri=LOINC.loincTerm__document_type_of_service, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__primary_document_type_of_service = Slot(uri=LOINC_PROPERTY['document-type-of-service'], name="loincTerm__primary_document_type_of_service", curie=LOINC_PROPERTY.curie('document-type-of-service'),
+                   model_uri=LOINC.loincTerm__primary_document_type_of_service, domain=None, range=Optional[Union[str, LoincPartId]])
 
 slots.loincPart__part_number = Slot(uri=LOINC.part_number, name="loincPart__part_number", curie=LOINC.curie('part_number'),
                    model_uri=LOINC.loincPart__part_number, domain=None, range=Optional[str])
