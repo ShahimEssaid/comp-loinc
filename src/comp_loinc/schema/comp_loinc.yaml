@@ -123,6 +123,14 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom, SomethingElse
 
+      supplementary_property:
+        slot_uri: loinc_property:PROPERTY
+        multivalued: false
+        range: LoincPart
+        required: false
+        annotations:
+          owl: ObjectSomeValuesFrom, SomethingElse
+
       # 3
       primary_time_aspect:
         slot_uri: loinc_property:TIME_ASPECT
@@ -150,8 +158,24 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
+      supplementary_scale_typ:
+        slot_uri: loinc_property:SCALE_TYP
+        multivalued: false
+        range: LoincPart
+        required: false
+        annotations:
+          owl: ObjectSomeValuesFrom
+
       # 6
       primary_method_typ:
+        slot_uri: loinc_property:METHOD_TYP
+        multivalued: false
+        range: LoincPart
+        required: false
+        annotations:
+          owl: ObjectSomeValuesFrom
+
+      supplementary_method_typ:
         slot_uri: loinc_property:METHOD_TYP
         multivalued: false
         range: LoincPart
@@ -344,7 +368,7 @@ classes:
           owl: ObjectSomeValuesFrom
 
       # metadata: https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#metadata
-      metadata_class: # the actual name 'class' conflicts with
+      supplementary_class: # the actual name 'class' conflicts with
         slot_uri: loinc_property:class_   # TODO: the generated code has a conflict with the term 'class'. This should be a bug report.
         # This hack, the trailing underscore, prevents the compile error caused by
         # uri=LOINC_PROPERTY.class
@@ -354,13 +378,23 @@ classes:
         annotations:
           owl: ObjectSomeValuesFrom
 
-      metadata_category:
+      supplementary_category:
         slot_uri: loinc_property:category
         multivalued: false
         range: LoincPart
         required: false
         annotations:
           owl: ObjectSomeValuesFrom
+
+      supplementary_search:
+        slot_uri: loinc_property:category
+        multivalued: false
+        range: LoincPart
+        required: false
+        annotations:
+          owl: ObjectSomeValuesFrom
+
+
 
       # radiology: https://loinc.org/kb/enriched-linkages-between-loinc-terms-and-loinc-parts/#radiology
       primary_rad_anatomic_location_imaging_focus:

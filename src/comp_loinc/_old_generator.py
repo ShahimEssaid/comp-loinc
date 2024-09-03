@@ -529,7 +529,7 @@ class Generator:
         if not label:
             label = f'{code} (COMP EQ)'
 
-        part_based_def.label = label
+        part_based_def.entity_labels = label
         part_based_def.has_component = LoincPart(id=_loincify(code))
         code_map[code] = part_based_def
 

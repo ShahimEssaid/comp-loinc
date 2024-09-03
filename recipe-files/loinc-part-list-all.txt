@@ -2,17 +2,19 @@
 #--fast-run
 
 -o
-out-comploinc
+out-comploinc-2
 
 builder
   set-module
     -n
-    loinc-terms-list
-  lt-inst-all
-    --active
-  lt-parent
+    loinc-part-list-all
+
+  lp-inst-all
+
   l-label
+
   l-annotate
+
   load-schema
       -f
       comp_loinc.yaml

@@ -1,5 +1,5 @@
 # Auto generated from comp_loinc.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-09-02T17:06:29
+# Generation date: 2024-09-03T12:09:49
 # Schema: loinc-owl-core-schema
 #
 # id: https://loinc.org/core
@@ -191,10 +191,13 @@ class LoincTerm(LoincEntity):
     loinc_class_type: Optional[str] = None
     primary_component: Optional[Union[str, LoincPartId]] = None
     primary_property: Optional[Union[str, LoincPartId]] = None
+    supplementary_property: Optional[Union[str, LoincPartId]] = None
     primary_time_aspect: Optional[Union[str, LoincPartId]] = None
     primary_system: Optional[Union[str, LoincPartId]] = None
     primary_scale_typ: Optional[Union[str, LoincPartId]] = None
+    supplementary_scale_typ: Optional[Union[str, LoincPartId]] = None
     primary_method_typ: Optional[Union[str, LoincPartId]] = None
+    supplementary_method_typ: Optional[Union[str, LoincPartId]] = None
     supplementary_analyte: Optional[Union[str, LoincPartId]] = None
     supplementary_challenge: Optional[Union[str, LoincPartId]] = None
     supplementary_adjustment: Optional[Union[str, LoincPartId]] = None
@@ -217,8 +220,9 @@ class LoincTerm(LoincEntity):
     supplementary_analyte_organism: Optional[Union[str, LoincPartId]] = None
     supplementary_challenge_route: Optional[Union[str, LoincPartId]] = None
     supplementary_analyte_allergen: Optional[Union[str, LoincPartId]] = None
-    metadata_class: Optional[Union[str, LoincPartId]] = None
-    metadata_category: Optional[Union[str, LoincPartId]] = None
+    supplementary_class: Optional[Union[str, LoincPartId]] = None
+    supplementary_category: Optional[Union[str, LoincPartId]] = None
+    supplementary_search: Optional[Union[str, LoincPartId]] = None
     primary_rad_anatomic_location_imaging_focus: Optional[Union[str, LoincPartId]] = None
     primary_rad_anatomic_location_laterality: Optional[Union[str, LoincPartId]] = None
     primary_rad_anatomic_location_laterality_presence: Optional[Union[str, LoincPartId]] = None
@@ -273,6 +277,9 @@ class LoincTerm(LoincEntity):
         if self.primary_property is not None and not isinstance(self.primary_property, LoincPartId):
             self.primary_property = LoincPartId(self.primary_property)
 
+        if self.supplementary_property is not None and not isinstance(self.supplementary_property, LoincPartId):
+            self.supplementary_property = LoincPartId(self.supplementary_property)
+
         if self.primary_time_aspect is not None and not isinstance(self.primary_time_aspect, LoincPartId):
             self.primary_time_aspect = LoincPartId(self.primary_time_aspect)
 
@@ -282,8 +289,14 @@ class LoincTerm(LoincEntity):
         if self.primary_scale_typ is not None and not isinstance(self.primary_scale_typ, LoincPartId):
             self.primary_scale_typ = LoincPartId(self.primary_scale_typ)
 
+        if self.supplementary_scale_typ is not None and not isinstance(self.supplementary_scale_typ, LoincPartId):
+            self.supplementary_scale_typ = LoincPartId(self.supplementary_scale_typ)
+
         if self.primary_method_typ is not None and not isinstance(self.primary_method_typ, LoincPartId):
             self.primary_method_typ = LoincPartId(self.primary_method_typ)
+
+        if self.supplementary_method_typ is not None and not isinstance(self.supplementary_method_typ, LoincPartId):
+            self.supplementary_method_typ = LoincPartId(self.supplementary_method_typ)
 
         if self.supplementary_analyte is not None and not isinstance(self.supplementary_analyte, LoincPartId):
             self.supplementary_analyte = LoincPartId(self.supplementary_analyte)
@@ -351,11 +364,14 @@ class LoincTerm(LoincEntity):
         if self.supplementary_analyte_allergen is not None and not isinstance(self.supplementary_analyte_allergen, LoincPartId):
             self.supplementary_analyte_allergen = LoincPartId(self.supplementary_analyte_allergen)
 
-        if self.metadata_class is not None and not isinstance(self.metadata_class, LoincPartId):
-            self.metadata_class = LoincPartId(self.metadata_class)
+        if self.supplementary_class is not None and not isinstance(self.supplementary_class, LoincPartId):
+            self.supplementary_class = LoincPartId(self.supplementary_class)
 
-        if self.metadata_category is not None and not isinstance(self.metadata_category, LoincPartId):
-            self.metadata_category = LoincPartId(self.metadata_category)
+        if self.supplementary_category is not None and not isinstance(self.supplementary_category, LoincPartId):
+            self.supplementary_category = LoincPartId(self.supplementary_category)
+
+        if self.supplementary_search is not None and not isinstance(self.supplementary_search, LoincPartId):
+            self.supplementary_search = LoincPartId(self.supplementary_search)
 
         if self.primary_rad_anatomic_location_imaging_focus is not None and not isinstance(self.primary_rad_anatomic_location_imaging_focus, LoincPartId):
             self.primary_rad_anatomic_location_imaging_focus = LoincPartId(self.primary_rad_anatomic_location_imaging_focus)
@@ -524,6 +540,9 @@ slots.loincTerm__primary_component = Slot(uri=LOINC_PROPERTY.COMPONENT, name="lo
 slots.loincTerm__primary_property = Slot(uri=LOINC_PROPERTY.PROPERTY, name="loincTerm__primary_property", curie=LOINC_PROPERTY.curie('PROPERTY'),
                    model_uri=LOINC.loincTerm__primary_property, domain=None, range=Optional[Union[str, LoincPartId]])
 
+slots.loincTerm__supplementary_property = Slot(uri=LOINC_PROPERTY.PROPERTY, name="loincTerm__supplementary_property", curie=LOINC_PROPERTY.curie('PROPERTY'),
+                   model_uri=LOINC.loincTerm__supplementary_property, domain=None, range=Optional[Union[str, LoincPartId]])
+
 slots.loincTerm__primary_time_aspect = Slot(uri=LOINC_PROPERTY.TIME_ASPECT, name="loincTerm__primary_time_aspect", curie=LOINC_PROPERTY.curie('TIME_ASPECT'),
                    model_uri=LOINC.loincTerm__primary_time_aspect, domain=None, range=Optional[Union[str, LoincPartId]])
 
@@ -533,8 +552,14 @@ slots.loincTerm__primary_system = Slot(uri=LOINC_PROPERTY.SYSTEM, name="loincTer
 slots.loincTerm__primary_scale_typ = Slot(uri=LOINC_PROPERTY.SCALE_TYP, name="loincTerm__primary_scale_typ", curie=LOINC_PROPERTY.curie('SCALE_TYP'),
                    model_uri=LOINC.loincTerm__primary_scale_typ, domain=None, range=Optional[Union[str, LoincPartId]])
 
+slots.loincTerm__supplementary_scale_typ = Slot(uri=LOINC_PROPERTY.SCALE_TYP, name="loincTerm__supplementary_scale_typ", curie=LOINC_PROPERTY.curie('SCALE_TYP'),
+                   model_uri=LOINC.loincTerm__supplementary_scale_typ, domain=None, range=Optional[Union[str, LoincPartId]])
+
 slots.loincTerm__primary_method_typ = Slot(uri=LOINC_PROPERTY.METHOD_TYP, name="loincTerm__primary_method_typ", curie=LOINC_PROPERTY.curie('METHOD_TYP'),
                    model_uri=LOINC.loincTerm__primary_method_typ, domain=None, range=Optional[Union[str, LoincPartId]])
+
+slots.loincTerm__supplementary_method_typ = Slot(uri=LOINC_PROPERTY.METHOD_TYP, name="loincTerm__supplementary_method_typ", curie=LOINC_PROPERTY.curie('METHOD_TYP'),
+                   model_uri=LOINC.loincTerm__supplementary_method_typ, domain=None, range=Optional[Union[str, LoincPartId]])
 
 slots.loincTerm__supplementary_analyte = Slot(uri=LOINC_PROPERTY.analyte, name="loincTerm__supplementary_analyte", curie=LOINC_PROPERTY.curie('analyte'),
                    model_uri=LOINC.loincTerm__supplementary_analyte, domain=None, range=Optional[Union[str, LoincPartId]])
@@ -602,11 +627,14 @@ slots.loincTerm__supplementary_challenge_route = Slot(uri=LOINC_PROPERTY['challe
 slots.loincTerm__supplementary_analyte_allergen = Slot(uri=LOINC_PROPERTY['analyte-allergen'], name="loincTerm__supplementary_analyte_allergen", curie=LOINC_PROPERTY.curie('analyte-allergen'),
                    model_uri=LOINC.loincTerm__supplementary_analyte_allergen, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__metadata_class = Slot(uri=LOINC_PROPERTY.class_, name="loincTerm__metadata_class", curie=LOINC_PROPERTY.curie('class_'),
-                   model_uri=LOINC.loincTerm__metadata_class, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_class = Slot(uri=LOINC_PROPERTY.class_, name="loincTerm__supplementary_class", curie=LOINC_PROPERTY.curie('class_'),
+                   model_uri=LOINC.loincTerm__supplementary_class, domain=None, range=Optional[Union[str, LoincPartId]])
 
-slots.loincTerm__metadata_category = Slot(uri=LOINC_PROPERTY.category, name="loincTerm__metadata_category", curie=LOINC_PROPERTY.curie('category'),
-                   model_uri=LOINC.loincTerm__metadata_category, domain=None, range=Optional[Union[str, LoincPartId]])
+slots.loincTerm__supplementary_category = Slot(uri=LOINC_PROPERTY.category, name="loincTerm__supplementary_category", curie=LOINC_PROPERTY.curie('category'),
+                   model_uri=LOINC.loincTerm__supplementary_category, domain=None, range=Optional[Union[str, LoincPartId]])
+
+slots.loincTerm__supplementary_search = Slot(uri=LOINC_PROPERTY.category, name="loincTerm__supplementary_search", curie=LOINC_PROPERTY.curie('category'),
+                   model_uri=LOINC.loincTerm__supplementary_search, domain=None, range=Optional[Union[str, LoincPartId]])
 
 slots.loincTerm__primary_rad_anatomic_location_imaging_focus = Slot(uri=LOINC_PROPERTY['rad-anatomic-location-imaging-focus'], name="loincTerm__primary_rad_anatomic_location_imaging_focus", curie=LOINC_PROPERTY.curie('rad-anatomic-location-imaging-focus'),
                    model_uri=LOINC.loincTerm__primary_rad_anatomic_location_imaging_focus, domain=None, range=Optional[Union[str, LoincPartId]])

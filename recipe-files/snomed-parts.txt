@@ -2,7 +2,7 @@
 --fast-run
 
 -o
-out-snomed
+out-comploinc-2
 
 builder
   set-module

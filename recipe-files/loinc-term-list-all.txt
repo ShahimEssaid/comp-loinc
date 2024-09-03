@@ -2,19 +2,18 @@
 #--fast-run
 
 -o
-out-comploinc
+out-comploinc-2
 
 builder
   set-module
     -n
-    primary-equiv-def
+    loinc-terms-list-all
   lt-inst-all
-  lt-primary-equiv-def
-#    --active
-#  l-label
-#  l-annotate
+    --active
+  lt-parent
+  l-label
+  l-annotate
   load-schema
       -f
       comp_loinc.yaml
-      --equivalent-term
   save-owl

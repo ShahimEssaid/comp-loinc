@@ -54,7 +54,7 @@ class CompLoincCli:
     self.cli.add_typer(self.builder_cli.cli, name='builder')
 
     self.loinc_builders = LoincBuilderSteps(configuration=self.config)
-    self.loinc_builders.setup_cli_builder_steps_all(self.builder_cli)
+    self.loinc_builders.setup_builder(self.builder_cli)
 
     self.snomed_builders = SnomedBuilderSteps(configuration=self.config)
     self.snomed_builders.setup_cli_builder_steps_all(self.builder_cli)

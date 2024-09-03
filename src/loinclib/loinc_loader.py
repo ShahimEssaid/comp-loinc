@@ -158,8 +158,12 @@ class LoincLoader:
       # @formatter:off
 
       loinc_node: Node = self.graph.getsert_node(LS.LoincNodeType.LoincTerm, loinc_number)
+      loinc_node.set_property(type_=LS.LoincTermProps.loinc_number, value=loinc_number)
+
       part_node: Node = self.graph.getsert_node(LS.LoincNodeType.LoincPart, part_number)
-      loinc_node.add_edge_single(LS.LoincTermSupplementaryEdges(property_),part_node,False)
+      part_node.set_property(type_=LS.LoincPartProps.part_number, value=part_number)
+
+      loinc_node.add_edge_single(LS.LoincTermSupplementaryEdges(property_),part_node)
 
     self.graph.loaded_sources[LoincSources.AccessoryFiles__PartFile__LoincPartLink_SupplementaryCsv] = {}
 

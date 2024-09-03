@@ -2,19 +2,19 @@
 #--fast-run
 
 -o
-out-comploinc
+out-comploinc-2
 
 builder
-
   set-module
     -n
-    loinc-parts-hierarchy
+    loinc-supplementary-def
 
-  lp-part-hierarchy-all
+  lt-inst-all
 
-  lp-parent
+  lt-supplementary-def
 
   load-schema
       -f
       comp_loinc.yaml
+      --equivalent-term
   save-owl
