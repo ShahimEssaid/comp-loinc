@@ -147,3 +147,6 @@ dmypy.json
 /comploinc_out/
 
 /*_release
+/*_demo*
+
+*.zip
